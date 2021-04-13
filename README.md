@@ -14,7 +14,7 @@ Now try to commit something and push it up to your new repo. If everything is se
 
 ## Setup
 
-After one person has gone through the steps of cloning down this repo and editing the remote, everyone should clone down the repo. 
+After one person has gone through the steps of cloning down this repo and editing the remote, everyone should clone down the repo.
 
 Then install the library dependencies. Run:
 
@@ -28,13 +28,22 @@ To verify that it is setup correctly, run `npm start` in your terminal. Go to `h
 
 ### JavaScript
 
-You have to be very intentional with where you add your feature code. This repo uses a tool called [webpack](https://webpack.js.org/) to combine many JavaScript files into one big file. Webpack enables you to have many, separate JavaScript files to keep your code organized and readable. Webpack expects all of your code files to be in a specific place, or else it doesn't know how to combine them all behind the scenes.
+📌 You have to be very intentional with where you add your feature code. This repo uses a tool called [webpack](https://webpack.js.org/) to combine many JavaScript files into one big file. Webpack enables you to have many, separate JavaScript files to keep your code organized and readable. Webpack expects all of your code files to be in a specific place, or else it doesn't know how to combine them all behind the scenes.
 
 **Create all of your feature code files in the `src` directory.**
 
-Since code is separated into multiple files, you need to use the `import` and `export` syntax to share code across file.
+📌 Since code is separated into multiple files, you need to use the `import` and `export` syntax to share code across file.
 
 Here is a video that walks through some information about [import and export](https://www.youtube.com/watch?v=_3oSWwapPKQ). There are a lot of resources out there about `import` and `export`, and resources will sometimes call them `ES6 modules`. It's something you will see in React and beyond.
+
+📌 asynchronous module definition (ES6)
+  * use code from another file by using `require([filename.js], function(filename) { do something with filename })` and `export default filename` to export the file
+  * `default` tells it there is only the one file
+📌 vanilla js (ES5) looks like `var filename = require([filename.js])` in combination with a `module.exports = filename`  
+📌 modules give us the ability to group a bunch of separate files together; they all depend on each other and work together
+📌 need to use a transpiler or bundling tool that knows how to use group your files using this syntax
+  * Babel is a tool that can perform this action
+
 
 ### HTML
 
@@ -90,7 +99,7 @@ The test results will output to the terminal.
 
 Run the command in your terminal `npm run lint` to run the linter on your JavaScript code. There will be errors and warnings right from the start in this starter kit - the linter is still running successfully.
 
-Your linter will look at the JavaScript files you have within the `src` directory and the `test` directory. 
+Your linter will look at the JavaScript files you have within the `src` directory and the `test` directory.
 
 ## Webpack?
 
