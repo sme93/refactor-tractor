@@ -1,21 +1,26 @@
 class User {
-  constructor(id, name, pantry) {
+  constructor(id, name) {
     this.id = id;
     this.name = name;
-    this.pantry = pantry;
+    this.recipesToCook = [];
     this.favoriteRecipes = [];
-
   }
 
   addToFavorites(recipe) {
     if (!this.favoriteRecipes.includes(recipe)) {
-      this.favoriteRecipes.push(recipe)
+      this.favoriteRecipes.push(recipe);
     }
   }
 
   removeFromFavorites(recipe) {
     const i = this.favoriteRecipes.indexOf(recipe);
-    this.favoriteRecipes.splice(i, 1)
+    this.favoriteRecipes.splice(i, 1);
+  }
+
+  addToRecipesToCook(recipe) {
+    if (!this.recipesToCook.includes(recipe)) {
+      this.recipesToCook.push(recipe);
+    }
   }
 
   filterFavorites(tag) {
