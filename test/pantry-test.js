@@ -2,9 +2,10 @@ import { expect } from 'chai';
 
 import Pantry from '../src/pantry.js'
 
-describe('Pantry class', () => {
+let user;
+let recipeIngredients;
 
-  let user, recipeIngredients
+describe('Pantry class', () => {
 
   beforeEach(() => {
     user = {
@@ -33,33 +34,44 @@ describe('Pantry class', () => {
       "quantity": {
         "amount": 2,
         "unit": "c"
-      }}, {
+        }
+      }, {
       "name": "cilantro",
       "id": 11733,
       "quantity": {
         "amount": 1,
         "unit": "bunch"
-      }}, {
+        }
+      }, {
       "name": "ginger",
       "id": 7317,
       "quantity": {
         "amount": 1,
         "unit": "large"
-      }}, {
+        }
+      }, {
         "name": "garlic",
         "id": 7317331,
         "quantity": {
           "amount": 1,
           "unit": "clove"
-        }}, {
+          }
+        }, {
         "name": "chicken broth",
         "id": 31713,
         "quantity": {
           "amount": 4,
           "unit": "Tbsp"
+          }
         }
-      }
-    ];
+      ];
+
+  });
+  
+  it("should should create a new pantry", () => {
+    let pantry = new Pantry();
+
+    expect(pantry).to.be.an.instanceof(Pantry);
   });
 })
 // what data will i need to run these tests?
