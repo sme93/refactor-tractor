@@ -3,7 +3,6 @@ class Cookbook {
     this.recipes = data;
   }
 
-
   findRecipe(searchText) {
     const newSearchText = searchText.toLowerCase()
      return this.recipes.filter(recipe => {
@@ -14,17 +13,10 @@ class Cookbook {
      })
    }
 
+   findRecipeByTags(tag) {
+     return this.recipes.filter(recipe => recipe.tags.includes(tag))
+   }
 
-  findRecipeByTags(tags) {
-   return this.recipes.filter(recipe => {
-     return recipe.tags.every(tag => recipe.tags.includes(tag));
-   });
- }
 }
 
 export default Cookbook;
-
-
-
-
-//   A filtered list of recipes based on one or more tags.

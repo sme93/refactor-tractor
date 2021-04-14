@@ -31,7 +31,7 @@ describe('Cookbook', () => {
     expect(cookbook.findRecipe('ambrosia CUPCAKES').length).to.equal(1);
   })
 
-  // it('Should filter recipes based on one or more tags', () => {
-  //   expect(cookbook.findRecipeByTags('appetizer')).to.equal(9);
-  // })
+  it('Should filter recipes based on one or more tags', () => {
+    expect(cookbook.findRecipeByTags('appetizer').length).to.equal(9);
+  })
 })
