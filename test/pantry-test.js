@@ -9,39 +9,33 @@ let user, recipe, pantry;
 describe('Pantry class', () => {
   beforeEach(() => {
     user = userData[12];
-    recipe = recipeData[13];
+    // console.log("user 13, Valerie Grant", user);
+    recipe = recipeData[13]; // "Brown Butter Garlic Shrimp"
+    // console.log("recipe for Brown Butter Garlic Shrimp", recipe);
     let userPantry = user.pantry; // an array of objects with a length of 130
-    // console.log("userPantry", userPantry.length);
+    // console.log("userPantry", userPantry);
     let recipeIngr = recipe.ingredients; // an array of objects with a length of 8
-    // console.log("recipeIngr", recipeIngr.length);
+    // console.log("recipeIngr", recipeIngr);
     pantry = new Pantry(userPantry);
   })
 
-  describe("pantry setup", () => {
+  describe("pantry setup", () => { // constructor properties
     it.only("should should create a new pantry", () => {
       expect(pantry).to.be.an.instanceof(Pantry);
     });
 
-    it.skip("should take in a user pantry", () => { // constructor properties
+    it.skip("should take in a user pantry", () => {
       expect(pantry.userPantry).to.be.an(array);
     });
   })
 
-  describe("a method to check the pantry for recipe supplies", () => {
-    it.skip("hould have a method to check for ingredients in a recipe", () => {
-
-    });
-
-    it.skip("should take in a recipe", () => {
-
-    });
-
+  describe("a method to check the pantry for recipe supplies", () => { // pantry.checkForIngr()
     it.skip("should be able to check the pantry to see if it has the ingredients for the recipe", () => {
-
+      expect(pantry.checkForIngr(recipe)).to.return.a(Boolean);
     });
 
     it.skip("should return an error if an ingredient is missing", () => {
-
+      (expect())
     });
 
     it.skip("should return a message if all ingredients are available", () => {
@@ -60,7 +54,7 @@ describe('Pantry class', () => {
 
     });
 
-    describe("a method to remove recipe ingredients from the pantry", () => {
+    describe("a method to remove recipe ingredients from the pantry", () => { // pantry.removeIngr()
       it("should have a method to remove recipe ingredients from the pantry", () => {
 
       });
@@ -73,7 +67,7 @@ describe('Pantry class', () => {
       });
     });
 
-    describe("an extra fancy method to check the pantry for a specific ingredient", () => {
+    describe("an extra fancy method to check the pantry for a specific ingredient", () => { // pantry.rummage()
       it.skip("should be able to check the pantry for a specific ingredient", () => {
 
       });
