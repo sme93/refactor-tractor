@@ -38,6 +38,10 @@ describe('Recipe', () => {
       expect(recipe.ingredientsData).to.deep.equal(ingredientsData);
     })
 
+    it('Should store the image of the recipe', () => {
+      expect(recipe.image).to.equal(recipeData[47].image);
+    })
+
   })
 
   it('Should be able to calculate the cost of its ingredients', () => {
