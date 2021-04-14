@@ -18,6 +18,10 @@ describe('Cookbook', () => {
   it('Should filter recipes based on an ingredient', () => {
     expect(cookbook.findRecipeByIngredient('instant vanilla pudding mix').length).to.equal(2);
   })
+  
+  it('Should filter by an ingredient regardless of capitalization', () => {
+    expect(cookbook.findRecipeByIngredient('INSTANT vanilla PUDDING mix').length).to.equal(2);
+  })
 
   it('Should filter recipes based on a name', () => {
     expect(cookbook.findRecipeByName('Ambrosia Cupcakes').length).to.equal(1);
