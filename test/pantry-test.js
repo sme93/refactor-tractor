@@ -4,17 +4,19 @@ import Pantry from '../src/pantry.js'
 import recipeData from '../src/data/recipes.js'
 import userData from '../src/data/users.js'
 
-let user, recipe, pantry;
+let user, recipe1, recipe2, pantry;
 
 describe('Pantry class', () => {
   beforeEach(() => {
     user = userData[12];
     // console.log("user 13, Valerie Grant", user);
-    recipe = recipeData[13]; // "Brown Butter Garlic Shrimp"
+    // console.log(recipeData.length); // 50;
+    recipe1 = recipeData[13]; // "Brown Butter Garlic Shrimp", missing three ingredients
     // console.log("recipe for Brown Butter Garlic Shrimp", recipe);
+    recipe2 = recipeData[27];
     let userPantry = user.pantry; // an array of objects with a length of 130
     // console.log("userPantry", userPantry);
-    let recipeIngr = recipe.ingredients; // an array of objects with a length of 8
+    let recipe1Ingr = recipe1.ingredients; // an array of objects with a length of 8
     // console.log("recipeIngr", recipeIngr);
     pantry = new Pantry(userPantry);
   })
@@ -31,16 +33,20 @@ describe('Pantry class', () => {
 
   describe("a method to check the pantry for recipe supplies", () => { // pantry.checkForIngr()
     it.skip("should be able to check the pantry to see if it has the ingredients for the recipe", () => {
-      expect(pantry.checkForIngr(recipe)).to.return.a(Boolean);
+      expect(pantry.checkForIngr(recipe1)).to.return.a(Boolean);
     });
 
     it.skip("should return an error if an ingredient is missing", () => {
-      (expect())
+      expect(pantry.checkForIngr(recipe1)).to.return("You don't have everything you need for this recipe.");
     });
 
     it.skip("should return a message if all ingredients are available", () => {
-
+      expect(pantry.checkForIngr(recipe2).to.return("You have everything you need to make this recipe!"));
     });
+
+    // describe("a method to check the available amount of each ingredient", () => {
+    //  should there be a separate method to check the ingredient amounts?
+    // })
 
     it.skip("should be able to check the amount available for each ingredient", () => {
 
