@@ -30,10 +30,11 @@ class User {
   }
 
   findFavorites(nameOrIngredient) {
+    const newSearchText = nameOrIngredient.toLowerCase();
     return this.favoriteRecipes.filter(recipe => {
       return recipe.name.includes(nameOrIngredient)
       || recipe.ingredients.find(ingredient => {
-        return ingredient.name.includes(nameOrIngredient)
+        return ingredient.name.toLowerCase().includes(newSearchText);
       });
     });
   }
