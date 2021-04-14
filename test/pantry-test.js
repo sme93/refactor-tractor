@@ -2,14 +2,18 @@ import { expect } from 'chai';
 
 import Pantry from '../src/pantry.js'
 import recipeData from '../src/data/recipes.js'
+import userData from '../src/data/users.js'
 
 let pantry, user, recipe;
 
 describe('Pantry class', () => {
   beforeEach(() => {
     pantry = new Pantry();
-    user = {};
+    user = userData[12];
+    // console.log("user", user);
     recipe = recipeData[13];
+    let userPantry = user.pantry;
+    // console.log("userPantry", userPantry);
     let recipeIngr = recipe.ingredients;
   })
 
