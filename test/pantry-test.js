@@ -1,18 +1,20 @@
 import { expect } from 'chai';
 
 import Pantry from '../src/pantry.js'
+import recipeData from '../src/data/recipes.js'
 
-let user;
-let recipeIngredients;
+let pantry, user, recipe;
 
 describe('Pantry class', () => {
   beforeEach(() => {
-    user = {}
-    recipeIngredients = {}
+    pantry = new Pantry();
+    user = {};
+    recipe = recipeData[13];
+    let recipeIngr = recipe.ingredients;
   })
 
   it.only("should should create a new pantry", () => {
-    let pantry = new Pantry();
+    // let pantry = new Pantry();
     expect(pantry).to.be.an.instanceof(Pantry);
   });
 
