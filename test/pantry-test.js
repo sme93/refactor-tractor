@@ -10,15 +10,12 @@ describe('Pantry class', () => {
   beforeEach(() => {
     pantry = new Pantry();
     user = userData[12];
-    // console.log("user", user);
     recipe = recipeData[13];
     let userPantry = user.pantry;
-    // console.log("userPantry", userPantry);
     let recipeIngr = recipe.ingredients;
   })
 
-  it.only("should should create a new pantry", () => {
-    // let pantry = new Pantry();
+  it("should should create a new pantry", () => {
     expect(pantry).to.be.an.instanceof(Pantry);
   });
 
