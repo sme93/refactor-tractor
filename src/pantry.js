@@ -1,7 +1,7 @@
 class Pantry {
-  constructor(userIngredients) { // will want this to take the value of user.pantry
-    this.contents = userIngredients;
-  }
+  // constructor(userIngredients) { // don't really like this naming... it's confusing
+  //   this.contents = userIngredients;
+  // }
 }
 
 export default Pantry;
