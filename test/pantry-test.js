@@ -6,68 +6,67 @@ let user;
 let recipeIngredients;
 
 describe('Pantry class', () => {
+  // beforeEach(() => {
+  //   user = {
+  //     id = 13,
+  //     username = 'River',
+  //     pantry = [{
+  //       'ingredient': 13377, // rice
+  //       'amount': 4
+  //     }, {
+  //       'ingredient': 11733, // cilantro
+  //       'amount': 5
+  //     }, {
+  //       'ingredient': 7317, // ginger
+  //       'amount': 3
+  //     }, {
+  //       'ingredient': 7317331, // garlic
+  //       'amount': 2
+  //     }, {
+  //       'ingredient': 31713, // chicken broth
+  //       'amount': 6
+  //     }]};
+  //
+  //   recipeIngredients =[{
+  //     "name": "jasmine rice",
+  //     "id": 13377,
+  //     "quantity": {
+  //       "amount": 2,
+  //       "unit": "c"
+  //       }
+  //     }, {
+  //     "name": "cilantro",
+  //     "id": 11733,
+  //     "quantity": {
+  //       "amount": 1,
+  //       "unit": "bunch"
+  //       }
+  //     }, {
+  //     "name": "ginger",
+  //     "id": 7317,
+  //     "quantity": {
+  //       "amount": 1,
+  //       "unit": "large"
+  //       }
+  //     }, {
+  //       "name": "garlic",
+  //       "id": 7317331,
+  //       "quantity": {
+  //         "amount": 1,
+  //         "unit": "clove"
+  //         }
+  //       }, {
+  //       "name": "chicken broth",
+  //       "id": 31713,
+  //       "quantity": {
+  //         "amount": 4,
+  //         "unit": "Tbsp"
+  //         }
+  //       }
+  //     ];
+  //
+  // });
 
-  beforeEach(() => {
-    user = {
-      id = 13;
-      username = 'River';
-      pantry = [{
-        'ingredient': 13377, // rice
-        'amount': 4
-      }, {
-        'ingredient': 11733, // cilantro
-        'amount': 5
-      }, {
-        'ingredient': 7317, // ginger
-        'amount': 3
-      }, {
-        'ingredient': 7317331, // garlic
-        'amount': 2
-      }, {
-        'ingredient': 31713, // chicken broth
-        'amount': 6
-      }];
-
-    recipeIngredients =[{
-      "name": "jasmine rice",
-      "id": 13377,
-      "quantity": {
-        "amount": 2,
-        "unit": "c"
-        }
-      }, {
-      "name": "cilantro",
-      "id": 11733,
-      "quantity": {
-        "amount": 1,
-        "unit": "bunch"
-        }
-      }, {
-      "name": "ginger",
-      "id": 7317,
-      "quantity": {
-        "amount": 1,
-        "unit": "large"
-        }
-      }, {
-        "name": "garlic",
-        "id": 7317331,
-        "quantity": {
-          "amount": 1,
-          "unit": "clove"
-          }
-        }, {
-        "name": "chicken broth",
-        "id": 31713,
-        "quantity": {
-          "amount": 4,
-          "unit": "Tbsp"
-          }
-        }
-      ];
-
-  });
-  
   it("should should create a new pantry", () => {
     let pantry = new Pantry();
 
