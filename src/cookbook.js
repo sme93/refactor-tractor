@@ -21,7 +21,11 @@ class Cookbook {
     })
   }
 
+  findRecipeByName(searchText) {
+    return this.recipes.filter(recipe => recipe.name.toLowerCase().includes(searchText.toLowerCase()));
+  }
 }
+
 
 
 export default Cookbook;
