@@ -1,5 +1,23 @@
 import { expect } from 'chai';
 
+import User from '../src/pantry.js'
+// Pantry Data
+// Create classes and methods that can:
+//
+// {
+//   "id": 1123,
+//   "name": "eggs",
+//   "estimatedCostInCents": 472
+// }
+// Determine whether a user’s pantry has enough ingredients to cook a given meal.
+  // check the pantry for each ingredient
+  // if any of the ingredients are not present, return an error
+  // if all of the ingredients are present, the receipe/meal can be made
+  
+// Determine the amount of missing ingredients still needed to cook a given meal, based on what’s in the user’s pantry.
+// Remove the ingredients used to cook a given recipe from a user’s pantry.
+
+
 
 
 it('should be able to check ingredients in User/s pantry for a given recipe', () => {
@@ -10,12 +28,6 @@ it('should inform User if they lack required ingredients for a given recipe', ()
   expect(pantry.checkPantry(recipeIngredients)).to.eql(missingIngredientsWithPrice);
 });
 //
-// Pantry Data
-// Create classes and methods that can:
-//
-// Determine whether a user’s pantry has enough ingredients to cook a given meal.
-// Determine the amount of missing ingredients still needed to cook a given meal, based on what’s in the user’s pantry.
-// Remove the ingredients used to cook a given recipe from a user’s pantry.
 // User Stories
 // As a user, I should be able to view what ingredients exist inside of my pantry.
 // As a user, I should be able to check my list of recipes to cook and see if my pantry has enough ingredients to cook a meal.
