@@ -73,7 +73,7 @@ describe('User', () => {
     defaultUser.addToFavorites(recipeData[0]);
     defaultUser.addToFavorites(recipeData[1]);
 
-    expect(defaultUser.findFavorites('Cookie')).to.eql([recipeData[0]]);
+    expect(defaultUser.findFavorites('cookie')).to.eql([recipeData[0]]);
   });
 
   it(`should be able to search favoriteRecipes,
