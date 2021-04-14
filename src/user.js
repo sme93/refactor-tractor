@@ -24,15 +24,14 @@ class User {
     });
   }
 
-  findFavorites(strgToSrch) {
+  findFavorites(nameOrIngredient) {
     return this.favoriteRecipes.filter(recipe => {
-      return recipe.name.includes(strgToSrch)
+      return recipe.name.includes(nameOrIngredient)
       || recipe.ingredients.find(ingredient => {
-        return ingredient.name.includes(strgToSrch)
+        return ingredient.name.includes(nameOrIngredient)
       });
     });
   }
 }
-
 
 export default User;

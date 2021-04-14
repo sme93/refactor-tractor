@@ -3,57 +3,104 @@ import { expect } from 'chai';
 import User from '../src/user.js';
 import recipeData from '../src/data/recipes.js'
 
-let user1
+let id;
+let username;
+let pantry;
 
 describe('User', () => {
   beforeEach(() => {
-    user1 = new User(1, 'Boba', [
-      {
-        'ingredient': 1077,
-        'amount': 1
-      },
-      {
-        'ingredient': 14412,
-        'amount': 1
-      },
-      {
-        'ingredient': 1009054,
-        'amount': 3
-      }]
-    );
+    id = 2;
+    username = 'Ruth';
+    pantry = [{
+      'ingredient': 1077,
+      'amount': 1
+    },
+    {
+      'ingredient': 14412,
+      'amount': 1
+    },
+    {
+      'ingredient': 1009054,
+      'amount': 3
+    }];
   });
 
-  it('Should have a property of favoriteRecipes with a default value', () => {
-    expect(user1.favoriteRecipes).to.eql([]);
+  it('should be an instance of a User', () => {
+    const user = new User(id, username, pantry);
+
+    expect(user).to.be.an.instanceof(User);
   });
 
-  it('Should be able to add recipes to favoriteRecipes', () =>{
-    user1.addToFavorites(recipeData[0])
-    expect(user1.favoriteRecipes.includes(recipeData[0])).to.eql(true);
+  it("should have an id", () => {
+    const user = new User(41, username, pantry);
+
+    expect(user.id).to.equal(41);
   });
 
-  it('Should be able to remove recipes from favoriteRecipes', () =>{
-    user1.removeFromFavorites(recipeData);
-    expect(user1.favoriteRecipes).to.eql([]);
+  it("should have a name", () => {
+    const user = new User(id, "Marvin Gaye", pantry);
+
+    expect(user.name).to.equal("Marvin Gaye");
   });
 
-  it('Should be able to filter through favoriteRecipes by tag', () => {
-    user1.addToFavorites(recipeData[0]);
-    user1.addToFavorites(recipeData[1]);
-    expect(user1.filterFavorites('antipasti')).to.eql([recipeData[0]]);
+  it("should have a pantry", () => {
+    const user = new User(id, username, [{
+      ingredient: 'PB',
+      amount: 2
+    }]);
+
+    expect(user.pantry).to.deep.equal([{
+      ingredient: 'PB',
+      amount: 2
+    }]);
   });
 
-  it('Should be able to search favoriteRecipes by name or ingredient', () => {
-    user1.addToFavorites(recipeData[0]);
-    user1.addToFavorites(recipeData[1]);
-    expect(user1.findFavorites('egg')).to.eql([recipeData[0]]);
+  it('should not have any favorite recipes by default', () => {
+    const user = new User(id, username, pantry);
+
+    expect(user.favoriteRecipes).to.eql([]);
   });
 
-  it('Should be able to check ingredients in User/s pantry for a given recipe', () => {
-    expect(user1.checkPantry(recipeIngredients)).to.eql('You have the ingredients!');
+  it('should be able to add recipes to favoriteRecipes', () => {
+    const user = new User(id, username, pantry);
+
+    user.addToFavorites(recipeData[0]);
+    expect(user.favoriteRecipes[0]).to.eql(recipeData[0]);
   });
 
-  it('Should inform User if they lack required ingredients for a given recipe', () => {
-    expect(user1.checkPantry(recipeIngredients)).to.eql(missingIngredientsWithPrice);
+  it('should be able to remove recipes from favoriteRecipes', () => {
+    const user = new User(id, username, pantry);
+
+    user.addToFavorites(recipeData[0]);
+    user.addToFavorites(recipeData[1]);
+    user.addToFavorites(recipeData[2]);
+    user.removeFromFavorites(recipeData[0]);
+
+    expect(user.favoriteRecipes[0]).to.eql(recipeData[1]);
   });
+
+  it('should be able to filter through favoriteRecipes by tag', () => {
+    const user = new User(id, username, pantry);
+
+    user.addToFavorites(recipeData[0]);
+    user.addToFavorites(recipeData[1]);
+    expect(user.filterFavorites('snack')).to.eql([recipeData[0]]);
+  });
+
+  it('should be able to search favoriteRecipes by name', () => {
+    const user = new User(id, username, pantry);
+
+    user.addToFavorites(recipeData[0]);
+    user.addToFavorites(recipeData[1]);
+    expect(user.findFavorites('Cookie')).to.eql([recipeData[0]]);
+  });
+
+  it('should be able to search favoriteRecipes by ingredient', () => {
+    const user = new User(id, username, pantry);
+
+    user.addToFavorites(recipeData[0]);
+    user.addToFavorites(recipeData[1]);
+    expect(user.findFavorites('apples')).to.eql([recipeData[1]]);
+  });
+
 });
