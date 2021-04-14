@@ -22,6 +22,14 @@ class Recipe {
     return costCounter;
   }
 
+  returnIngredients() {
+    return this.ingredients;
+  }
+
+  returnInstructions() {
+    return this.instructions;
+  }
+
 }
 
 export default Recipe;
