@@ -1,38 +1,30 @@
 class Cookbook {
   constructor(data) {
-    this.recipes = data;//an array of 50 recipes
+    this.recipes = data;
   }
 
-  // findRecipe(searchText) {
-  //   let newSearchText = searchText.toLowerCase();
-  //   return this.recipes.filter(recipe => {
-  //     return recipe.ingredients.find(ingredient => {
-  //       return (ingredient.name.includes(newSearchText)) ||
-  //       (recipe.name.toLowerCase().includes(newSearchText))
-  //     });
-  //   })
-  // }
 
-  findRecipeByIngredient(searchText) {
-    return this.recipes.filter(recipe => {
-     return recipe.ingredients.some(ingredient => {
-       return ingredient.name.toLowerCase().includes(searchText.toLowerCase())
+  findRecipe(searchText) {
+    const newSearchText = searchText.toLowerCase()
+     return this.recipes.filter(recipe => {
+       return recipe.ingredients.find(ingredient => {
+         return (ingredient.name.toLowerCase().includes(newSearchText)) ||
+         (recipe.name.toLowerCase().includes(newSearchText))
+       });
      })
-    })
-  }
+   }
 
-  findRecipeByName(searchText) {
-    return this.recipes.filter(recipe => recipe.name.toLowerCase().includes(searchText.toLowerCase()));
-  }
+
+  findRecipeByTags(tags) {
+   return this.recipes.filter(recipe => {
+     return recipe.tags.every(tag => recipe.tags.includes(tag));
+   });
+ }
 }
-
-
 
 export default Cookbook;
 
 
 
-// It should have a parameter to take in recipe data.
-// It should have methods to determine:
+
 //   A filtered list of recipes based on one or more tags.
-//   A filtered list of recipes based on its name or ingredients.
