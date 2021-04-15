@@ -1,10 +1,6 @@
 import './css/base.scss';
 import './css/styles.scss';
 
-// import recipeData from './data/recipes';
-// import ingredientsData from './data/ingredients';
-// import users from './data/users';
-
 import getData from './network-requests';
 
 import Pantry from './pantry';
@@ -26,16 +22,15 @@ cardArea.addEventListener('click', cardButtonConditionals);
 function onStartup() {
   getData()
     .then(allData => {
-      let userId = (Math.floor(Math.random() * allData.userData.length) + 1)
-      let newUser = allData.userData.find(user => {
-        return user.id === Number(userId);
-      });
-      user = new User(userId, newUser.name, newUser.pantry)
-      pantry = new Pantry(newUser.pantry)
-      let cookbook = new Cookbook(allData.recipeData);
+      const randomIndexInArray = Math.floor(
+        Math.random() * allData.userData.length);
+      const randomUser = allData.userData[randomIndexInArray];
+      user = new User(randomUser.id, randomUser.name, randomUser.pantry);
+      //pantry = new Pantry(randomUser.pantry);
+      const cookbook = new Cookbook(allData.recipeData);
       populateCards(cookbook.recipes);
       greetUser();
-    })
+    });
 }
 
 function viewFavorites() {
