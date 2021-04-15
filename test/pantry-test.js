@@ -130,7 +130,7 @@ describe('Pantry class', () => {
   })
 
   describe("pantry setup", () => { // constructor properties
-    it.only("should should create a new pantry", () => {
+    it.skip("should should create a new pantry", () => {
       expect(pantry1).to.be.an.instanceof(Pantry);
       expect(pantry2).to.be.an.instanceof(Pantry);
     });
@@ -170,24 +170,25 @@ describe('Pantry class', () => {
   })
 
     describe("a method to remove recipe ingredients from the pantry", () => { // pantry.removeIngr()
-      it("should have a method to remove recipe ingredients from the pantry", () => {
-
-      });
       it.skip("should remove ingredients used in a recipe from the pantry", () => {
+        pantry1.removeIngr(recipe1);
+        pantry2.removeIngr(recipe2);
 
+        expect(pantry1.userPantry).to.deep.equal([]);
+        expect(pantry2.userPantry).to.deep.equal([]);
       });
 
       it.skip("should return a message if the ingredient amount is now zero", () => {
-
+        expect(pantry1.removeIngr(recipe1)).to.return("Your pantry is out of the following items: bread, radish, cucumber, cream cheese");
       });
     });
 
     describe("an extra fancy method to check the pantry for a specific ingredient", () => { // pantry.rummage()
       it.skip("should be able to check the pantry for a specific ingredient", () => {
-
+        expect(pantry1.isThisInThePantry(12345)).to.return("You have 5 cucumbers!")
       });
     })
-  })
+  // })
 });
 
 // what data will i need to run these tests?
