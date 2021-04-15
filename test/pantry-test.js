@@ -143,7 +143,7 @@ describe('Pantry class', () => {
 
   describe("a method to check the pantry for recipe supplies", () => { // pantry.checkForIngr()
     it.skip("should be able to check the pantry to see if it has the ingredients for the recipe", () => {
-      expect(pantry1.checkForIngr(recipe1)).to.deep.equal([]); // should return that no ingredits are needed for this recipe
+      expect(pantry1.checkForIngr(recipe1)).to.deep.equal([]);
     });
 
     it.skip("should be able to check another recipe to see if it has the ingredients", () => {
@@ -185,7 +185,7 @@ describe('Pantry class', () => {
 
     describe("an extra fancy method to check the pantry for a specific ingredient", () => { // pantry.rummage()
       it.skip("should be able to check the pantry for a specific ingredient", () => {
-        expect(pantry1.isThisInThePantry(12345)).to.return("You have 5 cucumbers!")
+        expect(pantry1.rummage(12345)).to.return("You have 5 cucumbers!")
       });
     })
   // })
