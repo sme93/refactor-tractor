@@ -10,6 +10,9 @@ describe('Pantry class', () => {
   beforeEach(() => {
     // user = userData[12];
     // console.log("user 13, Valerie Grant", user);
+    // recipe1 = recipeData[13]; // "Brown Butter Garlic Shrimp", missing three ingredients
+    // console.log("recipe for Brown Butter Garlic Shrimp", recipe);
+    // recipe2 = recipeData[27];
     user1 = {
       "id": 1,
       "name": "Ahsoka Tano",
@@ -30,32 +33,31 @@ describe('Pantry class', () => {
           "ingredient": 1234567,
           "amount": 1
         }]};
-        user2 = {
-          "id": 2,
-          "name": "Yaddle",
-          "pantry": [
-            {
-              "ingredient": 2345,
-              "amount": 5
-            },
-            {
-              "ingredient": 23456,
-              "amount": 3
-            },
-            {
-              "ingredient": 234567,
-              "amount": 5
-            },
-            {
-              "ingredient": 2345678,
-              "amount": 1
-            }]};
-    // console.log(recipeData.length); // 50;
-    // recipe1 = recipeData[13]; // "Brown Butter Garlic Shrimp", missing three ingredients
-    // console.log("recipe for Brown Butter Garlic Shrimp", recipe);
-    // recipe2 = recipeData[27];
-    let user1Pantry = user1.pantry; // an array of objects with a length of 130
-    // console.log("userPantry", userPantry);
+    // console.log("Ahsoka", user1);
+    let user1Pantry = user1.pantry;
+    user2 = {
+      "id": 2,
+      "name": "Yaddle",
+      "pantry": [
+        {
+          "ingredient": 2345,
+          "amount": 5
+        },
+        {
+          "ingredient": 23456,
+          "amount": 3
+        },
+        {
+          "ingredient": 234567,
+          "amount": 5
+        },
+        {
+          "ingredient": 2345678,
+          "amount": 1
+        }]};
+    // console.log("Yaddle", user2);
+    let user2Pantry = user2.pantry;
+    // console.log("userPantry", user2Pantry);
     // let recipe1Ingr = recipe1.ingredients; // an array of objects with a length of 8
     // let recipe2Ingr = recipe2.ingredients; // an array of objects with a length of 12
     // console.log("recipeIngr", recipe2Ingr);
