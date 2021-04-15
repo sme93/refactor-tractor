@@ -6,7 +6,7 @@ import Cookbook from '../src/cookbook';
 
 let cookbook;
 
-describe('User', () => {
+describe('Cookbook', () => {
   beforeEach(() => {
     cookbook = new Cookbook(recipeData);
   });
@@ -15,13 +15,23 @@ describe('User', () => {
     expect(cookbook.recipes).to.be.an('array');
   });
 
-  describe('findRecipe', () => {
-    it('Should be able to filter through its array by ingredients', () => {
-      expect(cookbook.findRecipe('yolk').length).to.equal(2);
-    });
+  it('Should filter recipes based on an ingredient', () => {
+    expect(cookbook.findRecipe('instant vanilla pudding mix').length).to.equal(2);
+  })
 
-    it('Should be able to filter through its array by name', () => {
-      expect(cookbook.findRecipe('Sesame Cookies').length).to.equal(1);
-    });
-  });
+  it('Should filter by an ingredient regardless of capitalization', () => {
+    expect(cookbook.findRecipe('INSTANT vanilla PUDDING mix').length).to.equal(2);
+  })
+
+  it('Should filter recipes based on a name', () => {
+    expect(cookbook.findRecipe('Ambrosia Cupcakes').length).to.equal(1);
+  })
+
+  it('Should filter by a name regardless of capitalization', () => {
+    expect(cookbook.findRecipe('ambrosia CUPCAKES').length).to.equal(1);
+  })
+
+  it('Should filter recipes based on one or more tags', () => {
+    expect(cookbook.findRecipeByTags('appetizer').length).to.equal(9);
+  })
 })
