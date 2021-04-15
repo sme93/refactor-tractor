@@ -25,32 +25,35 @@ cardArea.addEventListener('click', cardButtonConditionals);
 
 function onStartup() {
   getData()
-  .then(allData => {
-  let userId = (Math.floor(Math.random() * allData.userData.length) + 1)
-  let newUser = allData.userData.find(user => {
-    return user.id === Number(userId);
-  });
-  user = new User(userId, newUser.name, newUser.pantry)
-  pantry = new Pantry(newUser.pantry)
-  let cookbook = new Cookbook(allData.recipeData);
-  populateCards(cookbook.recipes);
-  greetUser();
- })
+    .then(allData => {
+      let userId = (Math.floor(Math.random() * allData.userData.length) + 1)
+      let newUser = allData.userData.find(user => {
+        return user.id === Number(userId);
+      });
+      user = new User(userId, newUser.name, newUser.pantry)
+      pantry = new Pantry(newUser.pantry)
+      let cookbook = new Cookbook(allData.recipeData);
+      populateCards(cookbook.recipes);
+      greetUser();
+    })
 }
 
 function viewFavorites() {
-  if (cardArea.classList.contains('all')) {
-    cardArea.classList.remove('all')
-  }
-  if (!user.favoriteRecipes.length) {
-    favButton.innerHTML = 'You have no favorites!';
-    populateCards(cookbook.recipes);
-    return
-  } else {
-    favButton.innerHTML = 'Refresh Favorites'
-    cardArea.innerHTML = '';
-    user.favoriteRecipes.forEach(recipe => {
-      cardArea.insertAdjacentHTML('afterbegin', `<div id='${recipe.id}'
+  getData()
+    .then(allData => {
+      if (cardArea.classList.contains('all')) {
+        cardArea.classList.remove('all')
+      }
+      if (!user.favoriteRecipes.length) {
+        favButton.innerHTML = 'You have no favorites!';
+        let cookbook = new Cookbook(allData.recipeData);
+        populateCards(cookbook.recipes);
+        return
+      } else {
+        favButton.innerHTML = 'Refresh Favorites'
+        cardArea.innerHTML = '';
+        user.favoriteRecipes.forEach(recipe => {
+          cardArea.insertAdjacentHTML('afterbegin', `<div id='${recipe.id}'
       class='card'>
       <header id='${recipe.id}' class='card-header'>
       <label for='add-button' class='hidden'>Click to add recipe</label>
@@ -66,30 +69,35 @@ function viewFavorites() {
       <img id='${recipe.id}' tabindex='0' class='card-picture'
       src='${recipe.image}' alt='Food from recipe'>
       </div>`)
+        })
+      }
     })
-  }
 }
 
 function greetUser() {
   const userName = document.querySelector('.user-name');
   userName.innerHTML =
-  user.name.split(' ')[0] + ' ' + user.name.split(' ')[1][0];
+    user.name.split(' ')[0] + ' ' + user.name.split(' ')[1][0];
 }
 
 function favoriteCard(event) {
-  let specificRecipe = cookbook.recipes.find(recipe => {
-    if (recipe.id  === Number(event.target.id)) {
-      return recipe;
-    }
-  })
-  if (!event.target.classList.contains('favorite-active')) {
-    event.target.classList.add('favorite-active');
-    favButton.innerHTML = 'View Favorites';
-    user.addToFavorites(specificRecipe);
-  } else if (event.target.classList.contains('favorite-active')) {
-    event.target.classList.remove('favorite-active');
-    user.removeFromFavorites(specificRecipe)
-  }
+  getData()
+    .then(allData => {
+      let cookbook = new Cookbook(allData.recipeData);
+      let specificRecipe = cookbook.recipes.find(recipe => {
+        if (recipe.id === Number(event.target.id)) {
+          return recipe;
+        }
+      })
+      if (!event.target.classList.contains('favorite-active')) {
+        event.target.classList.add('favorite-active');
+        favButton.innerHTML = 'View Favorites';
+        user.addToFavorites(specificRecipe);
+      } else if (event.target.classList.contains('favorite-active')) {
+        event.target.classList.remove('favorite-active');
+        user.removeFromFavorites(specificRecipe)
+      }
+    })
 }
 
 function cardButtonConditionals(event) {
