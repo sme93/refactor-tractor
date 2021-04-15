@@ -124,7 +124,7 @@ describe('Pantry class', () => {
           }
     }]};
     // console.log("Cucumber sandwich", recipe1);
-    console.log("Ahi tuna bowl", recipe2);
+    // console.log("Ahi tuna bowl", recipe2);
     pantry1 = new Pantry(user1Pantry);
     pantry2 = new Pantry(user2Pantry);
   })
@@ -135,39 +135,39 @@ describe('Pantry class', () => {
       expect(pantry2).to.be.an.instanceof(Pantry);
     });
 
-    it.skip("should take in a user pantry", () => {
-      expect(pantry1.userPantry).to.deep.equal(user.pantry);
+    it.skip("should store a user's pantry", () => {
+      expect(pantry1.userPantry).to.deep.equal(user1Pantry);
+      expect(pantry2.userPantry).to.deep.equal(user2Pantry);
     });
   })
 
   describe("a method to check the pantry for recipe supplies", () => { // pantry.checkForIngr()
     it.skip("should be able to check the pantry to see if it has the ingredients for the recipe", () => {
-      // expect(pantry1.checkForIngr(recipe1)).to.return.a(Boolean);
+      expect(pantry1.checkForIngr(recipe1)).to.deep.equal([]); // should return that no ingredits are needed for this recipe
     });
 
+    it.skip("should be able to check another recipe to see if it has the ingredients", () => {
+      expect(pantry2.checkForIngr(recipe2)).to.deep.equal([{id: 2345, needAmt: .5}, {id: 23456, needAmt: 2}, {id: 234567, needAmt: 1}, {id: 2345678, needAmt: .5}]);
+    })
+
     it.skip("should return an error if an ingredient is missing", () => {
-      // expect(pantry1.checkForIngr(recipe1)).to.return("You don't have everything you need for this recipe.");
+      expect(pantry1.checkForIngr(recipe2)).to.return("You don't have everything you need for this recipe.");
     });
 
     it.skip("should return a message if all ingredients are available", () => {
-      // expect(pantry1.checkForIngr(recipe2).to.return("You have everything you need to make this recipe!"));
+      expect(pantry1.checkForIngr(recipe1).to.return("You have everything you need to make this recipe!"));
     });
+  })
 
-    // describe("a method to check the available amount of each ingredient", () => {
-    //  should there be a separate method to check the ingredient amounts?
-    // })
-
-    it.skip("should be able to check the amount available for each ingredient", () => {
-      // expect(pantry1.checkForIngr())
-    });
-
+  describe("a method to list ingredients available", () => {
     it.skip("should return the amount available for use", () => {
-
+      expect(pantry1.listIngr(recipe1)).to.deep.equal([{id: 1234, needAmt: 2}, {id: 12345, needAmt: .5}, {id: 123456, needAmt: 1}, {id: 1234567, needAmt: 1}]);
     });
 
     it.skip("should return the amount needed if the full amount is not available", () => {
-
+      expect(pantry2.listIngr(recipe2)).to.return("You need 2 slices of bread, .5 piece of cucumber, 1 large radish, and 1 TBSP of cream cheese to make a Cucumber Sandwich");
     });
+  })
 
     describe("a method to remove recipe ingredients from the pantry", () => { // pantry.removeIngr()
       it("should have a method to remove recipe ingredients from the pantry", () => {
