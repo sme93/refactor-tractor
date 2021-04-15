@@ -1,5 +1,5 @@
 class Pantry {
-  // constructor(userIngredients) { // don't really like this naming... it's confusing
+  // constructor(userIngredients) { 
   //   this.contents = userIngredients;
   // }
 }
