@@ -85,8 +85,46 @@ describe('Pantry class', () => {
             "amount": 1,
             "unit": "TBSP"
           }
-    }]},
+    }]};
+    recipe2 = {
+      "name": "Ahi Rice Bowl",
+      "id": 333777,
+      "image": "https://media.istockphoto.com/photos/ahi-poke-bowl-on-brown-rice-picture-id860670422?k=6&m=860670422&s=612x612&w=0&h=dB613OdUL7YXsOltUB76AL5B0ExkzWpzRGrmTp6ZpUo=",
+      "ingredients": [
+        {
+          "name": "Ahi tuna",
+          "id": 2345,
+          "quantity": {
+            "amount": .5,
+            "unit": "pound"
+          }
+        },
+        {
+          "name": "rice",
+          "id": 23456,
+          "quantity": {
+            "amount": 2,
+            "unit": "cups"
+          }
+        },
+        {
+          "name": "avocado",
+          "id": 234567,
+          "quantity": {
+            "amount": 1,
+            "unit": "large"
+          }
+        },
+        {
+          "name": "seaweed salad",
+          "id": 2345678,
+          "quantity": {
+            "amount": .5,
+            "unit": "cup"
+          }
+    }]};
     // console.log("Cucumber sandwich", recipe1);
+    console.log("Ahi tuna bowl", recipe2);
     pantry1 = new Pantry(user1Pantry);
     pantry2 = new Pantry(user2Pantry);
   })
