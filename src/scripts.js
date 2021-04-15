@@ -15,7 +15,7 @@ import Cookbook from './cookbook';
 let favButton = document.querySelector('.view-favorites');
 let homeButton = document.querySelector('.home')
 let cardArea = document.querySelector('.all-cards');
-let cookbook = new Cookbook(recipeData);
+// let cookbook = new Cookbook(recipeData);
 let user, pantry;
 
 window.onload = onStartup();
@@ -25,7 +25,9 @@ favButton.addEventListener('click', viewFavorites);
 cardArea.addEventListener('click', cardButtonConditionals);
 
 function onStartup() {
-  let userId = (Math.floor(Math.random() * 49) + 1)
+  getData()
+  .then(allData => {
+  let userId = (Math.floor(Math.random() * allData.userData.length) + 1)
   let newUser = users.find(user => {
     return user.id === Number(userId);
   });
@@ -33,6 +35,7 @@ function onStartup() {
   pantry = new Pantry(newUser.pantry)
   populateCards(cookbook.recipes);
   greetUser();
+ })
 }
 
 function viewFavorites() {
