@@ -1,18 +1,10 @@
 import { expect } from 'chai';
 
 import Pantry from '../src/pantry.js';
-// import recipeData from '../src/data/recipes.js'
-// import userData from '../src/data/users.js'
-
-let user1, user2, recipe1, recipe2, pantry1, pantry2;
 
 describe('Pantry class', () => {
+  let user1, user2, recipe1, recipe2, pantry1, pantry2;
   beforeEach(() => {
-    // user = userData[12];
-    // console.log("user 13, Valerie Grant", user);
-    // recipe1 = recipeData[13]; // "Brown Butter Garlic Shrimp", missing three ingredients
-    // console.log("recipe for Brown Butter Garlic Shrimp", recipe);
-    // recipe2 = recipeData[27];
     user1 = {
       "id": 1,
       "name": "Ahsoka Tano",
@@ -57,16 +49,52 @@ describe('Pantry class', () => {
         }]};
     // console.log("Yaddle", user2);
     let user2Pantry = user2.pantry;
-    // console.log("userPantry", user2Pantry);
-    // let recipe1Ingr = recipe1.ingredients; // an array of objects with a length of 8
-    // let recipe2Ingr = recipe2.ingredients; // an array of objects with a length of 12
-    // console.log("recipeIngr", recipe2Ingr);
+    recipe1 = {
+      "name": "Cucumber Sandwich",
+      "id": 777333,
+      "image": "https://thumbs.dreamstime.com/b/radish-cucumber-sandwich-dark-stone-background-62194116.jpg",
+      "ingredients": [
+        {
+          "name": "bread",
+          "id": 1234,
+          "quantity": {
+            "amount": 2,
+            "unit": "slices"
+          }
+        },
+        {
+          "name": "cucumber",
+          "id": 12345,
+          "quantity": {
+            "amount": 0.5,
+            "unit": "piece"
+          }
+        },
+        {
+          "name": "radish",
+          "id": 123456,
+          "quantity": {
+            "amount": 1,
+            "unit": "large"
+          }
+        },
+        {
+          "name": "cream cheese",
+          "id": 1234567,
+          "quantity": {
+            "amount": 1,
+            "unit": "TBSP"
+          }
+    }]},
+    // console.log("Cucumber sandwich", recipe1);
     pantry1 = new Pantry(user1Pantry);
+    pantry2 = new Pantry(user2Pantry);
   })
 
   describe("pantry setup", () => { // constructor properties
     it.only("should should create a new pantry", () => {
       expect(pantry1).to.be.an.instanceof(Pantry);
+      expect(pantry2).to.be.an.instanceof(Pantry);
     });
 
     it.skip("should take in a user pantry", () => {
@@ -76,15 +104,15 @@ describe('Pantry class', () => {
 
   describe("a method to check the pantry for recipe supplies", () => { // pantry.checkForIngr()
     it.skip("should be able to check the pantry to see if it has the ingredients for the recipe", () => {
-      expect(pantry1.checkForIngr(recipe1)).to.return.a(Boolean);
+      // expect(pantry1.checkForIngr(recipe1)).to.return.a(Boolean);
     });
 
     it.skip("should return an error if an ingredient is missing", () => {
-      expect(pantry1.checkForIngr(recipe1)).to.return("You don't have everything you need for this recipe.");
+      // expect(pantry1.checkForIngr(recipe1)).to.return("You don't have everything you need for this recipe.");
     });
 
     it.skip("should return a message if all ingredients are available", () => {
-      expect(pantry1.checkForIngr(recipe2).to.return("You have everything you need to make this recipe!"));
+      // expect(pantry1.checkForIngr(recipe2).to.return("You have everything you need to make this recipe!"));
     });
 
     // describe("a method to check the available amount of each ingredient", () => {
@@ -92,7 +120,7 @@ describe('Pantry class', () => {
     // })
 
     it.skip("should be able to check the amount available for each ingredient", () => {
-      expect(pantry1.checkForIngr())
+      // expect(pantry1.checkForIngr())
     });
 
     it.skip("should return the amount available for use", () => {
