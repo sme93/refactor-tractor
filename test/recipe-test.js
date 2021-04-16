@@ -45,15 +45,15 @@ describe('Recipe', () => {
   })
 
   it('Should be able to calculate the cost of its ingredients', () => {
-    expect(recipe.calculateCost()).to.equal(4166);
+    expect(recipe.calculateCost()).to.equal(17776);
   });
 
   it('Should be able to return the recipe ingredients', () => {
-    expect(recipe.returnIngredients()).to.deep.equal(recipeData[47].ingredients);
+    expect(recipe.returnIngredients()).to.deep.equal(recipeData[0].ingredients);
   });
 
   it('Should be able to return the recipe instructions', () => {
-    expect(recipe.returnInstructions()).to.deep.equal(recipeData[47].instructions);
+    expect(recipe.returnInstructions()).to.deep.equal(recipeData[0].instructions);
   });
 
 
