@@ -33,8 +33,6 @@ function onStartup() {
     });
 }
 
-// function renderPage()
-
 function viewFavorites(event) {
   if (event.target.innerHTML === 'Home') {
     populateCards(cookbook.recipes);
@@ -77,20 +75,20 @@ function favoriteCard(event) {
 }
 
 function cardButtonConditionals(event) {
- console.log("event ", event);
+  console.log("event ", event);
   // getData()
   //   .then(allData => {
-      if (event.target.classList.contains('favorite')) {
-        favoriteCard(event);
-      } else if (event.target.classList.contains('card-picture')) {
-        displayDirections(event);
-      } else if (event.target.classList.contains('home')) {
-        favButton.innerHTML = 'View Favorites';
-        console.log('fjkdhsfkjsdhf')
-        // let cookbook = new Cookbook(allData.recipeData);
-        populateCards(cookbook);
-      }
-    // })
+  if (event.target.classList.contains('favorite')) {
+    favoriteCard(event);
+  } else if (event.target.classList.contains('card-picture')) {
+    displayDirections(event);
+  } else if (event.target.classList.contains('home')) {
+    favButton.innerHTML = 'View Favorites';
+    console.log('fjkdhsfkjsdhf')
+    // let cookbook = new Cookbook(allData.recipeData);
+    populateCards(cookbook);
+  }
+  // })
 }
 
 
