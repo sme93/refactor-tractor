@@ -8,10 +8,10 @@ import Recipe from './recipe';
 import User from './user';
 import Cookbook from './cookbook';
 
-let favButton = document.querySelector('#viewFavoritesButton');
+const favButton = document.querySelector('#viewFavoritesButton');
 //let homeButton = document.querySelector('.home')
-let cardArea = document.querySelector('#allCards');
-let tagArea = document.querySelector('#allTags');
+const cardArea = document.querySelector('#allCards');
+const tagArea = document.querySelector('#allTags');
 let user, pantry, cookbook;
 
 window.onload = onStartup();
@@ -41,18 +41,31 @@ function filterTags(recipes) {
     return [...acc, ...recipe.tags]
   }, []);
   const uniqueTags = [...new Set(recipeTags)];
+
   const tagMarkup = uniqueTags.map(tag => {
-    return `<button class='tag-button' id="${tag}">${tag}</button>`
+    return `<button class='nav-button' id="${tag}">${tag}</button>`
   }).join("");
-  
-  tagArea.innerHTML = `<button class='nav-button'>
-                          Show All</button>` + tagMarkup;
+  const showAllButton = `<button class='nav-button active' id='showAll'>
+                        Show All</button>`;
+
+  tagArea.innerHTML = showAllButton + tagMarkup;
 }
 
 function filterByTag(event) {
   const tag = event.target.id;
-  const filteredRecipes = cookbook.findRecipeByTags(tag);
-  populateCards(filteredRecipes);
+  const navButtons = document.querySelectorAll('#allTags .nav-button');
+  navButtons.forEach(function(button) {
+    button.classList.remove('active');
+    if (button.id === tag) {
+      button.classList.add('active');
+    }
+  });
+  if (tag === 'showAll') {
+    populateCards(cookbook.recipes);
+  } else {
+    const filteredRecipes = cookbook.findRecipeByTags(tag);
+    populateCards(filteredRecipes);
+  }
 }
 
 function viewFavorites(event) {
@@ -97,7 +110,6 @@ function favoriteCard(event) {
 }
 
 function cardButtonConditionals(event) {
-  console.log("event ", event);
   // getData()
   //   .then(allData => {
   if (event.target.classList.contains('favorite')) {
@@ -110,6 +122,7 @@ function cardButtonConditionals(event) {
     populateCards(cookbook);
   }
   // })
+  //WIP - need to refactor!!!!
 }
 
 
