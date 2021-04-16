@@ -1,8 +1,8 @@
 import {expect} from 'chai';
 
 
-import recipeData from '../src/data/testData.js';
-import Cookbook from '../src/cookbook';
+import {recipeData} from '../src/data/testData.js';
+import Cookbook from '../src/cookbook.js';
 
 let cookbook;
 
@@ -16,22 +16,22 @@ describe('Cookbook', () => {
   });
 
   it('Should filter recipes based on an ingredient', () => {
-    expect(cookbook.findRecipe('instant vanilla pudding mix').length).to.equal(2);
+    expect(cookbook.findRecipe('all purpose flour').length).to.equal(2);
   })
 
   it('Should filter by an ingredient regardless of capitalization', () => {
-    expect(cookbook.findRecipe('INSTANT vanilla PUDDING mix').length).to.equal(2);
+    expect(cookbook.findRecipe('ALL purpose FLOUR').length).to.equal(2);
   })
 
   it('Should filter recipes based on a name', () => {
-    expect(cookbook.findRecipe('Ambrosia Cupcakes').length).to.equal(1);
+    expect(cookbook.findRecipe('Elvis Pancakes').length).to.equal(1);
   })
 
   it('Should filter by a name regardless of capitalization', () => {
-    expect(cookbook.findRecipe('ambrosia CUPCAKES').length).to.equal(1);
+    expect(cookbook.findRecipe('ElViS PaNcAkEs').length).to.equal(1);
   })
 
   it('Should filter recipes based on one or more tags', () => {
-    expect(cookbook.findRecipeByTags('appetizer').length).to.equal(9);
+    expect(cookbook.findRecipeByTags('appetizer').length).to.equal(1);
   })
 })
