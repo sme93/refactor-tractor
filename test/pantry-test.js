@@ -52,7 +52,7 @@ describe('Pantry class', () => {
   })
 
 
-    describe("a method to remove recipe ingredients from the pantry", () => { // pantry.removeIngr()
+    describe("a method to remove recipe ingredients from the pantry", () => {
       it("should remove ingredients used in a recipe from the pantry", () => {
         pantry1.cookMeal(recipe1);
         pantry2.cookMeal(recipe2);
@@ -64,27 +64,3 @@ describe('Pantry class', () => {
     });
 
 });
-
-// what data will i need to run these tests?
-// 🧪 the pantry will need ingredients - these will be supplied by the user
-// 🧪 recipe to check for necessary ingredients
-//
-// Create classes and methods that can:
-// 🧪 Determine whether a user’s pantry has enough ingredients to cook a given meal.
-  // 🧪 check the pantry for each ingredient
-  // 🧪  if any of the ingredients are not present, return an error
-  // 🧪  if all of the ingredients are present, the receipe/meal can be made
-//
-//🧪  Determine the amount of missing ingredients still needed to cook a given meal, based on what’s in the user’s pantry.
-//
-//🧪  Remove the ingredients used to cook a given recipe from a user’s pantry.
-
-// User Stories
-// As a user, I should be able to view what ingredients exist inside of my pantry.
-  // pantry.userPantry
-// As a user, I should be able to check my list of recipes to cook and see if my pantry has enough ingredients to cook a meal.
-  // pantry.checkForIngr()
-// As a user, I should be told what ingredients are still needed if I don’t have enough ingredients in my pantry to cook the recipe.
-  // pantry.checkForIngr() 😢 sad path testing
-// As a user, I should be able to cook a meal if I do have enough ingredients in my pantry. As a result, cooking the meal should remove the ingredients from my pantry.
-  // pantry.removeIngr()
