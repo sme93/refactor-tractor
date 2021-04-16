@@ -24,6 +24,14 @@ describe('Pantry class', () => {
       expect(pantry1.contents).to.deep.equal(users[0].pantry);
       expect(pantry2.contents).to.deep.equal(users[1].pantry);
     });
+
+    it("should store a user's ingredient amounts and id's", () => {
+      pantry1.populatePantry();
+      pantry2.populatePantry();
+      expect(pantry1.pantryIngredients).to.deep.equal([1234, 12345, 123456, 1234567]);
+      expect(pantry2.pantryAmounts).to.deep.equal([ 5, 3, 5, 1 ]);
+    });
+
   })
 
   describe("a method to check the pantry for recipe supplies", () => {
@@ -32,9 +40,10 @@ describe('Pantry class', () => {
       expect(pantry1.checkForIngr(recipe2)).to.equal("You don't have everything you need for this recipe.");
     });
 
-    // it.skip("should return a message if all ingredients are available", () => {
-    //   expect(pantry1.checkForIngr(recipe1)).to.equal("You have everything you need to make this recipe!"));
-    // });
+    it.skip("should return a message if all ingredients are available", () => {
+      expect(pantry1.checkForIngr(recipe1)).to.equal("You have everything you need to make this recipe!");
+    });
+
   })
 
 
@@ -45,7 +54,7 @@ describe('Pantry class', () => {
 
         expect(pantry1.pantryAmounts).to.deep.equal([ 3, 2.5, 4, 0 ]);
         expect(pantry2.pantryAmounts).to.deep.equal([ 4.5, 1, 4, 0.5 ]);
-        expect(pantry2.removeIngr(recipe1)).to.equal("Sorry, you dont have the required ingredients");
+        expect(pantry2.cookMeal(recipe1)).to.equal("Sorry, you dont have the required ingredients");
       });
 
       it.skip("should return a message if the ingredient amount is now zero", () => {

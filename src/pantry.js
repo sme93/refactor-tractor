@@ -13,7 +13,7 @@ class Pantry {
     })
   }
 
-  cookMeal(recipe) {
+  checkForIngr(recipe) {
     this.populatePantry()
     const checkedIngredients = [];
     let difference;
@@ -30,7 +30,7 @@ class Pantry {
     return checkedIngredients.join(", ");
   }
 
-  removeIngr(recipe) {
+  cookMeal(recipe) {
     if(this.checkForIngr(recipe).includes("don't")) {
       return "Sorry, you dont have the required ingredients"
     } else {
