@@ -36,12 +36,17 @@ describe('Pantry class', () => {
 
   describe("a method to check the pantry for recipe supplies", () => {
 
-    it.skip("should return an error if an ingredient is missing", () => {
-      expect(pantry1.checkForIngr(recipe2)).to.equal("You don't have everything you need for this recipe.");
+    it("should return an array of missing ingredients and amounts", () => {
+      expect(pantry1.checkForIngr(recipe2)).to.deep.equal([
+  { name: 'Ahi tuna', amount: 0.5 },
+  { name: 'rice', amount: 2 },
+  { name: 'avocado', amount: 1 },
+  { name: 'seaweed salad', amount: 0.5 }
+]);
     });
 
-    it.skip("should return a message if all ingredients are available", () => {
-      expect(pantry1.checkForIngr(recipe1)).to.equal("You have everything you need to make this recipe!");
+    it("should return a message if all ingredients are available", () => {
+      expect(pantry1.checkForIngr(recipe1)).to.equal("You have all of the ingredients that you need!");
     });
 
   })

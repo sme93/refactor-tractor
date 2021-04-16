@@ -15,23 +15,25 @@ class Pantry {
 
   checkForIngr(recipe) {
     this.populatePantry()
-    const checkedIngredients = [];
+    const missingIngredients = [];
     let difference;
     recipe.ingredients.forEach(ingredient => {
       if(!this.pantryIngredients.includes(ingredient.id)) {
-        return checkedIngredients.push(`You don't have ${ingredient.name}, you need ${ingredient.quantity.amount} more`)
+        return missingIngredients.push( { name: ingredient.name, amount: ingredient.quantity.amount} )
       } else if (ingredient.quantity.amount > this.pantryAmounts[this.pantryIngredients.indexOf(ingredient.id)]) {
         difference = this.pantryAmounts[this.pantryIngredients.indexOf(ingredient.id)] - ingredient.quantity.amount;
-        return checkedIngredients.push(`You don't have enough ${ingredient.name} you need ${difference} more`)
-      } else {
-        return checkedIngredients.push(`You have enough ${ingredient.name}`)
+        return missingIngredients.push({name: ingredient.name, amount: difference })
       }
     });
-    return checkedIngredients.join(", ");
+    if(missingIngredients.length) {
+      return missingIngredients
+    } else {
+      return "You have all of the ingredients that you need!"
+    }
   }
 
   cookMeal(recipe) {
-    if(this.checkForIngr(recipe).includes("don't")) {
+    if(this.checkForIngr(recipe) !== "You have all of the ingredients that you need!") {
       return "Sorry, you dont have the required ingredients"
     } else {
       recipe.ingredients.forEach(ingredient => {
