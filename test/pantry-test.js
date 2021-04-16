@@ -40,8 +40,8 @@ describe('Pantry class', () => {
 
     describe("a method to remove recipe ingredients from the pantry", () => { // pantry.removeIngr()
       it("should remove ingredients used in a recipe from the pantry", () => {
-        pantry1.removeIngr(recipe1);
-        pantry2.removeIngr(recipe2);
+        pantry1.cookMeal(recipe1);
+        pantry2.cookMeal(recipe2);
 
         expect(pantry1.pantryAmounts).to.deep.equal([ 3, 2.5, 4, 0 ]);
         expect(pantry2.pantryAmounts).to.deep.equal([ 4.5, 1, 4, 0.5 ]);

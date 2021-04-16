@@ -13,7 +13,7 @@ class Pantry {
     })
   }
 
-  checkForIngr(recipe) {
+  cookMeal(recipe) {
     this.populatePantry()
     const checkedIngredients = [];
     let difference;
