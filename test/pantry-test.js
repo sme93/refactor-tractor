@@ -18,9 +18,9 @@ describe('Pantry class', () => {
       expect(pantry2).to.be.an.instanceof(Pantry);
     });
 
-    it.skip("should store a user's pantry", () => {
-      expect(pantry1.userPantry).to.deep.equal(user1Pantry);
-      expect(pantry2.userPantry).to.deep.equal(user2Pantry);
+    it("should store a user's pantry", () => {
+      expect(pantry1.contents).to.deep.equal(users[0].pantry);
+      expect(pantry2.contents).to.deep.equal(users[1].pantry);
     });
   })
 

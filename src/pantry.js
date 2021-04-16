@@ -1,7 +1,7 @@
 class Pantry {
-  // constructor(userIngredients) { 
-  //   this.contents = userIngredients;
-  // }
+  constructor(userPantry) {
+    this.contents = userPantry;
+  }
 }
 
 export default Pantry;
