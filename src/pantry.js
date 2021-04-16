@@ -18,13 +18,14 @@ class Pantry {
     const missingIngredients = [];
     let difference;
     recipe.ingredients.forEach(ingredient => {
+      let currentIngredient = this.pantryIngredients.indexOf(ingredient.id);
       if (!this.pantryIngredients.includes(ingredient.id)) {
         return missingIngredients.push({
           name: ingredient.name,
           amount: ingredient.quantity.amount
         })
-      } else if (ingredient.quantity.amount > this.pantryAmounts[this.pantryIngredients.indexOf(ingredient.id)]) {
-        difference = this.pantryAmounts[this.pantryIngredients.indexOf(ingredient.id)] - ingredient.quantity.amount;
+      } else if (ingredient.quantity.amount > this.pantryAmounts[currentIngredient]) {
+        difference = this.pantryAmounts[currentIngredient] - ingredient.quantity.amount;
         return missingIngredients.push({
           name: ingredient.name,
           amount: difference
