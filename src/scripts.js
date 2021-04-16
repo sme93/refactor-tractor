@@ -8,9 +8,10 @@ import Recipe from './recipe';
 import User from './user';
 import Cookbook from './cookbook';
 
-let favButton = document.querySelector('.view-favorites');
+const favButton = document.querySelector('#viewFavoritesButton');
 //let homeButton = document.querySelector('.home')
-let cardArea = document.querySelector('.all-cards');
+const cardArea = document.querySelector('#allCards');
+const tagArea = document.querySelector('#allTags');
 let user, pantry, cookbook;
 
 window.onload = onStartup();
@@ -18,6 +19,7 @@ window.onload = onStartup();
 //homeButton.addEventListener('click', cardButtonConditionals);
 favButton.addEventListener('click', viewFavorites);
 cardArea.addEventListener('click', cardButtonConditionals);
+tagArea.addEventListener('click', filterByTag);
 
 function onStartup() {
   getData()
@@ -29,8 +31,41 @@ function onStartup() {
       //pantry = new Pantry(randomUser.pantry);
       cookbook = new Cookbook(allData.recipeData);
       populateCards(cookbook.recipes);
+      filterTags(cookbook.recipes);
       greetUser();
     });
+}
+
+function filterTags(recipes) {
+  const recipeTags = recipes.reduce((acc, recipe) => {
+    return [...acc, ...recipe.tags]
+  }, []);
+  const uniqueTags = [...new Set(recipeTags)];
+
+  const tagMarkup = uniqueTags.map(tag => {
+    return `<button class='nav-button' id="${tag}">${tag}</button>`
+  }).join("");
+  const showAllButton = `<button class='nav-button active' id='showAll'>
+                        Show All</button>`;
+
+  tagArea.innerHTML = showAllButton + tagMarkup;
+}
+
+function filterByTag(event) {
+  const tag = event.target.id;
+  const navButtons = document.querySelectorAll('#allTags .nav-button');
+  navButtons.forEach(function(button) {
+    button.classList.remove('active');
+    if (button.id === tag) {
+      button.classList.add('active');
+    }
+  });
+  if (tag === 'showAll') {
+    populateCards(cookbook.recipes);
+  } else {
+    const filteredRecipes = cookbook.findRecipeByTags(tag);
+    populateCards(filteredRecipes);
+  }
 }
 
 function viewFavorites(event) {
@@ -54,7 +89,7 @@ function greetUser() {
 }
 
 function favoriteCard(event) {
-  const specificRecipe = "";
+  //const specificRecipe = "";
   getData()
     .then(allData => {
       let cookbook = new Cookbook(allData.recipeData);
@@ -75,7 +110,6 @@ function favoriteCard(event) {
 }
 
 function cardButtonConditionals(event) {
-  console.log("event ", event);
   // getData()
   //   .then(allData => {
   if (event.target.classList.contains('favorite')) {
@@ -84,11 +118,11 @@ function cardButtonConditionals(event) {
     displayDirections(event);
   } else if (event.target.classList.contains('home')) {
     favButton.innerHTML = 'View Favorites';
-    console.log('fjkdhsfkjsdhf')
     // let cookbook = new Cookbook(allData.recipeData);
     populateCards(cookbook);
   }
   // })
+  //WIP - need to refactor!!!!
 }
 
 
@@ -136,7 +170,7 @@ function populateCards(recipes) {
     });
 
     return `
-    <div id='${recipe.id}' class='card'>
+    <article id='${recipe.id}' class='card'>
         <header id='${recipe.id}' class='card-header'>
           <label for='add-button' class='hidden'>Click to add recipe</label>
           <button id='${recipe.id}' 
@@ -158,7 +192,7 @@ function populateCards(recipes) {
           <span id='${recipe.id}' class='recipe-name'>${recipe.name}</span>
           <img id='${recipe.id}' tabindex='0' class='card-picture'
           src='${recipe.image}' alt='click to view recipe for ${recipe.name}'>
-    </div>`
+    </article>`
   }).join("");
 
   cardArea.innerHTML = markup;
