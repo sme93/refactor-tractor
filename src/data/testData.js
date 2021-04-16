@@ -1482,6 +1482,4 @@ let users = [
 ]
 
 
-export default recipeData;
-export default ingredientsData;
-export default users;
+export { recipeData, ingredientsData, users }
