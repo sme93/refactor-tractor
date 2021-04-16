@@ -19,6 +19,7 @@ window.onload = onStartup();
 //homeButton.addEventListener('click', cardButtonConditionals);
 favButton.addEventListener('click', viewFavorites);
 cardArea.addEventListener('click', cardButtonConditionals);
+tagArea.addEventListener('click', filterByTag);
 
 function onStartup() {
   getData()
@@ -39,34 +40,18 @@ function filterTags(recipes) {
   const recipeTags = recipes.reduce((acc, recipe) => {
     return [...acc, ...recipe.tags]
   }, []);
-  let uniqueTags = [...new Set(recipeTags)];
+  const uniqueTags = [...new Set(recipeTags)];
+  const tagMarkup = uniqueTags.map(tag => {
+    return `<button class='tag-button' id="${tag}">${tag}</button>`
+  }).join("");
   
-  uniqueTags =  `
-    <button>Antipasti</button>
-    <button>Starter</button>
-    <button>Snack</button>
-    <button>Appetizer</button>
-    <button>Antipasto</button>
-    <button>Hor d'oeuvre</button>
-    <button>Lunch</button>
-    <button>Main Course</button>
-    <button>Main Dish</button>
-    <button>Dinner</button>
-    <button>Sauce</button>
-    <button>Side Dish</button>
-    <button>Morning Meal</button>
-    <button>Brunch</button>
-    <button>Breakfast</button>
-    <button>Salad</button>
-    <button>Condiment</button>
-    <button>Dip</button>
-    <button>Spread</button>
-    `
-  tagArea.innerHTML = uniqueTags;
-  //step one - log just the recipes' tags
-  //step two - store all tags in an array and remove duplicates
-  //step three - make a button for each tag from stored tags array with tag name
-  // button content will be [cookies]
+  tagArea.innerHTML = tagMarkup;
+}
+
+function filterByTag(event) {
+  const tag = event.target.id;
+  const filteredRecipes = cookbook.findRecipeByTags(tag);
+  populateCards(filteredRecipes);
 }
 
 function viewFavorites(event) {
