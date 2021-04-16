@@ -18,14 +18,20 @@ class Pantry {
     const missingIngredients = [];
     let difference;
     recipe.ingredients.forEach(ingredient => {
-      if(!this.pantryIngredients.includes(ingredient.id)) {
-        return missingIngredients.push( { name: ingredient.name, amount: ingredient.quantity.amount} )
+      if (!this.pantryIngredients.includes(ingredient.id)) {
+        return missingIngredients.push({
+          name: ingredient.name,
+          amount: ingredient.quantity.amount
+        })
       } else if (ingredient.quantity.amount > this.pantryAmounts[this.pantryIngredients.indexOf(ingredient.id)]) {
         difference = this.pantryAmounts[this.pantryIngredients.indexOf(ingredient.id)] - ingredient.quantity.amount;
-        return missingIngredients.push({name: ingredient.name, amount: difference })
+        return missingIngredients.push({
+          name: ingredient.name,
+          amount: difference
+        })
       }
     });
-    if(missingIngredients.length) {
+    if (missingIngredients.length) {
       return missingIngredients
     } else {
       return "You have all of the ingredients that you need!"
@@ -33,7 +39,7 @@ class Pantry {
   }
 
   cookMeal(recipe) {
-    if(this.checkForIngr(recipe) !== "You have all of the ingredients that you need!") {
+    if (this.checkForIngr(recipe) !== "You have all of the ingredients that you need!") {
       return "Sorry, you dont have the required ingredients"
     } else {
       recipe.ingredients.forEach(ingredient => {
