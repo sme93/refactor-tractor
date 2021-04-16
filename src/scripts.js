@@ -10,7 +10,8 @@ import Cookbook from './cookbook';
 
 let favButton = document.querySelector('.view-favorites');
 //let homeButton = document.querySelector('.home')
-let cardArea = document.querySelector('.all-cards');
+let cardArea = document.querySelector('#allCards');
+let tagArea = document.querySelector('#allTags');
 let user, pantry, cookbook;
 
 window.onload = onStartup();
@@ -29,8 +30,43 @@ function onStartup() {
       //pantry = new Pantry(randomUser.pantry);
       cookbook = new Cookbook(allData.recipeData);
       populateCards(cookbook.recipes);
+      filterTags(cookbook.recipes);
       greetUser();
     });
+}
+
+function filterTags(recipes) {
+  const recipeTags = recipes.reduce((acc, recipe) => {
+    return [...acc, ...recipe.tags]
+  }, []);
+  let uniqueTags = [...new Set(recipeTags)];
+  
+  uniqueTags =  `
+    <button>Antipasti</button>
+    <button>Starter</button>
+    <button>Snack</button>
+    <button>Appetizer</button>
+    <button>Antipasto</button>
+    <button>Hor d'oeuvre</button>
+    <button>Lunch</button>
+    <button>Main Course</button>
+    <button>Main Dish</button>
+    <button>Dinner</button>
+    <button>Sauce</button>
+    <button>Side Dish</button>
+    <button>Morning Meal</button>
+    <button>Brunch</button>
+    <button>Breakfast</button>
+    <button>Salad</button>
+    <button>Condiment</button>
+    <button>Dip</button>
+    <button>Spread</button>
+    `
+  tagArea.innerHTML = uniqueTags;
+  //step one - log just the recipes' tags
+  //step two - store all tags in an array and remove duplicates
+  //step three - make a button for each tag from stored tags array with tag name
+  // button content will be [cookies]
 }
 
 function viewFavorites(event) {
@@ -54,7 +90,7 @@ function greetUser() {
 }
 
 function favoriteCard(event) {
-  const specificRecipe = "";
+  //const specificRecipe = "";
   getData()
     .then(allData => {
       let cookbook = new Cookbook(allData.recipeData);
@@ -84,7 +120,6 @@ function cardButtonConditionals(event) {
     displayDirections(event);
   } else if (event.target.classList.contains('home')) {
     favButton.innerHTML = 'View Favorites';
-    console.log('fjkdhsfkjsdhf')
     // let cookbook = new Cookbook(allData.recipeData);
     populateCards(cookbook);
   }
@@ -136,7 +171,7 @@ function populateCards(recipes) {
     });
 
     return `
-    <div id='${recipe.id}' class='card'>
+    <article id='${recipe.id}' class='card'>
         <header id='${recipe.id}' class='card-header'>
           <label for='add-button' class='hidden'>Click to add recipe</label>
           <button id='${recipe.id}' 
@@ -158,7 +193,7 @@ function populateCards(recipes) {
           <span id='${recipe.id}' class='recipe-name'>${recipe.name}</span>
           <img id='${recipe.id}' tabindex='0' class='card-picture'
           src='${recipe.image}' alt='click to view recipe for ${recipe.name}'>
-    </div>`
+    </article>`
   }).join("");
 
   cardArea.innerHTML = markup;
