@@ -8,7 +8,7 @@ import Recipe from './recipe';
 import User from './user';
 import Cookbook from './cookbook';
 
-let favButton = document.querySelector('.view-favorites');
+let favButton = document.querySelector('#viewFavoritesButton');
 //let homeButton = document.querySelector('.home')
 let cardArea = document.querySelector('#allCards');
 let tagArea = document.querySelector('#allTags');
@@ -45,7 +45,8 @@ function filterTags(recipes) {
     return `<button class='tag-button' id="${tag}">${tag}</button>`
   }).join("");
   
-  tagArea.innerHTML = tagMarkup;
+  tagArea.innerHTML = `<button class='nav-button'>
+                          Show All</button>` + tagMarkup;
 }
 
 function filterByTag(event) {
