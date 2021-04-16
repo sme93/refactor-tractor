@@ -44,7 +44,8 @@ class Pantry {
       return "Sorry, you dont have the required ingredients"
     } else {
       recipe.ingredients.forEach(ingredient => {
-        return this.pantryAmounts[this.pantryIngredients.indexOf(ingredient.id)] -= ingredient.quantity.amount;
+        let currentIngredient = this.pantryIngredients.indexOf(ingredient.id);
+        return this.pantryAmounts[currentIngredient] -= ingredient.quantity.amount;
       });
     }
   }
