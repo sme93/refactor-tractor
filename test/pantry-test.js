@@ -56,18 +56,8 @@ describe('Pantry class', () => {
         expect(pantry2.pantryAmounts).to.deep.equal([ 4.5, 1, 4, 0.5 ]);
         expect(pantry2.cookMeal(recipe1)).to.equal("Sorry, you dont have the required ingredients");
       });
-
-      it.skip("should return a message if the ingredient amount is now zero", () => {
-        expect(pantry1.removeIngr(recipe1)).to.return("Your pantry is out of the following items: bread, radish, cucumber, cream cheese");
-      });
     });
 
-    describe("an extra fancy method to check the pantry for a specific ingredient", () => { // pantry.rummage()
-      it.skip("should be able to check the pantry for a specific ingredient", () => {
-        expect(pantry1.rummage(12345)).to.return("You have 5 cucumbers!")
-      });
-    })
-  // })
 });
 
 // what data will i need to run these tests?
