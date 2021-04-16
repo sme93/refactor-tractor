@@ -1,19 +1,21 @@
 import { expect } from 'chai';
 
 import Pantry from '../src/pantry.js';
+import Recipe from '../src/recipe.js';
 import { users, recipes } from '../src/data/pantry-test-data.js';
 
 describe('Pantry class', () => {
   let user1, user2, recipe1, recipe2, pantry1, pantry2;
   beforeEach(() => {
-
     pantry1 = new Pantry(users[0].pantry);
     pantry2 = new Pantry(users[1].pantry);
+    recipe1 = new Recipe(recipes[0]);
+    recipe2 = new Recipe(recipes[1]);
+
   })
 
   describe("pantry setup", () => { // constructor properties
     it("should should create a new pantry", () => {
-      console.log(users);
       expect(pantry1).to.be.an.instanceof(Pantry);
       expect(pantry2).to.be.an.instanceof(Pantry);
     });
@@ -24,41 +26,26 @@ describe('Pantry class', () => {
     });
   })
 
-  describe("a method to check the pantry for recipe supplies", () => { // pantry.checkForIngr()
-    it.skip("should be able to check the pantry to see if it has the ingredients for the recipe", () => {
-      expect(pantry1.checkForIngr(recipe1)).to.deep.equal([]);
-    });
-
-    it.skip("should be able to check another recipe to see if it has the ingredients", () => {
-      expect(pantry2.checkForIngr(recipe2)).to.deep.equal([{id: 2345, needAmt: .5}, {id: 23456, needAmt: 2}, {id: 234567, needAmt: 1}, {id: 2345678, needAmt: .5}]);
-    })
+  describe("a method to check the pantry for recipe supplies", () => {
 
     it.skip("should return an error if an ingredient is missing", () => {
-      expect(pantry1.checkForIngr(recipe2)).to.return("You don't have everything you need for this recipe.");
+      expect(pantry1.checkForIngr(recipe2)).to.equal("You don't have everything you need for this recipe.");
     });
 
-    it.skip("should return a message if all ingredients are available", () => {
-      expect(pantry1.checkForIngr(recipe1).to.return("You have everything you need to make this recipe!"));
-    });
+    // it.skip("should return a message if all ingredients are available", () => {
+    //   expect(pantry1.checkForIngr(recipe1)).to.equal("You have everything you need to make this recipe!"));
+    // });
   })
 
-  describe("a method to list ingredients available", () => {
-    it.skip("should return the amount available for use", () => {
-      expect(pantry1.listIngr(recipe1)).to.deep.equal([{id: 1234, needAmt: 2}, {id: 12345, needAmt: .5}, {id: 123456, needAmt: 1}, {id: 1234567, needAmt: 1}]);
-    });
-
-    it.skip("should return the amount needed if the full amount is not available", () => {
-      expect(pantry2.listIngr(recipe2)).to.return("You need 2 slices of bread, .5 piece of cucumber, 1 large radish, and 1 TBSP of cream cheese to make a Cucumber Sandwich");
-    });
-  })
 
     describe("a method to remove recipe ingredients from the pantry", () => { // pantry.removeIngr()
-      it.skip("should remove ingredients used in a recipe from the pantry", () => {
+      it("should remove ingredients used in a recipe from the pantry", () => {
         pantry1.removeIngr(recipe1);
         pantry2.removeIngr(recipe2);
 
-        expect(pantry1.userPantry).to.deep.equal([]);
-        expect(pantry2.userPantry).to.deep.equal([]);
+        expect(pantry1.pantryAmounts).to.deep.equal([ 3, 2.5, 4, 0 ]);
+        expect(pantry2.pantryAmounts).to.deep.equal([ 4.5, 1, 4, 0.5 ]);
+        expect(pantry2.removeIngr(recipe1)).to.equal("Sorry, you dont have the required ingredients");
       });
 
       it.skip("should return a message if the ingredient amount is now zero", () => {
