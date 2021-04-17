@@ -12,6 +12,7 @@ const favButton = document.querySelector('#viewFavoritesButton');
 //let homeButton = document.querySelector('.home')
 const cardArea = document.querySelector('#allCards');
 const tagArea = document.querySelector('#allTags');
+const searchBar = document.getElementById('search-bar')
 const expandFilters = document.querySelector('#expandFilters');
 let user, pantry, cookbook;
 
@@ -21,6 +22,7 @@ window.onload = onStartup();
 favButton.addEventListener('click', viewFavorites);
 cardArea.addEventListener('click', cardButtonConditionals);
 tagArea.addEventListener('click', filterByTag);
+searchBar.addEventListener('keyup', filterBySearch)
 expandFilters.addEventListener('click', toggleFilters);
 
 function onStartup() {
@@ -222,8 +224,8 @@ function populateCards(recipes) {
     <article id='${recipe.id}' class='card'>
         <header id='${recipe.id}' class='card-header'>
           <label for='add-button' class='hidden'>Click to add recipe</label>
-          <button id='${recipe.id}' 
-              aria-label='add-button' 
+          <button id='${recipe.id}'
+              aria-label='add-button'
               class='add-button card-button'>
             <img id='${recipe.id} favorite' class='add'
             src='https://image.flaticon.com/icons/svg/32/32339.svg' alt='Add to
@@ -231,10 +233,10 @@ function populateCards(recipes) {
           </button>
           <label for='favorite-button' class='hidden'>Click to favorite recipe
           </label>
-          <button id='${recipe.id}' 
-              aria-label='favorite-button' 
-              class='favorite 
-                ${isFavorite ? "favorite-active" : ""} 
+          <button id='${recipe.id}'
+              aria-label='favorite-button'
+              class='favorite
+                ${isFavorite ? "favorite-active" : ""}
               card-button'>
           </button>
         </header>
@@ -245,4 +247,23 @@ function populateCards(recipes) {
   }).join("");
 
   cardArea.innerHTML = markup;
+}
+
+function filterBySearch(e) {
+  const searchText = e.target.value.toLowerCase();
+  const values = returnValues([cookbook.recipes]);
+  let result = values.filter(recipe => {
+    const { name } = recipe;
+    return name.toLowerCase().includes(searchText)
+  })
+  populateCards(result)
+}
+
+function returnValues(array) {
+  const newArray = array.reduce((arr, element) => {
+  const values = Object.values(element)
+  values.forEach(item => arr.push(item))
+    return arr
+  }, [])
+  return newArray
 }
