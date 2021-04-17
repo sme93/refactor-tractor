@@ -1,4 +1,4 @@
-import './css/base.scss';
+// import './css/base.scss';
 // import './css/styles.scss';
 import './css/main.scss';
 
