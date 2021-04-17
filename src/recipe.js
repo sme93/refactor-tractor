@@ -23,7 +23,17 @@ class Recipe {
   }
 
   returnIngredients() {
-    return this.ingredients;
+    const correctIngredient = this.ingredients.reduce((acc, ingredient) => {
+      const ingredientId = ingredient.id
+      const foundIngredient = this.ingredientsData.find(ingr => {
+        return ingr.id === ingredientId;
+      });
+      
+      const mergedIngredient = Object.assign(ingredient, foundIngredient)
+      return [...acc, mergedIngredient]
+    }, []);
+
+    return correctIngredient;
   }
 
   returnInstructions() {

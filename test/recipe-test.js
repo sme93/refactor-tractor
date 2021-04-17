@@ -48,11 +48,11 @@ describe('Recipe', () => {
     expect(recipe.calculateCost()).to.equal(17776);
   });
 
-  it.only('Should be able to return the recipe ingredients', () => {
+  it('Should be able to return the recipe ingredients', () => {
     const mockRecipe = {
       ingredients: [
-        {id: 5},
-        {id: 7}
+        {id: 5, some: "property"},
+        {id: 7, some: "property"}
       ]
     }
     const mockIngredients = [
@@ -60,14 +60,12 @@ describe('Recipe', () => {
       {id: 7, name: "corn"},
       {id: 9, name: "doesn't appear"}
     ]
-
     const expectedResult = [
-      {id: 5, name: "wheat flour"},
-      {id: 7, name: "corn"},
+      {id: 5, name: "wheat flour", some: "property"},
+      {id: 7, name: "corn", some: "property"},
     ]
+
     recipe = new Recipe(mockRecipe, mockIngredients);
-    console.log("recipe ", recipe);
-                                  
     expect(recipe.returnIngredients()).to.deep.equal(expectedResult);
   });
 
