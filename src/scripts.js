@@ -29,6 +29,7 @@ cardArea.addEventListener('click', toggleViewRecipeDetails);
 function onStartup() {
   getData()
     .then(allData => {
+      console.log(allData.recipeData[0]);
       const randomIndexInArray = Math.floor(
         Math.random() * allData.userData.length);
       const randomUser = allData.userData[randomIndexInArray];
