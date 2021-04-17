@@ -23,7 +23,7 @@ body {
 main {
   background-color: $secondary-background-color;
   height: 100%;
-  width: 100%;
+  width: $width-max;
 }
 
 h1 {
@@ -33,7 +33,7 @@ h1 {
   margin-bottom: 0;
   padding-top: 10px;
   text-align: center;
-  width: 30%;
+  width: $width-30;
 }
 
 h3 {
@@ -51,14 +51,14 @@ img {
   display: flex;
   height: auto;
   justify-content: space-between;
-  width: 100%;
+  width: $width-max;
 }
 
 .user-info {
   font-size: 180%;
   margin: auto;
   text-align: center;
-  width: 40%;
+  width: $width-40;
 }
 
 .nav-button {
@@ -79,13 +79,13 @@ img {
   display: flex;
   height: 100%;
   margin: 10px 0px 10px 0px;
-  width: 30%;
+  width: $width-30;
 }
 
 .search-button {
   background-color: $main-background-color;
   border: $sml-border;
-  width: 20%;
+  width: $width-20;
   height: 58px;
   margin-top: 3px;
 }
@@ -130,13 +130,13 @@ img {
 ol {
   color: $text-color;
   font-size: 220%;
-  width: 100%;
+  width: $width-max;
 }
 
 .card {
   background-color: $card-background-color;
   border: $lrg-border;
-  width: 100%;
+  width: $width-max;
 }
 
 .card-header {
@@ -168,13 +168,13 @@ ol {
 }
 
 .add {
-  width: 100%;
+  width: $width-max;
 }
 
 .add-button {
   background-color: $main-background-color;
   display: flex;
-  width: 12%;
+  width: $width-min;
 }
 
 .favorite {
@@ -182,7 +182,7 @@ ol {
   background-image: url(https://image.flaticon.com/icons/svg/149/149222.svg);
   background-repeat: no-repeat;
   background-position: center;
-  width: 13%;
+  width: $width-min;
 }
 
 .favorite-active {
