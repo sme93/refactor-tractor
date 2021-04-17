@@ -1,6 +1,6 @@
 import './css/base.scss';
 import './css/styles.scss';
-import '.css/styles/main.scss';
+import './css/main.scss';
 
 import getData from './network-requests';
 
