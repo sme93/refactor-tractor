@@ -1,7 +1,8 @@
 @import "base";
 @import "colors";
 @import "mixins";
-@import ""
+@import "typography";
+@import "variables";
 
 .card {
   background-color: $card-background-color;
