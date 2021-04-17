@@ -21,6 +21,7 @@ window.onload = onStartup();
 favButton.addEventListener('click', viewFavorites);
 cardArea.addEventListener('click', cardButtonConditionals);
 tagArea.addEventListener('click', filterByTag);
+searchBar.addEventListener('keyup', filterBySearch)
 
 function onStartup() {
   getData()
