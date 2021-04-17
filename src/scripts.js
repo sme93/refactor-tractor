@@ -199,3 +199,14 @@ function populateCards(recipes) {
 
   cardArea.innerHTML = markup;
 }
+
+
+
+function returnValues(array) {
+  const newArray = array.reduce((arr, element) => {
+  const values = Object.values(element)
+  values.forEach(item => arr.push(item))
+    return arr
+  }, [])
+  return newArray
+}
