@@ -1,0 +1,63 @@
+@import "base";
+@import "colors";
+@import "mixins";
+@import ""
+
+.card {
+  background-color: $card-background-color;
+  border: $lrg-border;
+  width: $width-max;
+  @include rounded-corners(20px);
+}
+
+.card-header {
+  @include space-flex();
+  background-color: $main-background-color;
+  border-bottom: $sml-border;
+  // display: flex;
+  // justify-content: space-between;
+}
+
+.card-button {
+  border: $sml-border;
+  height: 27px;
+  margin: 3px;
+}
+
+.card-picture {
+  border: $sml-border;
+  height: 200px;
+  margin: 10px 3% 8px 2.6%;
+  width: $width-big;
+}
+
+.card-picture:hover {
+  opacity: 0.7;
+}
+
+.card-picture:active {
+  border: $lrg-border;
+}
+
+.add {
+  width: $width-max;
+}
+
+.add-button {
+  background-color: $main-background-color;
+  display: flex;
+  width: $width-min;
+}
+
+.favorite {
+  background-color: $main-background-color;
+  background-image: url(https://image.flaticon.com/icons/svg/149/149222.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  width: $width-min;
+}
+
+.favorite-active {
+  background-image: url(https://image.flaticon.com/icons/svg/148/148841.svg);
+  background-repeat: no-repeat;
+}
