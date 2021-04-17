@@ -67,17 +67,40 @@ function filterByTag(event) {
   const tag = event.target.id;
   const navButtons = document.querySelectorAll('#allTags .nav-button');
   navButtons.forEach(function(button) {
-    button.classList.remove('active');
     if (button.id === tag) {
       button.classList.add('active');
+    }
+    if (button.id === 'showAll') {
+      button.classList.remove('active');
     }
   });
   if (tag === 'showAll') {
     populateCards(cookbook.recipes);
+    navButtons.forEach(function(button) {
+      button.classList.remove('active');
+      if (button.id === 'showAll') {
+        button.classList.add('active');
+      }
+    });
   } else {
-    const filteredRecipes = cookbook.findRecipeByTags(tag);
-    populateCards(filteredRecipes);
+    renderFilteredCards();
   }
+}
+
+function renderFilteredCards() {
+  //select any filter with the active class
+  const activeFilterButtons = document
+    .querySelectorAll('#allTags .nav-button.active');
+  //turns nodeList into array, maps to get just the id(the string for the tag)
+  const activeTags = [...activeFilterButtons].map(button => button.id);
+  //for each tag, call cookbook.findRecipeByTag method
+  //spread contents of result into filtered recipes
+  //populate cards with the filtered recipes
+  const filteredRecipes = activeTags.reduce((acc, tag) => {
+    return [...acc, ...cookbook.findRecipeByTags(tag)];
+  }, []);
+
+  populateCards(filteredRecipes);
 }
 
 function toggleFilters() {
