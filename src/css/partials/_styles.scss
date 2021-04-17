@@ -5,15 +5,14 @@
 @import "variables";
 @import "colors";
 
-* {
-  border: 1px solid lime;
-}
+// * {
+//   border: 1px solid lime;
+// }
 
 html {
   border: $med-border;
   height: 100vh;
 }
-
 
 body {
   box-sizing: border-box;
@@ -123,6 +122,7 @@ img {
   grid-template-columns: repeat(4, 1fr);
   padding: 30px 0 30px 30px;
   width: 95.5vw;
+  @include rounded-corners(20px);
 }
 
 .all-recipe-info,
