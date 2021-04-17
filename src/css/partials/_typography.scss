@@ -1,9 +1,20 @@
 // This file will set up our typography rules
 
-/* font A */
+/* Font Weights */
+$light: 100;
+$regular: 400;
+$bold: 600;
 
+/* Base Font */
+$base-font-family: "Open Sans", sans-serif;
+$base-font-weight: $regular;
+$base-font-size: 15px;
+$base-line-height: 1.4;
 
-/* font B
+/* Fixed Font */
+$fixed-font-family: monospace;
+$fixed-font-size: 100%;
+$fixed-line-height: $base-line-height;
 
-
-/* font C etc. */
+/* Headings */
+$header-font-weight: $bold;
