@@ -1,19 +1,16 @@
 html {
-  // background-color: $dark;
-  background-color: #37515C;
   border: 2px solid #000;
   height: 100vh;
 }
 
 body {
   box-sizing: border-box;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   margin: auto;
 }
 
-
 .main-header {
-  background-color: #EBF5EE;
+  background-color: #ebf5ee;
   border: 2px solid #000;
   display: flex;
   height: auto;
@@ -21,12 +18,17 @@ body {
   width: 100%;
 }
 
-.navButton {
-  background-color: #EBF5EE;
+.nav-button {
+  background-color: #ebf5ee;
   border-left: 1px solid #000;
   border-right: 1px solid #000;
   font-size: 130%;
   margin: 1%;
+
+  &.active {
+    background-color: #d7f2fe;
+    border: none;
+  }
 }
 
 h1 {
@@ -43,7 +45,7 @@ h1 {
   font-size: 180%;
   margin: auto;
   text-align: center;
-  width: 40%
+  width: 40%;
 }
 
 .search-bar {
@@ -54,7 +56,7 @@ h1 {
 }
 
 .search-button {
-  background-color: #EBF5EE;
+  background-color: #ebf5ee;
   border: 1px solid #000;
   width: 20%;
   height: 58px;
@@ -63,17 +65,16 @@ h1 {
 
 .search-image:hover,
 .card-button:hover,
-.navButton:hover,
+.nav-button:hover,
 .search-button:hover {
   background-color: #cff2da;
 }
 
-
 .search-image:active,
 .card-button:active,
-.navButton:active,
+.nav-button:active,
 .search-button:active {
-  background-color: #C3C2C6;
+  background-color: #c3c2c6;
 }
 
 .search-input {
@@ -85,17 +86,14 @@ h1 {
   width: 90%;
 }
 
-
 .card-button {
   border: 1px solid #000;
   height: 27px;
   margin: 3px;
 }
 
-
-
 .add-button {
-  background-color: #EBF5EE;
+  background-color: #ebf5ee;
   display: flex;
   width: 12%;
 }
@@ -108,9 +106,8 @@ h1 {
   display: none;
 }
 
-
 .favorite {
-  background-color: #EBF5EE;
+  background-color: #ebf5ee;
   background-image: url(https://image.flaticon.com/icons/svg/149/149222.svg);
   background-repeat: no-repeat;
   background-position: center;
@@ -130,14 +127,13 @@ img {
 }
 
 .card {
-  background-color: #D7F2FE;
+  background-color: #d7f2fe;
   border: 3px solid #000;
   width: 100%;
 }
 
-
 .card-header {
-  background-color: #EBF5EE;
+  background-color: #ebf5ee;
   border-bottom: 1px solid #000;
   display: flex;
   justify-content: space-between;
@@ -150,18 +146,17 @@ img {
 
 .all-recipe-info,
 ol {
-  color: #EBF5EE;
+  color: #ebf5ee;
   font-size: 220%;
   width: 100%;
 }
 
 h3 {
-  color: #EBF5EE;
+  color: #ebf5ee;
   font-size: 250%;
 }
 
 .recipe-name {
-
   display: block;
   font-size: 150%;
   text-align: center;
@@ -183,7 +178,7 @@ h3 {
 }
 
 main {
-  background-color: #37515C;
+  background-color: #37515c;
   height: 100%;
   width: 100%;
 }
