@@ -1,9 +1,10 @@
 // This file will set up our style rules
-@import "reset";
 @import "base";
+@import "colors";
+@import "mixins";
+@import "reset";
 @import "typography";
 @import "variables";
-@import "colors";
 
 // * {
 //   border: 1px solid lime;
@@ -46,11 +47,12 @@ img {
 }
 
 .main-header {
+  @include space-flex();
   background-color: $main-background-color;
   border: $med-border;
-  display: flex;
+  // display: flex;
   height: auto;
-  justify-content: space-between;
+  // justify-content: space-between;
   width: $width-max;
 }
 
@@ -122,7 +124,6 @@ img {
   grid-template-columns: repeat(4, 1fr);
   padding: 30px 0 30px 30px;
   width: 95.5vw;
-  @include rounded-corners(20px);
 }
 
 .all-recipe-info,
@@ -136,13 +137,15 @@ ol {
   background-color: $card-background-color;
   border: $lrg-border;
   width: $width-max;
+  @include rounded-corners(20px);
 }
 
 .card-header {
+  @include space-flex();
   background-color: $main-background-color;
   border-bottom: $sml-border;
-  display: flex;
-  justify-content: space-between;
+  // display: flex;
+  // justify-content: space-between;
 }
 
 .card-button {

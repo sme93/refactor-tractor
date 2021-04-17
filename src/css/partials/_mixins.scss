@@ -8,7 +8,11 @@
   border-radius: $radius;
 }
 
-/* Mixin B
+/* Mixin - FlexBox Spaced */
+@mixin space-flex() {
+  display: flex;
+  justify-content: space-between;
+}
 
 
 /* Mixin C etc. */
