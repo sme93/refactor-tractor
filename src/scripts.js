@@ -12,6 +12,7 @@ const favButton = document.querySelector('#viewFavoritesButton');
 //let homeButton = document.querySelector('.home')
 const cardArea = document.querySelector('#allCards');
 const tagArea = document.querySelector('#allTags');
+const expandFilters = document.querySelector('#expandFilters');
 let user, pantry, cookbook;
 
 window.onload = onStartup();
@@ -20,6 +21,7 @@ window.onload = onStartup();
 favButton.addEventListener('click', viewFavorites);
 cardArea.addEventListener('click', cardButtonConditionals);
 tagArea.addEventListener('click', filterByTag);
+expandFilters.addEventListener('click', toggleFilters);
 
 function onStartup() {
   getData()
@@ -37,12 +39,22 @@ function onStartup() {
 }
 
 function filterTags(recipes) {
+  const showAllFilters = document
+    .querySelector('#allTags')
+    .classList.contains('show-all-filters');
+  
   const recipeTags = recipes.reduce((acc, recipe) => {
     return [...acc, ...recipe.tags]
   }, []);
-  const uniqueTags = [...new Set(recipeTags)];
+  const uniqueTags = [...new Set(recipeTags)].reverse();
+  let filters = [];
+  if (showAllFilters) {
+    filters = uniqueTags;
+  } else {
+    filters = uniqueTags.slice(0, 5);
+  }
 
-  const tagMarkup = uniqueTags.map(tag => {
+  const tagMarkup = filters.map(tag => {
     return `<button class='nav-button' id="${tag}">${tag}</button>`
   }).join("");
   const showAllButton = `<button class='nav-button active' id='showAll'>
@@ -55,17 +67,54 @@ function filterByTag(event) {
   const tag = event.target.id;
   const navButtons = document.querySelectorAll('#allTags .nav-button');
   navButtons.forEach(function(button) {
-    button.classList.remove('active');
     if (button.id === tag) {
       button.classList.add('active');
+    }
+    if (button.id === 'showAll') {
+      button.classList.remove('active');
     }
   });
   if (tag === 'showAll') {
     populateCards(cookbook.recipes);
+    navButtons.forEach(function(button) {
+      button.classList.remove('active');
+      if (button.id === 'showAll') {
+        button.classList.add('active');
+      }
+    });
   } else {
-    const filteredRecipes = cookbook.findRecipeByTags(tag);
-    populateCards(filteredRecipes);
+    renderFilteredCards();
   }
+}
+
+function renderFilteredCards() {
+  //select any filter with the active class
+  const activeFilterButtons = document
+    .querySelectorAll('#allTags .nav-button.active');
+  //turns nodeList into array, maps to get just the id(the string for the tag)
+  const activeTags = [...activeFilterButtons].map(button => button.id);
+  //for each tag, call cookbook.findRecipeByTag method
+  //spread contents of result into filtered recipes
+  //populate cards with the filtered recipes
+  const filteredRecipes = activeTags.reduce((acc, tag) => {
+    return [...acc, ...cookbook.findRecipeByTags(tag)];
+  }, []);
+
+  populateCards(filteredRecipes);
+}
+
+function toggleFilters() {
+  const allTags = document.querySelector('#allTags');
+
+  if (allTags.classList.contains('show-all-filters')) {
+    allTags.classList.remove('show-all-filters');
+    allTags.nextElementSibling.innerHTML = 'Expand Filters';
+  } else {
+    allTags.classList.add('show-all-filters');
+    allTags.nextElementSibling.innerHTML = 'Minimize Filters';
+  }
+
+  filterTags(cookbook.recipes);
 }
 
 function viewFavorites(event) {
