@@ -33,7 +33,7 @@ h1 {
   margin-bottom: 0;
   padding-top: 10px;
   text-align: center;
-  width: $width-30;
+  width: $width-sml;
 }
 
 h3 {
@@ -58,14 +58,12 @@ img {
   font-size: 180%;
   margin: auto;
   text-align: center;
-  width: $width-40;
+  width: $width-avg;
 }
 
 .nav-button {
   background-color: $main-background-color;
   border: $sml-border;
-  // border-left: $sml-border;
-  // border-right: $sml-border;
   font-size: 130%;
   margin: 1%;
 
@@ -79,13 +77,13 @@ img {
   display: flex;
   height: 100%;
   margin: 10px 0px 10px 0px;
-  width: $width-30;
+  width: $width-sml;
 }
 
 .search-button {
   background-color: $main-background-color;
   border: $sml-border;
-  width: $width-20;
+  width: $width-smol;
   height: 58px;
   margin-top: 3px;
 }
@@ -96,7 +94,7 @@ img {
   height: 7vh;
   margin: 3px 7px 0px 0px;
   padding-left: 10px;
-  width: 90%;
+  width: $width-big;
 }
 
 .search-image:hover,
@@ -156,7 +154,7 @@ ol {
   border: $sml-border;
   height: 200px;
   margin: 10px 3% 8px 2.6%;
-  width: 94%;
+  width: $width-big;
 }
 
 .card-picture:hover {
