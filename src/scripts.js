@@ -12,6 +12,7 @@ const favButton = document.querySelector('#viewFavoritesButton');
 //let homeButton = document.querySelector('.home')
 const cardArea = document.querySelector('#allCards');
 const tagArea = document.querySelector('#allTags');
+const searchBar = document.getElementById('search-bar')
 let user, pantry, cookbook;
 
 window.onload = onStartup();
@@ -173,8 +174,8 @@ function populateCards(recipes) {
     <article id='${recipe.id}' class='card'>
         <header id='${recipe.id}' class='card-header'>
           <label for='add-button' class='hidden'>Click to add recipe</label>
-          <button id='${recipe.id}' 
-              aria-label='add-button' 
+          <button id='${recipe.id}'
+              aria-label='add-button'
               class='add-button card-button'>
             <img id='${recipe.id} favorite' class='add'
             src='https://image.flaticon.com/icons/svg/32/32339.svg' alt='Add to
@@ -182,10 +183,10 @@ function populateCards(recipes) {
           </button>
           <label for='favorite-button' class='hidden'>Click to favorite recipe
           </label>
-          <button id='${recipe.id}' 
-              aria-label='favorite-button' 
-              class='favorite 
-                ${isFavorite ? "favorite-active" : ""} 
+          <button id='${recipe.id}'
+              aria-label='favorite-button'
+              class='favorite
+                ${isFavorite ? "favorite-active" : ""}
               card-button'>
           </button>
         </header>
