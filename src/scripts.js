@@ -29,7 +29,6 @@ cardArea.addEventListener('click', toggleViewRecipeDetails);
 function onStartup() {
   getData()
     .then(allData => {
-      console.log(allData.recipeData[0]);
       const randomIndexInArray = Math.floor(
         Math.random() * allData.userData.length);
       const randomUser = allData.userData[randomIndexInArray];
@@ -190,20 +189,40 @@ function toggleViewRecipeDetails(event) {
     const recipe = new Recipe(recipeInfo, ingredients);
     const recipeName = `<div><h1>${recipe.name}</h1></div>`
     const recipeImg = `<img src=${recipe.image} alt=${recipe.name}>`
-    const ingredientsList = '<div>'
+    const ingredientsList = `
+      <div>
+        <h3>Ingredients</h3>
+        <ul>
+          ${recipe.returnIngredients().map(ingredient => {
+    return `<li>${ingredient.name} - 
+              ${ingredient.quantity.amount}
+              ${ingredient.quantity.unit} </li>`
+  }).join('')}
+        </ul>
+      </div>`
+    const recipeDirections = `
+    <div>
+      <h3>Directions</h3>
+      <p>${recipe.returnInstructions()}</p>
+    </div>`
+    const recipeCost = `
+    <div>
+      <h3>Estimated Cost</h3>
+      ${recipe.calculateCost()}
+    </div>
+    `
 
-    console.log(recipe);
-    console.log(recipe.calculateCost(), "CALCULATE");
-    console.log(recipe.returnIngredients(), "INGREDIENTS");
-    console.log(recipe.returnInstructions(), "INSTRU");
     cardArea.innerHTML = `<article>
                             ${recipeName}
                             <div>${recipeImg}${ingredientsList}</div>
-                            
+                            ${recipeDirections}
+                            ${recipeCost}
                           </article>`
   }
 }
 
+//do not Delete this function just yet - we might need to look at some of these
+//classes in CSS
 function displayDirections(event) {
   // getData()
   //   .then(allData => {
