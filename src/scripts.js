@@ -1,5 +1,6 @@
-import './css/base.scss';
-import './css/styles.scss';
+// import './css/base.scss';
+// import './css/styles.scss';
+import './css/main.scss';
 
 import getData from './network-requests';
 
@@ -44,7 +45,7 @@ function filterTags(recipes) {
   const showAllFilters = document
     .querySelector('#allTags')
     .classList.contains('show-all-filters');
-  
+
   const recipeTags = recipes.reduce((acc, recipe) => {
     return [...acc, ...recipe.tags]
   }, []);
