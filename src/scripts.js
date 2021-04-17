@@ -200,7 +200,15 @@ function populateCards(recipes) {
   cardArea.innerHTML = markup;
 }
 
-
+function filterBySearch(e) {
+  const searchText = e.target.value.toLowerCase();
+  const values = returnValues([cookbook.recipes]);
+  let result = values.filter(recipe => {
+    const { name } = recipe;
+    return name.toLowerCase().includes(searchText)
+  })
+  populateCards(result)
+}
 
 function returnValues(array) {
   const newArray = array.reduce((arr, element) => {
