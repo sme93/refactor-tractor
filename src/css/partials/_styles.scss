@@ -115,7 +115,8 @@ img {
   background-color: $active-color;
 }
 
-.all { // not sure what this is styling; cant find a class named "all"; does this apply to everything that contains the word "all" in the classList?
+.all {
+  // not sure what this is styling; cant find a class named "all"; does this apply to everything that contains the word "all" in the classList?
   grid-gap: 0px;
   grid-template-columns: repeat(1, 1fr);
   border: 1px solid lime;
@@ -204,4 +205,8 @@ ol {
 
 .hidden {
   display: none;
+}
+
+.is-added-to-cookbook {
+  background-color: green;
 }
