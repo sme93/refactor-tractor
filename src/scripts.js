@@ -319,8 +319,13 @@ function returnValues(array) {
 }
 
 function showPantry() {
-  pantrySection.classList.remove('hidden');
-  cardArea.classList.add('hidden')
+  pantrySection.classList.toggle('hidden');
+  cardArea.classList.toggle('hidden')
+  if (showPantryButton.innerText === "View Pantry") {
+    showPantryButton.innerHTML = "Home"
+  } else {
+    showPantryButton.innerHTML = "View Pantry"
+  }
 }
 
 function populatePantryList(pantry, ingredients) {
@@ -328,11 +333,12 @@ function populatePantryList(pantry, ingredients) {
   ingredients.forEach((ingredient, i) => {
     if (pantry.pantryIngredients.some((item) => item === ingredient.id)) {
       pantry.pantryIngredients.forEach((item, i) => {
-        if(item === ingredient.id) {
+        if (item === ingredient.id) {
           let currentAmount = pantry.pantryAmounts[i]
           pantrySection.innerHTML +=
-          `<li class='pantry-items' id='pantryItems'>${ingredient.name}: ${currentAmount}</li>`
+            `<li class='pantry-items' id='pantryItems'>${ingredient.name}: ${currentAmount}</li>`
         }
       });
-  }});
+    }
+  });
 }
