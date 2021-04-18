@@ -327,7 +327,6 @@ function populatePantryList(pantry, ingredients) {
   pantry.populatePantry();
   ingredients.forEach((ingredient, i) => {
     if (pantry.pantryIngredients.some((item) => item === ingredient.id)) {
-      console.log(ingredient.name)
       pantry.pantryIngredients.forEach((item, i) => {
         if(item === ingredient.id) {
           let currentAmount = pantry.pantryAmounts[i]
