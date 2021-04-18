@@ -195,7 +195,7 @@ function toggleViewRecipeDetails(event) {
     })
     cardArea.classList.add('all');
     const recipe = new Recipe(recipeInfo, ingredients);
-    console.log(pantry.checkForIngr(recipe));
+    const missingIngredients = `<p>${showMissingIngredients(recipe, ingredients)}</p>`
     const recipeName = `<div><h1>${recipe.name}</h1></div>`
     const recipeImg = `<img src=${recipe.image} alt=${recipe.name}>`
     const ingredientsList = `
@@ -222,6 +222,7 @@ function toggleViewRecipeDetails(event) {
     `
 
     cardArea.innerHTML = `<article>
+                            ${missingIngredients}
                             ${recipeName}
                             <div>${recipeImg}${ingredientsList}</div>
                             ${recipeDirections}
@@ -355,4 +356,28 @@ function populatePantryList(pantry, ingredients) {
       });
     }
   });
+}
+
+function showMissingIngredients(recipe, ingredients) {
+  var missingIngredients = pantry.checkForIngr(recipe);
+  let ingredientNames = [];
+  let ingredientValues = [];
+  let response = ['To cook this recipe you need'];
+  if(missingIngredients === 'You have all of the ingredients that you need!') {
+    return missingIngredients;
+  } else {
+  missingIngredients.forEach(ingredient => ingredientValues.push(ingredient.amount));
+
+  ingredients.forEach((ingredient, i) => {
+    if (missingIngredients.some((item, i) => item.name === ingredient.id)) {
+      ingredientNames.push(ingredient.name);
+    }
+  });
+  ingredientNames.forEach((item, i) => {
+  response.push(`${ingredientNames[i]}: ${ingredientValues[i]}`)
+  });
+
+  console.log(response.join(", "))
+  return response.join(", ")
+ }
 }

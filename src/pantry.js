@@ -23,13 +23,13 @@ class Pantry {
       let currentIngredient = this.pantryIngredients.indexOf(ingredient.id);
       if (!this.pantryIngredients.includes(ingredient.id)) {
         missingIngredients.push({
-          name: ingredient,
+          name: ingredient.id,
           amount: ingredient.quantity.amount
         })
       } else if (ingredient.quantity.amount > this.pantryAmounts[currentIngredient]) {
         difference = ingredient.quantity.amount - this.pantryAmounts[currentIngredient];
         missingIngredients.push({
-          name: ingredient,
+          name: ingredient.id,
           amount: difference
         })
       }
