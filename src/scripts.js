@@ -315,8 +315,7 @@ function filterBySearch(e) {
   combineDataSets(cookbook.recipes, ingredients);
   let result;
   result = cookbook.recipes.filter(recipe => {
-    const { name, ingredients } = recipe;
-    return name.toLowerCase().includes(searchText)
+    return recipe.name.toLowerCase().includes(searchText)
   })
   cookbook.recipes.forEach(recipe => {
     recipe.ingredients.forEach(ingredient => {
@@ -330,7 +329,7 @@ function filterBySearch(e) {
 }
 
 function combineDataSets(recipeData, ingredientsData) {
-  const result = recipeData.forEach(recipe => {
+  recipeData.forEach(recipe => {
     recipe.ingredients.forEach(ingredient => {
       let ingredientID = ingredient.id;
       ingredientsData.forEach(ingredientOnList => {
