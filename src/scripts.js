@@ -167,16 +167,8 @@ function cardButtonConditionals(event) {
   if (event.target.classList.contains('favorite')) {
     favoriteCard(event);
   } else if (event.target.classList.contains('add-button')) {
-    addCardToCook(event)
-
-
-
-
-//figure out which add-button was clicked
-//match that button with that recipe's ID
-//invoke that addRecipeToCook with that ID
-
-
+    addCardToCook(event);
+    event.target.classList.add('is-added-to-cookbook');//dom manipulation!
   } else if (event.target.classList.contains('card-picture')) {
     displayDirections(event);
   } else if (event.target.classList.contains('home')) {
@@ -227,38 +219,37 @@ function displayDirections(event) {
 }
 
 function populateCards(recipes) {
-  const markup = recipes.map(recipe => {
-    const isFavorite = user.favoriteRecipes.some(favoriteRecipe => {
-      return favoriteRecipe.id === recipe.id;
-    });
-
+  const htmlString = recipes.map(recipe => {
+    const { id, name, image } = recipe;
+    const isFavorite = user.favoriteRecipes.some(favoriteRecipe => favoriteRecipe.id === id);
+    const isRecipeToCook = user.recipesToCook.some(toCookRecipeID=> toCookRecipeID === id);
     return `
-    <article id='${recipe.id}' class='card'>
-        <header id='${recipe.id}' class='card-header'>
+    <article id='${id}' class='card'>
+        <header id='${id}' class='card-header'>
           <label for='add-button' class='hidden'>Click to add recipe</label>
           <button
               aria-label='add-button'
-              class='add-button card-button'>
-            <img id='${recipe.id} favorite' class='add'
+              class='add-button card-button ${isRecipeToCook ? "is-added-to-cookbook" : ''}'>
+            <img id='${id} favorite' class='add'
             src='https://image.flaticon.com/icons/svg/32/32339.svg' alt='Add to
             recipes to cook'>
           </button>
           <label for='favorite-button' class='hidden'>Click to favorite recipe
           </label>
-          <button id='${recipe.id}'
+          <button id='${id}'
               aria-label='favorite-button'
               class='favorite
                 ${isFavorite ? "favorite-active" : ""}
               card-button'>
           </button>
         </header>
-          <span id='${recipe.id}' class='recipe-name'>${recipe.name}</span>
-          <img id='${recipe.id}' tabindex='0' class='card-picture'
-          src='${recipe.image}' alt='click to view recipe for ${recipe.name}'>
+          <span id='${id}' class='recipe-name'>${name}</span>
+          <img id='${id}' tabindex='0' class='card-picture'
+          src='${image}' alt='click to view recipe for ${name}'>
     </article>`
-  }).join("");
+  })
 
-  cardArea.innerHTML = markup;
+  cardArea.innerHTML = htmlString.join("");
 }
 
 function addCardToCook(event) {
@@ -267,52 +258,26 @@ function addCardToCook(event) {
   user.addToRecipesToCook(idAsInteger);
   return idAsInteger;
 }
-//
-// check to see where the user clicks
-// if it's a plus sign, grab the id of that recipe
-// invoke user.addToRecipesToCook(recipe)
-// change the plus sign to a different image  by adding a classlist of hidden?
-//   if (!event.target.classList.contains('favorite-active')) {
-//     event.target.classList.add('favorite-active');
-//     // favButton.innerHTML = 'View Favorites';
-//     user.addToFavorites(specificRecipe);
-//   } else if (event.target.classList.contains('favorite-active')) {
-//     event.target.classList.remove('favorite-active');
-//     user.removeFromFavorites(specificRecipe)
-//   console.log('hello')
-
-
 
 
 function filterBySearch(e) {
   const searchText = e.target.value.toLowerCase();
-  console.log(cookbook.recipes)
+// console.log(cookbook.recipes)
+//recipes data and ingredients data,
+//if the search text is in the ingredients array by name,
+//take the id associated wth it, and check the id is in the array of recipes,
+//if it is return that recipe
   let result = cookbook.recipes.filter(recipe => {
-    const { name } = recipe;
-    return name.toLowerCase().includes(searchText)
+    const { name, ingredients, ingredientsData } = recipe;
+    const ingredientNames = ingredients.map(ingredient => {
+      // const name = ingredientsData.find(i => i.id === ingredient.id)
+      // console.log(name)//in case its undefined
+      // if (name) {
+      //   return name.toLowerCase();
+      // }
+    })
+    return name.toLowerCase().includes(searchText) || ingredientNames.includes(searchText)
   })
   populateCards(result)
 }
-
-// function filterBySearch(e) {
-//   const searchText = e.target.value.toLowerCase();
-//   let result;
-//   if (favButton.innerHTML = 'View Favorites') {
-//     result = cookbook.recipes.filter(recipe => {
-//       const { name } = recipe;
-//       return name.toLowerCase().includes(searchText)
-//     })
-//     populateCards(result)
-//   }
-//   if (favButton.innerHTML = 'Home') {
-//     result = user.favoriteRecipes.filter(recipe => {
-//       const { name } = recipe;
-//       return name.toLowerCase().includes(searchText)
-//     })
-//     populateCards(result)
-//   }
-// }
-
-
-
-// }
+//
