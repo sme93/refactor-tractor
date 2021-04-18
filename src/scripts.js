@@ -1,5 +1,6 @@
-import './css/base.scss';
-import './css/styles.scss';
+// import './css/base.scss';
+// import './css/styles.scss';
+import './css/main.scss';
 
 import getData from './network-requests';
 
@@ -14,16 +15,19 @@ const cardArea = document.querySelector('#allCards');
 const tagArea = document.querySelector('#allTags');
 const searchBar = document.getElementById('search-bar')
 const expandFilters = document.querySelector('#expandFilters');
-let user, pantry, cookbook;
+const showPantryButton = document.querySelector('#viewPantryButton')
+const pantrySection = document.querySelector('#pantry')
+let user, pantry, cookbook, ingredients;
 
 window.onload = onStartup();
 
-//homeButton.addEventListener('click', cardButtonConditionals);
 favButton.addEventListener('click', viewFavorites);
 cardArea.addEventListener('click', cardButtonConditionals);
 tagArea.addEventListener('click', filterByTag);
 searchBar.addEventListener('keyup', filterBySearch)
 expandFilters.addEventListener('click', toggleFilters);
+cardArea.addEventListener('click', toggleViewRecipeDetails);
+showPantryButton.addEventListener('click', showPantry);
 
 function onStartup() {
   getData()
@@ -32,8 +36,10 @@ function onStartup() {
         Math.random() * allData.userData.length);
       const randomUser = allData.userData[randomIndexInArray];
       user = new User(randomUser.id, randomUser.name, randomUser.pantry);
-      //pantry = new Pantry(randomUser.pantry);
       cookbook = new Cookbook(allData.recipeData);
+      ingredients = allData.ingredientData;
+      pantry = new Pantry(randomUser.pantry);
+      populatePantryList(pantry, ingredients);
       populateCards(cookbook.recipes);
       filterTags(cookbook.recipes);
       greetUser();
@@ -180,42 +186,86 @@ function cardButtonConditionals(event) {
   //WIP - need to refactor!!!!
 }
 
-
-function displayDirections(event) {
-  getData()
-    .then(allData => {
-      let cookbook = new Cookbook(allData.recipeData);
-      let newRecipeInfo = cookbook.recipes.find(recipe => {
-        if (recipe.id === Number(event.target.id)) {
-          return recipe;
-        }
-      })
-      let recipeObject = new Recipe(newRecipeInfo, allData.ingredientData);
-      let cost = recipeObject.calculateCost()
-      let costInDollars = (cost / 100).toFixed(2)
-      cardArea.classList.add('all');
-      cardArea.innerHTML = `<h3>${recipeObject.name}</h3>
-      <p class='all-recipe-info'>
-      <strong>It will cost: </strong><span class='cost recipe-info'>
-      $${costInDollars}</span><br><br>
-      <strong>You will need: </strong><span class='ingredients recipe-info'></span>
-      <strong>Instructions: </strong><ol><span class='instructions recipe-info'>
-      </span></ol>
-      </p>`;
-      let ingredientsSpan = document.querySelector('.ingredients');
-      let instructionsSpan = document.querySelector('.instructions');
-      recipeObject.ingredients.forEach(ingredient => {
-        ingredientsSpan.insertAdjacentHTML('afterbegin', `<ul><li>
-        ${ingredient.quantity.amount.toFixed(2)} ${ingredient.quantity.unit}
-        ${ingredient.name}</li></ul>
-        `)
-      })
-      recipeObject.instructions.forEach(instruction => {
-        instructionsSpan.insertAdjacentHTML('beforebegin', `<li>
-        ${instruction.instruction}</li>
-        `)
-      })
+function toggleViewRecipeDetails(event) {
+  if (event.target.classList.contains('card-picture')) {
+    const recipeInfo = cookbook.recipes.find(recipe => {
+      if (recipe.id === Number(event.target.id)) {
+        return recipe;
+      }
     })
+    cardArea.classList.add('all');
+    const recipe = new Recipe(recipeInfo, ingredients);
+    const recipeName = `<div><h1>${recipe.name}</h1></div>`
+    const recipeImg = `<img src=${recipe.image} alt=${recipe.name}>`
+    const ingredientsList = `
+      <div>
+        <h3>Ingredients</h3>
+        <ul>
+          ${recipe.returnIngredients().map(ingredient => {
+    return `<li>${ingredient.name} -
+              ${ingredient.quantity.amount}
+              ${ingredient.quantity.unit} </li>`
+  }).join('')}
+        </ul>
+      </div>`
+    const recipeDirections = `
+    <div>
+      <h3>Directions</h3>
+      <p>${recipe.returnInstructions()}</p>
+    </div>`
+    const recipeCost = `
+    <div>
+      <h3>Estimated Cost</h3>
+      ${recipe.calculateCost()}
+    </div>
+    `
+
+    cardArea.innerHTML = `<article>
+                            ${recipeName}
+                            <div>${recipeImg}${ingredientsList}</div>
+                            ${recipeDirections}
+                            ${recipeCost}
+                          </article>`
+  }
+}
+
+//do not Delete this function just yet - we might need to look at some of these
+//classes in CSS
+function displayDirections(event) {
+  // getData()
+  //   .then(allData => {
+  //     let cookbook = new Cookbook(allData.recipeData);
+  //     let newRecipeInfo = cookbook.recipes.find(recipe => {
+  //       if (recipe.id === Number(event.target.id)) {
+  //         return recipe;
+  //       }
+  //     })
+  //     let recipeObject = new Recipe(newRecipeInfo, allData.ingredientData);
+  //     let cost = recipeObject.calculateCost()
+  //     let costInDollars = (cost / 100).toFixed(2)
+  //     cardArea.classList.add('all');
+  //     cardArea.innerHTML = `<h3>${recipeObject.name}</h3>
+  //     <p class='all-recipe-info'>
+  //     <strong>It will cost: </strong><span class='cost recipe-info'>
+  //     $${costInDollars}</span><br><br>
+  //     <strong>You will need: </strong><span class='ingredients recipe-info'></span>
+  //     <strong>Instructions: </strong><ol><span class='instructions recipe-info'>
+  //     </span></ol>
+  //     </p>`;
+  //     let ingredientsSpan = document.querySelector('.ingredients');
+  //     let instructionsSpan = document.querySelector('.instructions');
+  //     recipeObject.ingredients.forEach(ingredient => {
+  //       ingredientsSpan.insertAdjacentHTML('afterbegin', `<ul><li>
+  //       ${ingredient.quantity.amount.toFixed(2)} ${ingredient.quantity.unit}
+  //       ${ingredient.name}</li></ul>
+  //       `)
+  //     })
+  //     recipeObject.instructions.forEach(instruction => {
+  //       instructionsSpan.insertAdjacentHTML('beforebegin', `<li>
+  //       ${instruction.instruction}</li>
+  //       `)
+  //     })
+  //   })
 }
 
 function populateCards(recipes) {
@@ -280,4 +330,28 @@ function filterBySearch(e) {
   })
   populateCards(result)
 }
-//
+
+function showPantry() {
+  pantrySection.classList.toggle('hidden');
+  cardArea.classList.toggle('hidden')
+  if (showPantryButton.innerText === "View Pantry") {
+    showPantryButton.innerHTML = "Home"
+  } else {
+    showPantryButton.innerHTML = "View Pantry"
+  }
+}
+
+function populatePantryList(pantry, ingredients) {
+  pantry.populatePantry();
+  ingredients.forEach((ingredient, i) => {
+    if (pantry.pantryIngredients.some((item) => item === ingredient.id)) {
+      pantry.pantryIngredients.forEach((item, i) => {
+        if (item === ingredient.id) {
+          let currentAmount = pantry.pantryAmounts[i]
+          pantrySection.innerHTML +=
+            `<li class='pantry-items' id='pantryItems'>${ingredient.name}: ${currentAmount}</li>`
+        }
+      });
+    }
+  });
+}

@@ -14,7 +14,6 @@ class Pantry {
   }
 
   checkForIngr(recipe) {
-    this.populatePantry()
     const missingIngredients = [];
     let difference;
     recipe.ingredients.forEach(ingredient => {

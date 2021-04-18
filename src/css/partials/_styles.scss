@@ -1,0 +1,207 @@
+// This file will set up our style rules
+@import "base";
+@import "cards";
+@import "colors";
+@import "mixins";
+@import "reset";
+@import "typography";
+@import "variables";
+
+// * {
+//   border: 1px solid lime;
+// }
+
+html {
+  border: $med-border;
+  height: 100vh;
+}
+
+body {
+  box-sizing: border-box;
+  font-family: $base-font-family;
+  margin: auto;
+}
+
+main {
+  background-color: $secondary-background-color;
+  height: 100%;
+  width: $width-max;
+}
+
+h1 {
+  border-right: $med-border;
+  font-size: 255%;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 10px;
+  text-align: center;
+  width: $width-sml;
+}
+
+h3 {
+  color: $text-color;
+  font-size: 250%;
+}
+
+img {
+  cursor: pointer;
+}
+
+.main-header {
+  @include space-flex();
+  background-color: $main-background-color;
+  border: $med-border;
+  // display: flex;
+  height: auto;
+  // justify-content: space-between;
+  width: $width-max;
+}
+
+.user-info {
+  font-size: 180%;
+  margin: auto;
+  text-align: center;
+  width: $width-avg;
+}
+
+.nav-button {
+  background-color: $main-background-color;
+  border: $sml-border;
+  font-size: 130%;
+  margin: 1%;
+
+  &.active {
+    background-color: $active-background-color;
+    border: none;
+  }
+}
+
+.search-bar {
+  display: flex;
+  height: 100%;
+  margin: 10px 0px 10px 0px;
+  width: $width-sml;
+}
+
+.search-button {
+  background-color: $main-background-color;
+  border: $sml-border;
+  width: $width-smol;
+  height: 55px;
+  margin-top: 3px;
+}
+
+.search-input {
+  border: $sml-border;
+  border-left: none;
+  // height: 7vh;
+  font-size: 100%;
+  margin: 3px 7px 0px 0px;
+  padding-left: 10px;
+  width: $width-big;
+}
+
+.search-image:hover,
+.card-button:hover,
+.nav-button:hover,
+.search-button:hover {
+  background-color: $hover-color;
+}
+
+.search-image:active,
+.card-button:active,
+.nav-button:active,
+.search-button:active {
+  background-color: $active-color;
+}
+
+.all { // not sure what this is styling; cant find a class named "all"; does this apply to everything that contains the word "all" in the classList?
+  grid-gap: 0px;
+  grid-template-columns: repeat(1, 1fr);
+  border: 1px solid lime;
+}
+
+.all-cards {
+  @include card-grid();
+  // display: grid;
+  // grid-gap: 30px;
+  // grid-template-columns: repeat(4, 1fr);
+  // padding: 30px 0 30px 30px;
+  // width: 95.5vw;
+}
+
+.all-recipe-info,
+ol {
+  color: $text-color;
+  font-size: 220%;
+  width: $width-max;
+}
+//
+// .card {
+//   background-color: $card-background-color;
+//   border: $lrg-border;
+//   width: $width-max;
+//   @include rounded-corners(20px);
+// }
+//
+// .card-header {
+//   @include space-flex();
+//   background-color: $main-background-color;
+//   border-bottom: $sml-border;
+//   // display: flex;
+//   // justify-content: space-between;
+// }
+//
+// .card-button {
+//   border: $sml-border;
+//   height: 27px;
+//   margin: 3px;
+// }
+//
+// .card-picture {
+//   border: $sml-border;
+//   height: 200px;
+//   margin: 10px 3% 8px 2.6%;
+//   width: $width-big;
+// }
+//
+// .card-picture:hover {
+//   opacity: 0.7;
+// }
+//
+// .card-picture:active {
+//   border: $lrg-border;
+// }
+//
+// .add {
+//   width: $width-max;
+// }
+//
+// .add-button {
+//   background-color: $main-background-color;
+//   display: flex;
+//   width: $width-min;
+// }
+//
+// .favorite {
+//   background-color: $main-background-color;
+//   background-image: url(https://image.flaticon.com/icons/svg/149/149222.svg);
+//   background-repeat: no-repeat;
+//   background-position: center;
+//   width: $width-min;
+// }
+//
+// .favorite-active {
+//   background-image: url(https://image.flaticon.com/icons/svg/148/148841.svg);
+//   background-repeat: no-repeat;
+// }
+
+.recipe-name {
+  display: block;
+  font-size: 150%;
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}

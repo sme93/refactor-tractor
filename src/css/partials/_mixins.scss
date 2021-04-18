@@ -1,0 +1,24 @@
+// This file will set up our mixin rules
+
+/* Mixin - Rounded corners on cards */
+@mixin rounded-corners($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
+
+/* Mixin - FlexBox Spaced */
+@mixin space-flex() {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Mixin Card Display Grid */
+@mixin card-grid() {
+  display: grid;
+  grid-gap: 30px;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 30px 0 30px 30px;
+  width: 95.5vw;
+}
