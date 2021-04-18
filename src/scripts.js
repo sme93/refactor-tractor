@@ -36,10 +36,10 @@ function onStartup() {
         Math.random() * allData.userData.length);
       const randomUser = allData.userData[randomIndexInArray];
       user = new User(randomUser.id, randomUser.name, randomUser.pantry);
-      pantry = new Pantry(randomUser.pantry);
-      populatePantryList(pantry);
       cookbook = new Cookbook(allData.recipeData);
       ingredients = allData.ingredientData;
+      pantry = new Pantry(randomUser.pantry);
+      populatePantryList(pantry, ingredients);
       populateCards(cookbook.recipes);
       filterTags(cookbook.recipes);
       greetUser();
@@ -323,12 +323,17 @@ function showPantry() {
   cardArea.classList.add('hidden')
 }
 
-function populatePantryList(pantry) {
+function populatePantryList(pantry, ingredients) {
   pantry.populatePantry();
-  pantry.pantryIngredients.forEach((ingredient, i) => {
-    pantrySection.innerHTML +=
-    `<li class='pantry-items' id='pantryItems'>${ingredient}: ${pantry.pantryAmounts[i]}</li>`
-
-  });
-
+  ingredients.forEach((ingredient, i) => {
+    if (pantry.pantryIngredients.some((item) => item === ingredient.id)) {
+      console.log(ingredient.name)
+      pantry.pantryIngredients.forEach((item, i) => {
+        if(item === ingredient.id) {
+          let currentAmount = pantry.pantryAmounts[i]
+          pantrySection.innerHTML +=
+          `<li class='pantry-items' id='pantryItems'>${ingredient.name}: ${currentAmount}</li>`
+        }
+      });
+  }});
 }
