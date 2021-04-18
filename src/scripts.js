@@ -44,7 +44,7 @@ function filterTags(recipes) {
   const showAllFilters = document
     .querySelector('#allTags')
     .classList.contains('show-all-filters');
-  
+
   const recipeTags = recipes.reduce((acc, recipe) => {
     return [...acc, ...recipe.tags]
   }, []);
@@ -151,7 +151,7 @@ function favoriteCard(event) {
       })
       if (!event.target.classList.contains('favorite-active')) {
         event.target.classList.add('favorite-active');
-        favButton.innerHTML = 'View Favorites';
+        // favButton.innerHTML = 'View Favorites';
         user.addToFavorites(specificRecipe);
       } else if (event.target.classList.contains('favorite-active')) {
         event.target.classList.remove('favorite-active');
@@ -161,10 +161,14 @@ function favoriteCard(event) {
 }
 
 function cardButtonConditionals(event) {
+  // console.log(event.target)
   // getData()
   //   .then(allData => {
   if (event.target.classList.contains('favorite')) {
     favoriteCard(event);
+  } else if (event.target.classList.contains('add-button')) {
+    console.log(event)
+
   } else if (event.target.classList.contains('card-picture')) {
     displayDirections(event);
   } else if (event.target.classList.contains('home')) {
@@ -224,7 +228,7 @@ function populateCards(recipes) {
     <article id='${recipe.id}' class='card'>
         <header id='${recipe.id}' class='card-header'>
           <label for='add-button' class='hidden'>Click to add recipe</label>
-          <button id='${recipe.id}'
+          <button
               aria-label='add-button'
               class='add-button card-button'>
             <img id='${recipe.id} favorite' class='add'
@@ -249,21 +253,57 @@ function populateCards(recipes) {
   cardArea.innerHTML = markup;
 }
 
+function addCardToCook(e) {
+  if (e.target.closest('.add-button')) {
+    console.log(e)
+  }
+}
+//
+// check to see where the user clicks
+// if it's a plus sign, grab the id of that recipe
+// invoke user.addToRecipesToCook(recipe)
+// change the plus sign to a different image  by adding a classlist of hidden?
+//   if (!event.target.classList.contains('favorite-active')) {
+//     event.target.classList.add('favorite-active');
+//     // favButton.innerHTML = 'View Favorites';
+//     user.addToFavorites(specificRecipe);
+//   } else if (event.target.classList.contains('favorite-active')) {
+//     event.target.classList.remove('favorite-active');
+//     user.removeFromFavorites(specificRecipe)
+//   console.log('hello')
+
+
+
+
 function filterBySearch(e) {
   const searchText = e.target.value.toLowerCase();
-  const values = returnValues([cookbook.recipes]);
-  let result = values.filter(recipe => {
+  console.log(cookbook.recipes)
+  let result = cookbook.recipes.filter(recipe => {
     const { name } = recipe;
     return name.toLowerCase().includes(searchText)
   })
   populateCards(result)
 }
 
-function returnValues(array) {
-  const newArray = array.reduce((arr, element) => {
-  const values = Object.values(element)
-  values.forEach(item => arr.push(item))
-    return arr
-  }, [])
-  return newArray
-}
+// function filterBySearch(e) {
+//   const searchText = e.target.value.toLowerCase();
+//   let result;
+//   if (favButton.innerHTML = 'View Favorites') {
+//     result = cookbook.recipes.filter(recipe => {
+//       const { name } = recipe;
+//       return name.toLowerCase().includes(searchText)
+//     })
+//     populateCards(result)
+//   }
+//   if (favButton.innerHTML = 'Home') {
+//     result = user.favoriteRecipes.filter(recipe => {
+//       const { name } = recipe;
+//       return name.toLowerCase().includes(searchText)
+//     })
+//     populateCards(result)
+//   }
+// }
+
+
+
+// }
