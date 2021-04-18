@@ -167,7 +167,15 @@ function cardButtonConditionals(event) {
   if (event.target.classList.contains('favorite')) {
     favoriteCard(event);
   } else if (event.target.classList.contains('add-button')) {
-    console.log(event)
+    addCardToCook(event)
+
+
+
+
+//figure out which add-button was clicked
+//match that button with that recipe's ID
+//invoke that addRecipeToCook with that ID
+
 
   } else if (event.target.classList.contains('card-picture')) {
     displayDirections(event);
@@ -253,10 +261,11 @@ function populateCards(recipes) {
   cardArea.innerHTML = markup;
 }
 
-function addCardToCook(e) {
-  if (e.target.closest('.add-button')) {
-    console.log(e)
-  }
+function addCardToCook(event) {
+  const { id } = event.target.closest('.card');
+  const idAsInteger = parseInt(id);
+  user.addToRecipesToCook(idAsInteger);
+  return idAsInteger;
 }
 //
 // check to see where the user clicks
