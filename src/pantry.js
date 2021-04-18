@@ -6,14 +6,17 @@ class Pantry {
   }
 
   populatePantry() {
+    if (!this.pantryIngredients.length) {
     this.contents.forEach(item => {
       this.pantryIngredients.push(item.ingredient);
       this.pantryAmounts.push(item.amount);
       return
     })
   }
+  }
 
   checkForIngr(recipe) {
+    this.populatePantry();
     const missingIngredients = [];
     let difference;
     recipe.ingredients.forEach(ingredient => {
