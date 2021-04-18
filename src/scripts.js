@@ -195,6 +195,7 @@ function toggleViewRecipeDetails(event) {
     })
     cardArea.classList.add('all');
     const recipe = new Recipe(recipeInfo, ingredients);
+    console.log(pantry.checkForIngr(recipe));
     const recipeName = `<div><h1>${recipe.name}</h1></div>`
     const recipeImg = `<img src=${recipe.image} alt=${recipe.name}>`
     const ingredientsList = `
