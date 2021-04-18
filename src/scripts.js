@@ -15,6 +15,8 @@ const cardArea = document.querySelector('#allCards');
 const tagArea = document.querySelector('#allTags');
 const searchBar = document.getElementById('search-bar')
 const expandFilters = document.querySelector('#expandFilters');
+const showPantryButton = document.querySelector('#viewPantryButton')
+const pantrySection = document.querySelector('#pantry')
 let user, pantry, cookbook, ingredients;
 
 window.onload = onStartup();
@@ -25,6 +27,7 @@ tagArea.addEventListener('click', filterByTag);
 searchBar.addEventListener('keyup', filterBySearch)
 expandFilters.addEventListener('click', toggleFilters);
 cardArea.addEventListener('click', toggleViewRecipeDetails);
+showPantryButton.addEventListener('click', showPantry);
 
 function onStartup() {
   getData()
@@ -33,7 +36,8 @@ function onStartup() {
         Math.random() * allData.userData.length);
       const randomUser = allData.userData[randomIndexInArray];
       user = new User(randomUser.id, randomUser.name, randomUser.pantry);
-      //pantry = new Pantry(randomUser.pantry);
+      pantry = new Pantry(randomUser.pantry);
+      populatePantryList(pantry);
       cookbook = new Cookbook(allData.recipeData);
       ingredients = allData.ingredientData;
       populateCards(cookbook.recipes);
@@ -194,7 +198,7 @@ function toggleViewRecipeDetails(event) {
         <h3>Ingredients</h3>
         <ul>
           ${recipe.returnIngredients().map(ingredient => {
-    return `<li>${ingredient.name} - 
+    return `<li>${ingredient.name} -
               ${ingredient.quantity.amount}
               ${ingredient.quantity.unit} </li>`
   }).join('')}
@@ -312,4 +316,19 @@ function returnValues(array) {
     return arr
   }, [])
   return newArray
+}
+
+function showPantry() {
+  pantrySection.classList.remove('hidden');
+  cardArea.classList.add('hidden')
+}
+
+function populatePantryList(pantry) {
+  pantry.populatePantry();
+  pantry.pantryIngredients.forEach((ingredient, i) => {
+    pantrySection.innerHTML +=
+    `<li class='pantry-items' id='pantryItems'>${ingredient}: ${pantry.pantryAmounts[i]}</li>`
+
+  });
+
 }
