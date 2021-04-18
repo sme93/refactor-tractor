@@ -17,6 +17,7 @@ const searchBar = document.getElementById('search-bar')
 const expandFilters = document.querySelector('#expandFilters');
 const showPantryButton = document.querySelector('#viewPantryButton')
 const pantrySection = document.querySelector('#pantry')
+const allTags = document.querySelector('#allTags');
 let user, pantry, cookbook, ingredients;
 
 window.onload = onStartup();
@@ -112,8 +113,6 @@ function renderFilteredCards() {
 }
 
 function toggleFilters() {
-  const allTags = document.querySelector('#allTags');
-
   if (allTags.classList.contains('show-all-filters')) {
     allTags.classList.remove('show-all-filters');
     allTags.nextElementSibling.innerHTML = 'Expand Filters';
@@ -320,7 +319,8 @@ function returnValues(array) {
 
 function showPantry() {
   pantrySection.classList.toggle('hidden');
-  cardArea.classList.toggle('hidden')
+  cardArea.classList.toggle('hidden');
+  allTags.classList.toggle('hidden')
   if (showPantryButton.innerText === "View Pantry") {
     showPantryButton.innerHTML = "Home"
   } else {
