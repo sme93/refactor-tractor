@@ -2,10 +2,10 @@
 
 /* Mixin - Rounded corners on cards */
 @mixin rounded-corners($radius) {
-  -webkit-border-radius: $radius;
-  -moz-border-radius: $radius;
-  -ms-border-radius: $radius;
-  border-radius: $radius;
+  -webkit-border-radius: 0 0 $radius $radius;
+  -moz-border-radius: 0 0 $radius $radius;
+  -ms-border-radius: 0 0 $radius $radius;
+  border-radius: 0 0 $radius $radius;
 }
 
 /* Mixin - FlexBox Spaced */
