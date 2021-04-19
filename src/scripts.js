@@ -313,7 +313,7 @@ function addCardToCook(event) {
 
 
 
-function helper(recipes, search) {
+function returnFilteredRecipes(recipes, search) {
   let result = [];
   result = recipes.filter(recipe => {
     return recipe.name.toLowerCase().includes(search)
@@ -328,28 +328,16 @@ function helper(recipes, search) {
   return result;
 }
 
-function filterBySearch(e) {//helper(user.favoriteRecipes)
+function filterBySearch(e) {
   const searchText = e.target.value.toLowerCase();
-  // let result;
   if (favButton.innerHTML === 'Home') {
-    combineDataSets(user.favoriteRecipes, ingredients)
-    let result = helper(user.favoriteRecipes, searchText)
+    combineDataSets(user.favoriteRecipes, ingredients);
+    let result = returnFilteredRecipes(user.favoriteRecipes, searchText);
     const finalResult = [...new Set(result)];
     populateCards(finalResult);
   } else {
-    // const searchText = e.target.value.toLowerCase();
     combineDataSets(cookbook.recipes, ingredients);
-    let result;
-    result = cookbook.recipes.filter(recipe => {
-      return recipe.name.toLowerCase().includes(searchText)
-    })
-    cookbook.recipes.forEach(recipe => {
-      recipe.ingredients.forEach(ingredient => {
-        if (ingredient.name.toLowerCase().includes(searchText)) {
-          result.push(recipe)
-        }
-      })
-    })
+    let result = returnFilteredRecipes(cookbook.recipes, searchText);
     const finalResult = [...new Set(result)];
     populateCards(finalResult);
   }
