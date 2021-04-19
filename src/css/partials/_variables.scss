@@ -1,10 +1,10 @@
 // This file will set up our variables
-/* BORDERS */
+/* Borders */
 $lrg-border: 3px solid $tertiary-color;
 $med-border: 2px solid $tertiary-color;
 $sml-border: 1px solid $tertiary-color;
 
-/* WIDTH */
+/* Width */
 $width-max: 100%; // CHANGE THESE TO A MIXIN!
 $width-big: 90%;
 $width-avg: 40%;
@@ -12,8 +12,8 @@ $width-sml: 30%;
 $width-smol: 20%;
 $width-min: 13%;
 
-/* MEDIA QUERY SELECTORS */
-$mobile: 300px;
+/* Media Query Selectors */
+$mobile: 250px;
 $tablet: 540px;
 $laptop: 1024px;
 $desktop: 1200px;

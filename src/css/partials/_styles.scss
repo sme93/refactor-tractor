@@ -1,5 +1,5 @@
 // This file will set up our style rules
-// Import partial files here 👇
+/* Imported Files */
 @import "base";
 @import "cards";
 @import "colors";
@@ -112,33 +112,7 @@ img {
 }
 
 .all {
-  // @include card-grid(1);
   grid-gap: 0px;
   grid-template-columns: repeat(1, 1fr);
   border: 1px solid lime;
-}
-
-.all-cards {
-  @include card-grid(4);
-}
-
-.all-recipe-info,
-ol {
-  color: $dark-text-color;
-  font-size: 220%;
-  width: $width-max;
-}
-
-.recipe-name {
-  display: block;
-  font-size: 150%;
-  text-align: center;
-}
-
-.hidden {
-  display: none;
-}
-
-.is-added-to-cookbook {
-  background-color: green;
 }

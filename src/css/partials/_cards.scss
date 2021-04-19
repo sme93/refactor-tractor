@@ -4,8 +4,11 @@
 @import "typography";
 @import "variables";
 
+article > .card {
+  background-color: $card-background-gradient;
+}
+
 .card {
-  background-color: $card-background-color;
   color: $light-text-color;
   border: $sml-border;
   width: $width-max;
@@ -16,8 +19,6 @@
   @include space-flex();
   background-color: $main-background-color;
   border-bottom: $sml-border;
-  // display: flex;
-  // justify-content: space-between;
 }
 
 .card-button {
@@ -62,4 +63,30 @@
 .favorite-active {
   background-image: url(https://image.flaticon.com/icons/svg/148/148841.svg);
   background-repeat: no-repeat;
+}
+
+.all-cards {
+  @include card-grid(4);
+}
+
+.all-recipe-info,
+ol {
+  color: $dark-text-color;
+  font-size: 220%;
+  width: $width-max;
+}
+
+.recipe-name {
+  @include center-flex();
+  color: $dark-text-color;
+  height: 7vw;
+  font-size: 150%;
+}
+
+.hidden {
+  display: none;
+}
+
+.is-added-to-cookbook {
+  background-color: $secondary-background-color;
 }

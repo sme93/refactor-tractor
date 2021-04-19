@@ -2,13 +2,14 @@
 @import "mixins";
 @import "variables";
 
-// Desktop 🖥
+// Jumbo Desktop 📺
 @media screen and (min-width: $jumbo) {
   main > .all-cards {
     @include card-grid(6);
   }
 }
 
+// Desktop 🖥
 @media screen and (min-width: $desktop) and (max-width: $jumbo - 1) {
   main > .all-cards {
     @include card-grid(5);

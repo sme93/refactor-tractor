@@ -15,6 +15,14 @@
   align-items: center;
 }
 
+/* Mixin - FlexBox Centered */
+@mixin center-flex() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
 /* Mixin - Card Display Grid */
 @mixin card-grid($across) {
   display: grid;
