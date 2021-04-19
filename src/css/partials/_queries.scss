@@ -5,7 +5,9 @@
 // Desktop 🖥
 @media screen and (min-width: $desktop) {
 // @media screen and (min-width: 1300px) {
-
+  main > .all-cards {
+    @include card-grid(5)
+  }
   // * {
   //   border: 1px solid fuchsia;
   // }
