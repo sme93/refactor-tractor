@@ -3,7 +3,13 @@
 @import "variables";
 
 // Desktop 🖥
-@media screen and (min-width: $desktop) {
+@media screen and (min-width: $jumbo) {
+  main > .all-cards {
+    @include card-grid(6);
+  }
+}
+
+@media screen and (min-width: $desktop) and (max-width: $jumbo - 1) {
   main > .all-cards {
     @include card-grid(5);
   }
