@@ -272,23 +272,19 @@ function addCardToCook(event) {
   return idAsInteger;
 }
 
-
 function filterBySearch(e) {
   const searchText = e.target.value.toLowerCase();
-  combineDataSets(cookbook.recipes, ingredients);
-  let result;
-  result = cookbook.recipes.filter(recipe => {
-    return recipe.name.toLowerCase().includes(searchText)
-  })
-  cookbook.recipes.forEach(recipe => {
-    recipe.ingredients.forEach(ingredient => {
-      if (ingredient.name.toLowerCase().includes(searchText)) {
-        result.push(recipe)
-      }
-    })
-  })
-  const finalResult = [...new Set(result)];
-  populateCards(finalResult);
+  if (favButton.innerHTML === 'Home') {
+    combineDataSets(user.favoriteRecipes, ingredients);
+    let result = returnFilteredRecipes(user.favoriteRecipes, searchText);
+    const finalResult = [...new Set(result)];
+    populateCards(finalResult);
+  } else {
+    combineDataSets(cookbook.recipes, ingredients);
+    let result = returnFilteredRecipes(cookbook.recipes, searchText);
+    const finalResult = [...new Set(result)];
+    populateCards(finalResult);
+  }
 }
 
 function combineDataSets(recipeData, ingredientsData) {
@@ -304,6 +300,21 @@ function combineDataSets(recipeData, ingredientsData) {
       })
     })
   })
+}
+
+function returnFilteredRecipes(recipes, search) {
+  let result = [];
+  result = recipes.filter(recipe => {
+    return recipe.name.toLowerCase().includes(search);
+  })
+  recipes.forEach(recipe => {
+    recipe.ingredients.forEach(ingredient => {
+      if (ingredient.name.toLowerCase().includes(search)) {
+        result.push(recipe);
+      }
+    })
+  })
+  return result;
 }
 
 function showPantry() {
