@@ -14,7 +14,7 @@ const searchBar = document.getElementById('search-bar')
 const expandFilters = document.querySelector('#expandFilters');
 const showPantryButton = document.querySelector('#viewPantryButton')
 const pantrySection = document.querySelector('#pantry')
-let user, pantry, cookbook, ingredients, recipe;
+let user, pantry, cookbook, ingredients, recipe, randomUser;
 
 window.onload = onStartup();
 
@@ -38,7 +38,7 @@ function onStartup() {
     .then(allData => {
       const randomIndexInArray = Math.floor(
         Math.random() * allData.userData.length);
-      const randomUser = allData.userData[randomIndexInArray];
+      randomUser = allData.userData[randomIndexInArray];
       user = new User(randomUser.id, randomUser.name, randomUser.pantry);
       cookbook = new Cookbook(allData.recipeData);
       ingredients = allData.ingredientData;
@@ -335,6 +335,7 @@ function showPantry() {
 
 function populatePantryList(pantry, ingredients) {
   pantry.populatePantry();
+  pantrySection.innerHTML = ""
   ingredients.forEach((ingredient) => {
     if (pantry.pantryIngredients.some((item) => item === ingredient.id)) {
       pantry.pantryIngredients.forEach((item, i) => {
@@ -389,6 +390,19 @@ function addIngredients() {
       postData({ userID: user.id, ingredientID: ingredient.name, ingredientModification: ingredient.amount })
     });
 
+getData()
+.then( allData => {
+  let currentUserIndex;
+  allData.userData.forEach((userObj, i) => {
+    if (userObj.id === user.id)
+    currentUserIndex = i;
+  })
+  let currentUser = allData.userData[currentUserIndex];
+  user = new User(currentUser.id, currentUser.name, currentUser.pantry)
+  pantry = new Pantry(user.pantry)
+  pantry.populatePantry();
+  populatePantryList(pantry, ingredients);
 
-  }
+})
+}
 }
