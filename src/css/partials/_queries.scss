@@ -1,25 +1,21 @@
 // Media queries for responsive design
+@import "mixins";
 @import "variables";
 
 // Desktop 🖥
-// @media screen and ($desktop) {
-//
-// }
+@media screen and (min-width: $desktop) {
+// @media screen and (min-width: 1300px) {
 
-// Laptop 💻
-@media screen and ($laptop) {
-  main {
-    width: $width-big;
-  }
+  // * {
+  //   border: 1px solid fuchsia;
+  // }
 
 }
 
+// Laptop 💻
+
+
 // Tablet 📱
-// @media screen and ($tablet) {
-//
-// }
+
 
 // Mobile 📱
-// @media screen and ($mobile) {
-//
-// }

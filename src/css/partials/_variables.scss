@@ -13,10 +13,10 @@ $width-smol: 20%;
 $width-min: 13%;
 
 /* MEDIA QUERY SELECTORS */
-$mobile: "(min-width: 1px) and (max-width 539px)";
-$tablet: "(min-width: 540px) and (max-width 1023px)";
-$laptop: "(min-width 1024px) and (max-width px)";
-$desktop: "(min-width px) and (max-width px)";
+$mobile: 320px;
+$tablet: 540px;
+$laptop: 1024px;
+$desktop: 1300px;
 
 
 /* REUSED STYLES

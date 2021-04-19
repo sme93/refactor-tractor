@@ -117,7 +117,7 @@ img {
 }
 
 .all-cards {
-  @include card-grid-four();
+  @include card-grid(4);
 }
 
 .all-recipe-info,

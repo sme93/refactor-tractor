@@ -15,26 +15,27 @@
 }
 
 /* Mixin Card Display Grid */
-@mixin card-grid-four() {
-  display: grid;
-  grid-gap: 30px;
-  grid-template-columns: repeat(4, 1fr);
-  padding: 30px 0 30px 30px;
-  width: 95.5vw;
-}
+// @mixin card-grid-four() {
+//   display: grid;
+//   grid-gap: 30px;
+//   grid-template-columns: repeat(4, 1fr);
+//   padding: 30px 0 30px 30px;
+//   width: 95.5vw;
+// }
+//
+// @mixin card-grid-three() {
+//   display: grid;
+//   grid-gap: 30px;
+//   grid-template-columns: repeat(3, 1fr);
+//   padding: 30px 0 30px 30px;
+//   width: 95.5vw;
+// }
 
-@mixin card-grid-three() {
+// refactor to be dynamic!
+@mixin card-grid($across) {
   display: grid;
   grid-gap: 30px;
-  grid-template-columns: repeat(3, 1fr);
-  padding: 30px 0 30px 30px;
-  width: 95.5vw;
-}
-
-@mixin card-grid-one() {
-  display: grid;
-  grid-gap: 30px;
-  grid-template-columns: repeat(1, 1fr);
+  grid-template-columns: repeat($across, 1fr);
   padding: 30px 0 30px 30px;
   width: 95.5vw;
 }
