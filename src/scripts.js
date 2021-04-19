@@ -1,6 +1,6 @@
 import './css/main.scss';
 
-import getData from './network-requests';
+import { getData, postData } from './network-requests';
 
 import Pantry from './pantry';
 import Recipe from './recipe';
@@ -14,7 +14,7 @@ const searchBar = document.getElementById('search-bar')
 const expandFilters = document.querySelector('#expandFilters');
 const showPantryButton = document.querySelector('#viewPantryButton')
 const pantrySection = document.querySelector('#pantry')
-let user, pantry, cookbook, ingredients;
+let user, pantry, cookbook, ingredients, recipe;
 
 window.onload = onStartup();
 
@@ -25,6 +25,8 @@ searchBar.addEventListener('keyup', filterBySearch)
 expandFilters.addEventListener('click', toggleFilters);
 showPantryButton.addEventListener('click', showPantry);
 cardArea.addEventListener('click', toggleViewRecipeDetails);
+cardArea.addEventListener('click', cookRecipe);
+cardArea.addEventListener('click', addIngredients);
 cardArea.addEventListener('keydown', function(event) {
   if (event.code === 'Space') {
     toggleViewRecipeDetails(event);
@@ -181,13 +183,15 @@ function toggleViewRecipeDetails(event) {
       }
     })
     cardArea.classList.add('all');
-    const recipe = new Recipe(recipeInfo, ingredients);
+    recipe = new Recipe(recipeInfo, ingredients);
     const missingIngredients = `
       <div>
         <h3>Missing Ingredients</h3>
         <p>${showMissingIngredients(recipe, ingredients)}</p>
       </div>`
     const recipeName = `<div><h1>${recipe.name}</h1></div>`
+    const cookRecipeButton = `<button id='cookRecipeButton' class='view-favorites cook-recipe nav-button'>Cook Recipe</button>`
+    const addIngredients = `<button id='addIngredients' class='view-favorites add-ingredients nav-button'>Add Ingredients</button>`
     const recipeImg = `<img src=${recipe.image} alt=${recipe.name}>`
     const ingredientsList = `
       <div class='ingredients recipe-info'>
@@ -217,7 +221,9 @@ function toggleViewRecipeDetails(event) {
                             <div>${recipeImg}${ingredientsList}</div>
                             ${recipeDirections}
                             ${missingIngredients}
+                            ${addIngredients}
                             ${recipeCost}
+                            ${cookRecipeButton}
                           </article>`
   }
 }
@@ -237,8 +243,8 @@ function populateCards(recipes) {
           <button
               aria-label='add-button'
               class='
-                add-button 
-                card-button 
+                add-button
+                card-button
                 ${isRecipeToCook ? "is-added-to-cookbook" : ''}'>
             <img class='add'
             src='https://image.flaticon.com/icons/svg/32/32339.svg' alt='Add to
@@ -254,8 +260,8 @@ function populateCards(recipes) {
           </button>
         </div>
           <span class='recipe-name'>${name}</span>
-          <img id='img-${id}' 
-                tabindex='0' 
+          <img id='img-${id}'
+                tabindex='0'
                 class='card-picture'
                 src='${image}'
                 alt='click to view recipe for ${name}'>
@@ -321,7 +327,7 @@ function showPantry() {
   pantrySection.classList.toggle('hidden');
   cardArea.classList.toggle('hidden')
   if (showPantryButton.innerText === "View Pantry") {
-    showPantryButton.innerHTML = "Home"
+    showPantryButton.innerHTML = "Hide pantry"
   } else {
     showPantryButton.innerHTML = "View Pantry"
   }
@@ -352,7 +358,7 @@ function showMissingIngredients(recipe, ingredients) {
   if (missingIngredients === 'You have all of the ingredients that you need!') {
     return missingIngredients;
   } else {
-    missingIngredients.forEach(ingredient => 
+    missingIngredients.forEach(ingredient =>
       ingredientValues.push(ingredient.amount));
 
     ingredients.forEach((ingredient) => {
@@ -365,5 +371,21 @@ function showMissingIngredients(recipe, ingredients) {
     });
     return response.join(", ")
   }
-  
+}
+
+function cookRecipe() {
+  if(event.target.classList.contains('cook-recipe')) {
+    pantry.cookRecipe(recipe);
+    populatePantryList(pantry, ingredients)
+  }
+}
+
+function addIngredients() {
+  if(event.target.classList.contains('add-ingredients')) {
+    let shoppingList = pantry.checkForIngr(recipe)
+    console.log(user)
+    console.log(shoppingList[0])
+    postData({ userID: user.id, ingredientID: shoppingList[0].name, ingredientModification: shoppingList[0].amount })
+
+  }
 }
