@@ -43,8 +43,7 @@ function onStartup() {
       pantry = new Pantry(randomUser.pantry);
       populatePantryList(pantry, ingredients);
       console.log(user, cookbook)
-    domUpdates.populateCards(user, cookbook.recipes, cardArea);
-      // cardArea.innerHTML = htmlString.join("");
+      domUpdates.populateCards(user, cookbook.recipes, cardArea);
       filterTags(cookbook.recipes);
       greetUser();
     });

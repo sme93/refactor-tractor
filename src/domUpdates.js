@@ -38,7 +38,7 @@ const domUpdates = {
                   alt='click to view recipe for ${name}'>
       </article>`
     })
-      cardArea.innerHTML = htmlString.join("");
+    cardArea.innerHTML = htmlString.join("");
   }
 
 }
