@@ -311,23 +311,6 @@ function addCardToCook(event) {
   return idAsInteger;
 }
 
-
-
-function returnFilteredRecipes(recipes, search) {
-  let result = [];
-  result = recipes.filter(recipe => {
-    return recipe.name.toLowerCase().includes(search)
-  })
-  recipes.forEach(recipe => {
-    recipe.ingredients.forEach(ingredient => {
-      if (ingredient.name.toLowerCase().includes(search)) {
-        result.push(recipe)
-      }
-    })
-  })
-  return result;
-}
-
 function filterBySearch(e) {
   const searchText = e.target.value.toLowerCase();
   if (favButton.innerHTML === 'Home') {
@@ -343,43 +326,6 @@ function filterBySearch(e) {
   }
 }
 
-
-// function filterBySearch(e) {
-//   if (favButton.innerHTML === 'Home') {
-//     combineDataSets(user.favoriteRecipes, ingredients)
-//     const searchText = e.target.value.toLowerCase();
-//     let result;
-//     result = user.favoriteRecipes.filter(recipe => {
-//       return recipe.name.toLowerCase().includes(searchText)
-//     })
-//     user.favoriteRecipes.forEach(recipe => {
-//       recipe.ingredients.forEach(ingredient => {
-//         if (ingredient.name.toLowerCase().includes(searchText)) {
-//           result.push(recipe)
-//         }
-//       })
-//     })
-//     const finalResult = [...new Set(result)];
-//     populateCards(finalResult);
-//   } else {
-//     const searchText = e.target.value.toLowerCase();
-//     combineDataSets(cookbook.recipes, ingredients);
-//     let result;
-//     result = cookbook.recipes.filter(recipe => {
-//       return recipe.name.toLowerCase().includes(searchText)
-//     })
-//     cookbook.recipes.forEach(recipe => {
-//       recipe.ingredients.forEach(ingredient => {
-//         if (ingredient.name.toLowerCase().includes(searchText)) {
-//           result.push(recipe)
-//         }
-//       })
-//     })
-//     const finalResult = [...new Set(result)];
-//     populateCards(finalResult);
-//   }
-// }
-
 function combineDataSets(recipeData, ingredientsData) {
   recipeData.forEach(recipe => {
     recipe.ingredients.forEach(ingredient => {
@@ -392,6 +338,21 @@ function combineDataSets(recipeData, ingredientsData) {
       })
     })
   })
+}
+
+function returnFilteredRecipes(recipes, search) {
+  let result = [];
+  result = recipes.filter(recipe => {
+    return recipe.name.toLowerCase().includes(search);
+  })
+  recipes.forEach(recipe => {
+    recipe.ingredients.forEach(ingredient => {
+      if (ingredient.name.toLowerCase().includes(search)) {
+        result.push(recipe);
+      }
+    })
+  })
+  return result;
 }
 
 function showPantry() {
