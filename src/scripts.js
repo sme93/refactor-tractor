@@ -1,5 +1,5 @@
 import './css/main.scss';
-
+import domUpdates from './domUpdates.js';
 import getData from './network-requests';
 
 import Pantry from './pantry';
@@ -237,8 +237,8 @@ function populateCards(recipes) {
           <button
               aria-label='add-button'
               class='
-                add-button 
-                card-button 
+                add-button
+                card-button
                 ${isRecipeToCook ? "is-added-to-cookbook" : ''}'>
             <img class='add'
             src='https://image.flaticon.com/icons/svg/32/32339.svg' alt='Add to
@@ -254,8 +254,8 @@ function populateCards(recipes) {
           </button>
         </div>
           <span class='recipe-name'>${name}</span>
-          <img id='img-${id}' 
-                tabindex='0' 
+          <img id='img-${id}'
+                tabindex='0'
                 class='card-picture'
                 src='${image}'
                 alt='click to view recipe for ${name}'>
@@ -352,7 +352,7 @@ function showMissingIngredients(recipe, ingredients) {
   if (missingIngredients === 'You have all of the ingredients that you need!') {
     return missingIngredients;
   } else {
-    missingIngredients.forEach(ingredient => 
+    missingIngredients.forEach(ingredient =>
       ingredientValues.push(ingredient.amount));
 
     ingredients.forEach((ingredient) => {
@@ -365,5 +365,5 @@ function showMissingIngredients(recipe, ingredients) {
     });
     return response.join(", ")
   }
-  
+
 }
