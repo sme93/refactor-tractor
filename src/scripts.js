@@ -312,23 +312,34 @@ function addCardToCook(event) {
 
 function filterBySearch(e) {
   const searchText = e.target.value.toLowerCase();
-// console.log(cookbook.recipes)
-//recipes data and ingredients data,
-//if the search text is in the ingredients array by name,
-//take the id associated wth it, and check the id is in the array of recipes,
-//if it is return that recipe
-  let result = cookbook.recipes.filter(recipe => {
-    const { name, ingredients, ingredientsData } = recipe;
-    const ingredientNames = ingredients.map(ingredient => {
-      // const name = ingredientsData.find(i => i.id === ingredient.id)
-      // console.log(name)//in case its undefined
-      // if (name) {
-      //   return name.toLowerCase();
-      // }
-    })
-    return name.toLowerCase().includes(searchText) || ingredientNames.includes(searchText)
+  combineDataSets(cookbook.recipes, ingredients);
+  let result;
+  result = cookbook.recipes.filter(recipe => {
+    return recipe.name.toLowerCase().includes(searchText)
   })
-  populateCards(result)
+  cookbook.recipes.forEach(recipe => {
+    recipe.ingredients.forEach(ingredient => {
+      if (ingredient.name.toLowerCase().includes(searchText)) {
+        result.push(recipe)
+      }
+    })
+  })
+  const finalResult = [...new Set(result)];
+  populateCards(finalResult);
+}
+
+function combineDataSets(recipeData, ingredientsData) {
+  recipeData.forEach(recipe => {
+    recipe.ingredients.forEach(ingredient => {
+      let ingredientID = ingredient.id;
+      ingredientsData.forEach(ingredientOnList => {
+        if (ingredientOnList.id === ingredientID) {
+          ingredient['name'] = ingredientOnList.name;
+          ingredient['estimatedCostInCents'] = ingredientOnList.estimatedCostInCents;
+        }
+      })
+    })
+  })
 }
 
 function showPantry() {
