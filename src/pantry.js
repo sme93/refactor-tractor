@@ -6,27 +6,32 @@ class Pantry {
   }
 
   populatePantry() {
-    this.contents.forEach(item => {
-      this.pantryIngredients.push(item.ingredient);
-      this.pantryAmounts.push(item.amount);
-      return
-    })
+    if (!this.pantryIngredients.length) {
+      this.contents.forEach(item => {
+        this.pantryIngredients.push(item.ingredient);
+        this.pantryAmounts.push(item.amount);
+        return
+      })
+    }
   }
 
   checkForIngr(recipe) {
+    this.populatePantry();
     const missingIngredients = [];
     let difference;
     recipe.ingredients.forEach(ingredient => {
       let currentIngredient = this.pantryIngredients.indexOf(ingredient.id);
       if (!this.pantryIngredients.includes(ingredient.id)) {
-        return missingIngredients.push({
-          name: ingredient.name,
+        missingIngredients.push({
+          name: ingredient.id,
           amount: ingredient.quantity.amount
         })
-      } else if (ingredient.quantity.amount > this.pantryAmounts[currentIngredient]) {
-        difference = this.pantryAmounts[currentIngredient] - ingredient.quantity.amount;
-        return missingIngredients.push({
-          name: ingredient.name,
+      } else if (ingredient.quantity.amount > 
+          this.pantryAmounts[currentIngredient]) {
+        difference = ingredient.quantity.amount - 
+          this.pantryAmounts[currentIngredient];
+        missingIngredients.push({
+          name: ingredient.id,
           amount: difference
         })
       }
@@ -39,12 +44,14 @@ class Pantry {
   }
 
   cookMeal(recipe) {
-    if (this.checkForIngr(recipe) !== "You have all of the ingredients that you need!") {
+    if (this.checkForIngr(recipe) !== 
+      "You have all of the ingredients that you need!") {
       return "Sorry, you dont have the required ingredients"
     } else {
       recipe.ingredients.forEach(ingredient => {
         let currentIngredient = this.pantryIngredients.indexOf(ingredient.id);
-        return this.pantryAmounts[currentIngredient] -= ingredient.quantity.amount;
+        return this.pantryAmounts[currentIngredient] -= 
+          ingredient.quantity.amount;
       });
     }
   }
