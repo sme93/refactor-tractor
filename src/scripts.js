@@ -2,6 +2,8 @@ import './css/main.scss';
 import domUpdates from './domUpdates.js';
 import getData from './network-requests';
 
+import { getData, postData } from './network-requests';
+
 import Pantry from './pantry';
 import Recipe from './recipe';
 import User from './user';
@@ -14,7 +16,7 @@ const searchBar = document.getElementById('search-bar')
 const expandFilters = document.querySelector('#expandFilters');
 const showPantryButton = document.querySelector('#viewPantryButton')
 const pantrySection = document.querySelector('#pantry')
-let user, pantry, cookbook, ingredients;
+let user, pantry, cookbook, ingredients, recipe, randomUser;
 
 window.onload = onStartup();
 
@@ -25,6 +27,8 @@ searchBar.addEventListener('keyup', filterBySearch)
 expandFilters.addEventListener('click', toggleFilters);
 showPantryButton.addEventListener('click', showPantry);
 cardArea.addEventListener('click', toggleViewRecipeDetails);
+cardArea.addEventListener('click', cookRecipe);
+cardArea.addEventListener('click', addIngredients);
 cardArea.addEventListener('keydown', function(event) {
   if (event.code === 'Space') {
     toggleViewRecipeDetails(event);
@@ -36,7 +40,7 @@ function onStartup() {
     .then(allData => {
       const randomIndexInArray = Math.floor(
         Math.random() * allData.userData.length);
-      const randomUser = allData.userData[randomIndexInArray];
+      randomUser = allData.userData[randomIndexInArray];
       user = new User(randomUser.id, randomUser.name, randomUser.pantry);
       cookbook = new Cookbook(allData.recipeData);
       ingredients = allData.ingredientData;
@@ -103,7 +107,7 @@ function renderFilteredCards() {
     .querySelectorAll('#allTags .nav-button.active');
   const activeTags = [...activeFilterButtons].map(button => button.id);
   const filteredRecipes = activeTags.reduce((acc, tag) => {
-    return [...acc, ...cookbook.findRecipeByTags(tag)];
+    return [...acc, ...cookbook.filterByTag(tag, cookbook.recipes)];
   }, []);
 
   domUpdates.populateCards(filteredRecipes);
@@ -182,13 +186,15 @@ function toggleViewRecipeDetails(event) {
       }
     })
     cardArea.classList.add('all');
-    const recipe = new Recipe(recipeInfo, ingredients);
+    recipe = new Recipe(recipeInfo, ingredients);
     const missingIngredients = `
       <div>
         <h3>Missing Ingredients</h3>
         <p>${showMissingIngredients(recipe, ingredients)}</p>
       </div>`
     const recipeName = `<div><h1>${recipe.name}</h1></div>`
+    const cookRecipeButton = `<button id='cookRecipeButton' class='view-favorites cook-recipe nav-button'>Cook Recipe</button>`
+    const addIngredients = `<button id='addIngredients' class='view-favorites add-ingredients nav-button'>Add Ingredients</button>`
     const recipeImg = `<img src=${recipe.image} alt=${recipe.name}>`
     const ingredientsList = `
       <div class='ingredients recipe-info'>
@@ -218,7 +224,9 @@ function toggleViewRecipeDetails(event) {
                             <div>${recipeImg}${ingredientsList}</div>
                             ${recipeDirections}
                             ${missingIngredients}
+                            ${addIngredients}
                             ${recipeCost}
+                            ${cookRecipeButton}
                           </article>`
   }
 }
@@ -279,7 +287,7 @@ function showPantry() {
   pantrySection.classList.toggle('hidden');
   cardArea.classList.toggle('hidden')
   if (showPantryButton.innerText === "View Pantry") {
-    showPantryButton.innerHTML = "Home"
+    showPantryButton.innerHTML = "Hide pantry"
   } else {
     showPantryButton.innerHTML = "View Pantry"
   }
@@ -287,16 +295,19 @@ function showPantry() {
 
 function populatePantryList(pantry, ingredients) {
   pantry.populatePantry();
+  pantrySection.innerHTML = ""
   ingredients.forEach((ingredient) => {
     if (pantry.pantryIngredients.some((item) => item === ingredient.id)) {
       pantry.pantryIngredients.forEach((item, i) => {
         if (item === ingredient.id) {
           let currentAmount = pantry.pantryAmounts[i]
+          if (currentAmount) {
           pantrySection.innerHTML +=
             `<li class='pantry-items' id='pantryItems-${i}'>
             ${ingredient.name}: ${currentAmount}
             </li>`
         }
+      }
       });
     }
   });
@@ -323,5 +334,42 @@ function showMissingIngredients(recipe, ingredients) {
     });
     return response.join(", ")
   }
+}
+
+function cookRecipe(event) {
+  if(event.target.classList.contains('cook-recipe')) {
+    let ingredientsUsed = pantry.checkForIngrUsed(recipe);
+    pantry.cookMeal(recipe);
+    populatePantryList(pantry, ingredients)
+    ingredientsUsed.forEach(ingredient => {
+      postData({ userID: user.id, ingredientID: ingredient.name, ingredientModification: ingredient.amount })
+    });
+  }
+}
+
+function addIngredients(event) {
+  if(event.target.classList.contains('add-ingredients')) {
+    let shoppingList = pantry.checkForIngr(recipe)
+    console.log(shoppingList);
+    console.log(user);
+    shoppingList.forEach(ingredient => {
+      postData({ userID: user.id, ingredientID: ingredient.name, ingredientModification: ingredient.amount })
+    });
+
+getData()
+.then( allData => {
+  let currentUserIndex;
+  allData.userData.forEach((userObj, i) => {
+    if (userObj.id === user.id)
+    currentUserIndex = i;
+  })
+  let currentUser = allData.userData[currentUserIndex];
+  user = new User(currentUser.id, currentUser.name, currentUser.pantry)
+  pantry = new Pantry(user.pantry)
+  pantry.populatePantry();
+  populatePantryList(pantry, ingredients);
+
+})
+}
 }
 export {}

@@ -1,5 +1,8 @@
-class Cookbook {
+import Search from './search';
+
+class Cookbook extends Search {
   constructor(data) {
+    super();
     this.recipes = data;
   }
 
@@ -11,10 +14,6 @@ class Cookbook {
        (recipe.name.toLowerCase().includes(newSearchText))
       });
     })
-  }
-
-  findRecipeByTags(tag) {
-    return this.recipes.filter(recipe => recipe.tags.includes(tag))
   }
 
 }

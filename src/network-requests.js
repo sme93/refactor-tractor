@@ -30,4 +30,16 @@ const getData = () => {
     })
 }
 
-export default getData;
+const postData = (object) => {
+  fetch("http://localhost:3001/api/v1/users", {
+    method: "POST",
+    body: JSON.stringify(object),
+    headers: {
+      "content-type": "application/json"
+    }
+  })
+  .catch(err => console.log('ERROR', err))
+
+}
+
+export {getData, postData};

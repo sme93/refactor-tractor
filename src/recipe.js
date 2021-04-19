@@ -23,7 +23,7 @@ class Recipe {
   }
 
   returnIngredients() {
-    const correctIngredient = this.ingredients.reduce((acc, ingredient) => {
+    const correctIngredients = this.ingredients.reduce((acc, ingredient) => {
       const ingredientId = ingredient.id
       const foundIngredient = this.ingredientsData.find(ingr => {
         return ingr.id === ingredientId;
@@ -33,7 +33,7 @@ class Recipe {
       return [...acc, mergedIngredient]
     }, []);
 
-    return correctIngredient;
+    return correctIngredients;
   }
 
   returnInstructions() {
