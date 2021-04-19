@@ -23,8 +23,13 @@ cardArea.addEventListener('click', cardButtonConditionals);
 tagArea.addEventListener('click', filterByTag);
 searchBar.addEventListener('keyup', filterBySearch)
 expandFilters.addEventListener('click', toggleFilters);
-cardArea.addEventListener('click', toggleViewRecipeDetails);
 showPantryButton.addEventListener('click', showPantry);
+cardArea.addEventListener('click', toggleViewRecipeDetails);
+cardArea.addEventListener('keydown', function(event) {
+  if (event.code === 'Space') {
+    toggleViewRecipeDetails(event);
+  }
+})
 
 function onStartup() {
   getData()
@@ -93,16 +98,11 @@ function filterByTag(event) {
 }
 
 function renderFilteredCards() {
-  //select any filter with the active class
   const activeFilterButtons = document
     .querySelectorAll('#allTags .nav-button.active');
-  //turns nodeList into array, maps to get just the id(the string for the tag)
   const activeTags = [...activeFilterButtons].map(button => button.id);
-  //for each tag, call cookbook.findRecipeByTag method
-  //spread contents of result into filtered recipes
-  //populate cards with the filtered recipes
   const filteredRecipes = activeTags.reduce((acc, tag) => {
-    return [...acc, ...cookbook.findRecipeByTags(tag)];
+    return [...acc, ...cookbook.filterByTag(tag, cookbook.recipes)];
   }, []);
 
   populateCards(filteredRecipes);
@@ -232,7 +232,7 @@ function populateCards(recipes) {
       .some(toCookRecipeID=> toCookRecipeID === id);
     return `
     <article class='card'>
-        <header id='${id}' class='card-header'>
+        <div id='${id}' class='card-header'>
           <label for='add-button' class='hidden'>Click to add recipe</label>
           <button
               aria-label='add-button'
@@ -252,7 +252,7 @@ function populateCards(recipes) {
                 ${isFavorite ? "favorite-active" : ""}
               card-button'>
           </button>
-        </header>
+        </div>
           <span class='recipe-name'>${name}</span>
           <img id='img-${id}' 
                 tabindex='0' 

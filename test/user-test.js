@@ -66,7 +66,8 @@ describe('User', () => {
     defaultUser.addToFavorites(recipeData[0]);
     defaultUser.addToFavorites(recipeData[1]);
 
-    expect(defaultUser.filterFavorites('snack')).to.eql([recipeData[0]]);
+    expect(defaultUser.filterByTag('snack', recipeData))
+      .to.eql([recipeData[0]]);
   });
 
   it('should be able to search favoriteRecipes by name', () => {
