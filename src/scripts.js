@@ -312,24 +312,85 @@ function addCardToCook(event) {
 }
 
 
-function filterBySearch(e) {
-  const searchText = e.target.value.toLowerCase();
-  combineDataSets(cookbook.recipes, ingredients);
-  //one if statement so that if its on the filtered screen, only filter based on 
-  let result;
-  result = cookbook.recipes.filter(recipe => {
-    return recipe.name.toLowerCase().includes(searchText)
+
+function helper(recipes, search) {
+  let result = [];
+  result = recipes.filter(recipe => {
+    return recipe.name.toLowerCase().includes(search)
   })
-  cookbook.recipes.forEach(recipe => {
+  recipes.forEach(recipe => {
     recipe.ingredients.forEach(ingredient => {
-      if (ingredient.name.toLowerCase().includes(searchText)) {
+      if (ingredient.name.toLowerCase().includes(search)) {
         result.push(recipe)
       }
     })
   })
-  const finalResult = [...new Set(result)];
-  populateCards(finalResult);
+  return result;
 }
+
+function filterBySearch(e) {//helper(user.favoriteRecipes)
+  const searchText = e.target.value.toLowerCase();
+  // let result;
+  if (favButton.innerHTML === 'Home') {
+    combineDataSets(user.favoriteRecipes, ingredients)
+    let result = helper(user.favoriteRecipes, searchText)
+    const finalResult = [...new Set(result)];
+    populateCards(finalResult);
+  } else {
+    // const searchText = e.target.value.toLowerCase();
+    combineDataSets(cookbook.recipes, ingredients);
+    let result;
+    result = cookbook.recipes.filter(recipe => {
+      return recipe.name.toLowerCase().includes(searchText)
+    })
+    cookbook.recipes.forEach(recipe => {
+      recipe.ingredients.forEach(ingredient => {
+        if (ingredient.name.toLowerCase().includes(searchText)) {
+          result.push(recipe)
+        }
+      })
+    })
+    const finalResult = [...new Set(result)];
+    populateCards(finalResult);
+  }
+}
+
+
+// function filterBySearch(e) {
+//   if (favButton.innerHTML === 'Home') {
+//     combineDataSets(user.favoriteRecipes, ingredients)
+//     const searchText = e.target.value.toLowerCase();
+//     let result;
+//     result = user.favoriteRecipes.filter(recipe => {
+//       return recipe.name.toLowerCase().includes(searchText)
+//     })
+//     user.favoriteRecipes.forEach(recipe => {
+//       recipe.ingredients.forEach(ingredient => {
+//         if (ingredient.name.toLowerCase().includes(searchText)) {
+//           result.push(recipe)
+//         }
+//       })
+//     })
+//     const finalResult = [...new Set(result)];
+//     populateCards(finalResult);
+//   } else {
+//     const searchText = e.target.value.toLowerCase();
+//     combineDataSets(cookbook.recipes, ingredients);
+//     let result;
+//     result = cookbook.recipes.filter(recipe => {
+//       return recipe.name.toLowerCase().includes(searchText)
+//     })
+//     cookbook.recipes.forEach(recipe => {
+//       recipe.ingredients.forEach(ingredient => {
+//         if (ingredient.name.toLowerCase().includes(searchText)) {
+//           result.push(recipe)
+//         }
+//       })
+//     })
+//     const finalResult = [...new Set(result)];
+//     populateCards(finalResult);
+//   }
+// }
 
 function combineDataSets(recipeData, ingredientsData) {
   recipeData.forEach(recipe => {
