@@ -18,8 +18,8 @@ const domUpdates = {
                   card-button
                   ${isRecipeToCook ? "is-added-to-cookbook" : ''}'>
               <img class='add'
-              src='https://image.flaticon.com/icons/svg/32/32339.svg' alt='Add to
-              recipes to cook'>
+                src='https://image.flaticon.com/icons/svg/32/32339.svg' 
+                alt='Add to recipes to cook'>
             </button>
             <label for='favorite-button' class='hidden'>Click to favorite recipe
             </label>
