@@ -313,6 +313,7 @@ function addCardToCook(event) {
 function filterBySearch(e) {
   const searchText = e.target.value.toLowerCase();
   combineDataSets(cookbook.recipes, ingredients);
+  //one if statement so that if its on the filtered screen, only filter based on 
   let result;
   result = cookbook.recipes.filter(recipe => {
     return recipe.name.toLowerCase().includes(searchText)
