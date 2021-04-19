@@ -1,46 +1,34 @@
 import { expect } from 'chai';
 
 import Search from '../src/search.js';
-import { recipeData } from '../src/data/testData.js'
-
-let search;
 
 describe('Search', () => {
 
-  beforeEach(() => {
-    search = new Search();
+  it('should be an instance of a Search', () => {
+    const search = new Search();
+    expect(search).to.be.an.instanceof(Search);
   });
 
-  it('should be an instance of a Searchable', () => {
-    expect(search).to.be.an.instanceof(Searchable);
+  it('should be able to filter arrays by tag', () => {
+    const mockArray = [
+      {tags: ['find me']}, 
+      {tags: ['not found']}
+    ];
+    const search = new Search();
+
+    expect(search.filterByTag('find me', mockArray))
+      .to.eql([{tags: ['find me']}]);
   });
 
-  it('should be able to filter through favoriteRecipes by tag', () => {
-    search.addToFavorites(recipeData[0]);
-    search.addToFavorites(recipeData[1]);
+  it('should return an empty array when there are no matches', () => {
+    const mockArray = [
+      {tags: ['find me']}, 
+      {tags: ['not found']}
+    ];
+    const search = new Search();
 
-    expect(search.filterFavorites('snack')).to.eql([recipeData[0]]);
+    expect(search.filterByTag('no match', mockArray))
+      .to.eql([]);
   });
 
-  it('should be able to search favoriteRecipes by name', () => {
-    search.addToFavorites(recipeData[0]);
-    search.addToFavorites(recipeData[1]);
-
-    expect(search.findFavorites('cookie')).to.eql([recipeData[0]]);
-  });
-
-  it(`should be able to search favoriteRecipes,
-            without regard to capitalization`, () => {
-    search.addToFavorites(recipeData[0]);
-    search.addToFavorites(recipeData[1]);
-
-    expect(search.findFavorites('PUDDING')).to.eql([recipeData[0]]);
-  });
-
-  it('should be able to search favoriteRecipes by ingredient', () => {
-    search.addToFavorites(recipeData[0]);
-    search.addToFavorites(recipeData[1]);
-
-    expect(search.findFavorites('apples')).to.eql([recipeData[1]]);
-  });
 });
