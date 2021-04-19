@@ -21,7 +21,7 @@ body {
 }
 
 main {
-  background-color: $secondary-background-color;
+  background: $gradient-background-color;
   height: 100%;
   width: $width-max;
 }
@@ -47,6 +47,7 @@ img {
 
 .main-header {
   @include space-flex();
+  // background-color: $gradient-background;
   background-color: $main-background-color;
   border: $med-border;
   height: auto;
