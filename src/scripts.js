@@ -1,4 +1,5 @@
 import './css/main.scss';
+import domUpdates from './domUpdates.js';
 
 import { getData, postData } from './network-requests';
 
@@ -44,7 +45,7 @@ function onStartup() {
       ingredients = allData.ingredientData;
       pantry = new Pantry(randomUser.pantry);
       populatePantryList(pantry, ingredients);
-      populateCards(cookbook.recipes);
+      domUpdates.populateCards(user, cookbook.recipes, cardArea);
       filterTags(cookbook.recipes);
       greetUser();
     });
@@ -87,7 +88,7 @@ function filterByTag(event) {
     }
   });
   if (tag === 'showAll') {
-    populateCards(cookbook.recipes);
+    domUpdates.populateCards(user, cookbook.recipes, cardArea);
     navButtons.forEach(function(button) {
       button.classList.remove('active');
       if (button.id === 'showAll') {
@@ -107,7 +108,7 @@ function renderFilteredCards() {
     return [...acc, ...cookbook.filterByTag(tag, cookbook.recipes)];
   }, []);
 
-  populateCards(filteredRecipes);
+  domUpdates.populateCards(user, filteredRecipes, cardArea);
 }
 
 function toggleFilters() {
@@ -126,14 +127,14 @@ function toggleFilters() {
 
 function viewFavorites(event) {
   if (event.target.innerHTML === 'Home') {
-    populateCards(cookbook.recipes);
+    domUpdates.populateCards(user, cookbook.recipes, cardArea);
     favButton.innerHTML = 'View Favorites'
   } else {
     favButton.innerHTML = 'Home';
     if (!user.favoriteRecipes.length) {
       cardArea.innerHTML = 'You have no favorites!'
     } else {
-      populateCards(user.favoriteRecipes);
+      domUpdates.populateCards(user, user.favoriteRecipes, cardArea);
     }
   }
 }
@@ -171,7 +172,7 @@ function cardButtonConditionals(event) {
     event.target.classList.add('is-added-to-cookbook');
   } else if (event.target.classList.contains('home')) {
     favButton.innerHTML = 'View Favorites';
-    populateCards(cookbook);
+    domUpdates.populateCards(user, cookbook, cardArea);
   }
 }
 
@@ -228,49 +229,6 @@ function toggleViewRecipeDetails(event) {
   }
 }
 
-
-function populateCards(recipes) {
-  const htmlString = recipes.map(recipe => {
-    const { id, name, image } = recipe;
-    const isFavorite = user.favoriteRecipes
-      .some(favoriteRecipe => favoriteRecipe.id === id);
-    const isRecipeToCook = user.recipesToCook
-      .some(toCookRecipeID=> toCookRecipeID === id);
-    return `
-    <article class='card'>
-        <div id='${id}' class='card-header'>
-          <label for='add-button' class='hidden'>Click to add recipe</label>
-          <button
-              aria-label='add-button'
-              class='
-                add-button
-                card-button
-                ${isRecipeToCook ? "is-added-to-cookbook" : ''}'>
-            <img class='add'
-            src='https://image.flaticon.com/icons/svg/32/32339.svg' alt='Add to
-            recipes to cook'>
-          </button>
-          <label for='favorite-button' class='hidden'>Click to favorite recipe
-          </label>
-          <button id='favorite-${id}'
-              aria-label='favorite-button'
-              class='favorite
-                ${isFavorite ? "favorite-active" : ""}
-              card-button'>
-          </button>
-        </div>
-          <span class='recipe-name'>${name}</span>
-          <img id='img-${id}'
-                tabindex='0'
-                class='card-picture'
-                src='${image}'
-                alt='click to view recipe for ${name}'>
-    </article>`
-  })
-
-  cardArea.innerHTML = htmlString.join("");
-}
-
 function addCardToCook(event) {
   const { id } = event.target.closest('.card');
   const idAsInteger = parseInt(id);
@@ -284,12 +242,12 @@ function filterBySearch(e) {
     combineDataSets(user.favoriteRecipes, ingredients);
     let result = returnFilteredRecipes(user.favoriteRecipes, searchText);
     const finalResult = [...new Set(result)];
-    populateCards(finalResult);
+    domUpdates.populateCards(user, finalResult, cardArea);
   } else {
     combineDataSets(cookbook.recipes, ingredients);
     let result = returnFilteredRecipes(cookbook.recipes, searchText);
     const finalResult = [...new Set(result)];
-    populateCards(finalResult);
+    domUpdates.populateCards(user, finalResult, cardArea);
   }
 }
 
@@ -376,7 +334,7 @@ function showMissingIngredients(recipe, ingredients) {
   }
 }
 
-function cookRecipe() {
+function cookRecipe(event) {
   if(event.target.classList.contains('cook-recipe')) {
     let ingredientsUsed = pantry.checkForIngrUsed(recipe);
     pantry.cookMeal(recipe);
@@ -387,7 +345,7 @@ function cookRecipe() {
   }
 }
 
-function addIngredients() {
+function addIngredients(event) {
   if(event.target.classList.contains('add-ingredients')) {
     let shoppingList = pantry.checkForIngr(recipe)
     console.log(shoppingList);
@@ -412,3 +370,4 @@ getData()
 })
 }
 }
+export {}
