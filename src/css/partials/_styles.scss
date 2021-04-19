@@ -37,7 +37,7 @@ h1 {
 }
 
 h3 {
-  color: $text-color;
+  color: $dark-text-color;
   font-size: 250%;
 }
 
@@ -47,8 +47,8 @@ img {
 
 .main-header {
   @include space-flex();
-  // background-color: $gradient-background;
-  background-color: $main-background-color;
+  background: $gradient-background-color;
+  // background-color: $main-background-color;
   border: $med-border;
   height: auto;
   width: $width-max;
@@ -112,6 +112,7 @@ img {
 }
 
 .all {
+  // @include card-grid(1);
   grid-gap: 0px;
   grid-template-columns: repeat(1, 1fr);
   border: 1px solid lime;
@@ -123,7 +124,7 @@ img {
 
 .all-recipe-info,
 ol {
-  color: $text-color;
+  color: $dark-text-color;
   font-size: 220%;
   width: $width-max;
 }

@@ -1,8 +1,8 @@
 // This file will set up our variables
 /* BORDERS */
-$lrg-border: 3px solid #000;
-$med-border: 2px solid #000;
-$sml-border: 1px solid #000;
+$lrg-border: 3px solid $tertiary-color;
+$med-border: 2px solid $tertiary-color;
+$sml-border: 1px solid $tertiary-color;
 
 /* WIDTH */
 $width-max: 100%; // CHANGE THESE TO A MIXIN!
@@ -16,4 +16,4 @@ $width-min: 13%;
 $mobile: 300px;
 $tablet: 540px;
 $laptop: 1024px;
-$desktop: 1300px;
+$desktop: 1200px;

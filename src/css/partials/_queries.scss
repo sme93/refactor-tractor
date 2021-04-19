@@ -19,7 +19,7 @@
 // Tablet 📱
 @media screen and (min-width: $tablet) and (max-width: $laptop - 1) {
   main > .all-cards {
-    @include card-grid(3);
+    @include card-grid(2);
   }
 }
 

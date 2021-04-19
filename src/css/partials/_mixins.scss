@@ -12,6 +12,7 @@
 @mixin space-flex() {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 /* Mixin - Card Display Grid */
@@ -22,20 +23,3 @@
   padding: 30px 0 30px 30px;
   width: 95.5vw;
 }
-
-/* Mixin Card Display Grid */
-// @mixin card-grid-four() {
-//   display: grid;
-//   grid-gap: 30px;
-//   grid-template-columns: repeat(4, 1fr);
-//   padding: 30px 0 30px 30px;
-//   width: 95.5vw;
-// }
-//
-// @mixin card-grid-three() {
-//   display: grid;
-//   grid-gap: 30px;
-//   grid-template-columns: repeat(3, 1fr);
-//   padding: 30px 0 30px 30px;
-//   width: 95.5vw;
-// }

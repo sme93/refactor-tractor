@@ -6,7 +6,8 @@
 
 .card {
   background-color: $card-background-color;
-  border: $lrg-border;
+  color: $light-text-color;
+  border: $sml-border;
   width: $width-max;
   @include rounded-corners(20px);
 }
