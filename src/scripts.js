@@ -341,11 +341,13 @@ function populatePantryList(pantry, ingredients) {
       pantry.pantryIngredients.forEach((item, i) => {
         if (item === ingredient.id) {
           let currentAmount = pantry.pantryAmounts[i]
+          if (currentAmount) {
           pantrySection.innerHTML +=
             `<li class='pantry-items' id='pantryItems-${i}'>
             ${ingredient.name}: ${currentAmount}
             </li>`
         }
+      }
       });
     }
   });
@@ -376,8 +378,12 @@ function showMissingIngredients(recipe, ingredients) {
 
 function cookRecipe() {
   if(event.target.classList.contains('cook-recipe')) {
-    pantry.cookRecipe(recipe);
+    let ingredientsUsed = pantry.checkForIngrUsed(recipe);
+    pantry.cookMeal(recipe);
     populatePantryList(pantry, ingredients)
+    ingredientsUsed.forEach(ingredient => {
+      postData({ userID: user.id, ingredientID: ingredient.name, ingredientModification: ingredient.amount })
+    });
   }
 }
 
