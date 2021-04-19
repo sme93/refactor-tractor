@@ -4,20 +4,28 @@
 
 // Desktop 🖥
 @media screen and (min-width: $desktop) {
-// @media screen and (min-width: 1300px) {
   main > .all-cards {
-    @include card-grid(5)
+    @include card-grid(5);
   }
-  // * {
-  //   border: 1px solid fuchsia;
-  // }
-
 }
 
 // Laptop 💻
-
+@media screen and (min-width: $laptop) and (max-width: $desktop - 1) {
+  main > .all-cards {
+    @include card-grid(4);
+  }
+}
 
 // Tablet 📱
-
+@media screen and (min-width: $tablet) and (max-width: $laptop - 1) {
+  main > .all-cards {
+    @include card-grid(3);
+  }
+}
 
 // Mobile 📱
+@media screen and (min-width: $mobile) and (max-width: $tablet - 1) {
+  main > .all-cards {
+    @include card-grid(1);
+  }
+}
