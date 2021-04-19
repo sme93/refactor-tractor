@@ -1,6 +1,5 @@
 import './css/main.scss';
 import domUpdates from './domUpdates.js';
-import getData from './network-requests';
 
 import { getData, postData } from './network-requests';
 
@@ -46,7 +45,6 @@ function onStartup() {
       ingredients = allData.ingredientData;
       pantry = new Pantry(randomUser.pantry);
       populatePantryList(pantry, ingredients);
-      console.log(user, cookbook)
       domUpdates.populateCards(user, cookbook.recipes, cardArea);
       filterTags(cookbook.recipes);
       greetUser();
@@ -90,7 +88,7 @@ function filterByTag(event) {
     }
   });
   if (tag === 'showAll') {
-    domUpdates.populateCards(cookbook.recipes);
+    domUpdates.populateCards(user, cookbook.recipes, cardArea);
     navButtons.forEach(function(button) {
       button.classList.remove('active');
       if (button.id === 'showAll') {
@@ -110,7 +108,7 @@ function renderFilteredCards() {
     return [...acc, ...cookbook.filterByTag(tag, cookbook.recipes)];
   }, []);
 
-  domUpdates.populateCards(filteredRecipes);
+  domUpdates.populateCards(user, filteredRecipes, cardArea);
 }
 
 function toggleFilters() {
@@ -129,14 +127,14 @@ function toggleFilters() {
 
 function viewFavorites(event) {
   if (event.target.innerHTML === 'Home') {
-    domUpdates.populateCards(cookbook.recipes);
+    domUpdates.populateCards(user, cookbook.recipes, cardArea);
     favButton.innerHTML = 'View Favorites'
   } else {
     favButton.innerHTML = 'Home';
     if (!user.favoriteRecipes.length) {
       cardArea.innerHTML = 'You have no favorites!'
     } else {
-      domUpdates.populateCards(user.favoriteRecipes);
+      domUpdates.populateCards(user, user.favoriteRecipes, cardArea);
     }
   }
 }
@@ -174,7 +172,7 @@ function cardButtonConditionals(event) {
     event.target.classList.add('is-added-to-cookbook');
   } else if (event.target.classList.contains('home')) {
     favButton.innerHTML = 'View Favorites';
-    domUpdates.populateCards(cookbook);
+    domUpdates.populateCards(user, cookbook, cardArea);
   }
 }
 
@@ -244,12 +242,12 @@ function filterBySearch(e) {
     combineDataSets(user.favoriteRecipes, ingredients);
     let result = returnFilteredRecipes(user.favoriteRecipes, searchText);
     const finalResult = [...new Set(result)];
-    domUpdates.populateCards(finalResult);
+    domUpdates.populateCards(user, finalResult, cardArea);
   } else {
     combineDataSets(cookbook.recipes, ingredients);
     let result = returnFilteredRecipes(cookbook.recipes, searchText);
     const finalResult = [...new Set(result)];
-    domUpdates.populateCards(finalResult);
+    domUpdates.populateCards(user, finalResult, cardArea);
   }
 }
 
