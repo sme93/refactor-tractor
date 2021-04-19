@@ -102,7 +102,7 @@ function renderFilteredCards() {
     .querySelectorAll('#allTags .nav-button.active');
   const activeTags = [...activeFilterButtons].map(button => button.id);
   const filteredRecipes = activeTags.reduce((acc, tag) => {
-    return [...acc, ...cookbook.findRecipeByTags(tag)];
+    return [...acc, ...cookbook.filterByTag(tag, cookbook.recipes)];
   }, []);
 
   populateCards(filteredRecipes);

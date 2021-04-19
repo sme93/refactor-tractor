@@ -1,5 +1,8 @@
-class User {
+import Search from './search';
+
+class User extends Search {
   constructor(id, name, pantry) {
+    super();
     this.id = id;
     this.name = name;
     this.pantry = pantry;
@@ -22,12 +25,6 @@ class User {
     if (!this.recipesToCook.includes(recipe)) {
       this.recipesToCook.push(recipe);
     }
-  }
-
-  filterFavorites(tag) {
-    return this.favoriteRecipes.filter(recipe => {
-      return recipe.tags.includes(tag);
-    });
   }
 
   findFavorites(nameOrIngredient) {

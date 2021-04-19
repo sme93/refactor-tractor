@@ -32,6 +32,6 @@ describe('Cookbook', () => {
   })
 
   it('Should filter recipes based on one or more tags', () => {
-    expect(cookbook.findRecipeByTags('appetizer').length).to.equal(1);
+    expect(cookbook.filterByTag('appetizer', recipeData).length).to.equal(1);
   })
 })
