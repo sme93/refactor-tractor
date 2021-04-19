@@ -1,14 +1,14 @@
 import { expect } from 'chai';
 
-import Searchable from '../src/searchable.js';
+import Search from '../src/search.js';
 import { recipeData } from '../src/data/testData.js'
 
 let search;
 
-describe('Searchable', () => {
+describe('Search', () => {
 
   beforeEach(() => {
-    search = new Searchable();
+    search = new Search();
   });
 
   it('should be an instance of a Searchable', () => {
