@@ -1,0 +1,31 @@
+// Media queries for responsive design
+@import "mixins";
+@import "variables";
+
+// Desktop 🖥
+@media screen and (min-width: $desktop) {
+  main > .all-cards {
+    @include card-grid(5);
+  }
+}
+
+// Laptop 💻
+@media screen and (min-width: $laptop) and (max-width: $desktop - 1) {
+  main > .all-cards {
+    @include card-grid(4);
+  }
+}
+
+// Tablet 📱
+@media screen and (min-width: $tablet) and (max-width: $laptop - 1) {
+  main > .all-cards {
+    @include card-grid(3);
+  }
+}
+
+// Mobile 📱
+@media screen and (min-width: $mobile) and (max-width: $tablet - 1) {
+  main > .all-cards {
+    @include card-grid(1);
+  }
+}

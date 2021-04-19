@@ -3,26 +3,20 @@
 $lrg-border: 3px solid #000;
 $med-border: 2px solid #000;
 $sml-border: 1px solid #000;
-//
-// /* COLORS */
-// $main-background-color: #ebf5ee;
-// $secondary-background-color: #37515c;
-// $active-background-color: #ac8dd8;
-// $card-background-color: #d7f2fe;
-// $hover-color: #cff2da;
-// $active-color: #c3c2c6;
-// $text-color: #ebf5ee;
 
 /* WIDTH */
-$width-max: 100%;
+$width-max: 100%; // CHANGE THESE TO A MIXIN!
 $width-big: 90%;
 $width-avg: 40%;
 $width-sml: 30%;
 $width-smol: 20%;
 $width-min: 13%;
 
-/* */
-
+/* MEDIA QUERY SELECTORS */
+$mobile: 300px;
+$tablet: 540px;
+$laptop: 1024px;
+$desktop: 1300px;
 
 
 /* REUSED STYLES
