@@ -383,9 +383,12 @@ function cookRecipe() {
 function addIngredients() {
   if(event.target.classList.contains('add-ingredients')) {
     let shoppingList = pantry.checkForIngr(recipe)
-    console.log(user)
-    console.log(shoppingList[0])
-    postData({ userID: user.id, ingredientID: shoppingList[0].name, ingredientModification: shoppingList[0].amount })
+    console.log(shoppingList);
+    console.log(user);
+    shoppingList.forEach(ingredient => {
+      postData({ userID: user.id, ingredientID: ingredient.name, ingredientModification: ingredient.amount })
+    });
+
 
   }
 }
