@@ -26,9 +26,9 @@ class Pantry {
           name: ingredient.id,
           amount: ingredient.quantity.amount
         })
-      } else if (ingredient.quantity.amount > 
+      } else if (ingredient.quantity.amount >
           this.pantryAmounts[currentIngredient]) {
-        difference = ingredient.quantity.amount - 
+        difference = ingredient.quantity.amount -
           this.pantryAmounts[currentIngredient];
         missingIngredients.push({
           name: ingredient.id,
@@ -44,17 +44,33 @@ class Pantry {
   }
 
   cookMeal(recipe) {
-    if (this.checkForIngr(recipe) !== 
+    if (this.checkForIngr(recipe) !==
       "You have all of the ingredients that you need!") {
       return "Sorry, you dont have the required ingredients"
     } else {
       recipe.ingredients.forEach(ingredient => {
         let currentIngredient = this.pantryIngredients.indexOf(ingredient.id);
-        return this.pantryAmounts[currentIngredient] -= 
+        return this.pantryAmounts[currentIngredient] -=
           ingredient.quantity.amount;
       });
     }
   }
+
+  checkForIngrUsed(recipe) {
+    this.populatePantry();
+    const usedIngredients = [];
+    recipe.ingredients.forEach(ingredient => {
+        let currentIngredient = this.pantryIngredients.indexOf(ingredient.id);
+        if (this.pantryIngredients.includes(ingredient.id)) {
+          usedIngredients.push({
+            name: ingredient.id,
+            amount: 0 - ingredient.quantity.amount
+          })
+        }
+      })
+      return usedIngredients;
+    }
+
 }
 
 export default Pantry;
