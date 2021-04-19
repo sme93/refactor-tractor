@@ -6,27 +6,30 @@ class Pantry {
   }
 
   populatePantry() {
+    if (!this.pantryIngredients.length) {
     this.contents.forEach(item => {
       this.pantryIngredients.push(item.ingredient);
       this.pantryAmounts.push(item.amount);
       return
     })
   }
+  }
 
   checkForIngr(recipe) {
+    this.populatePantry();
     const missingIngredients = [];
     let difference;
     recipe.ingredients.forEach(ingredient => {
       let currentIngredient = this.pantryIngredients.indexOf(ingredient.id);
       if (!this.pantryIngredients.includes(ingredient.id)) {
-        return missingIngredients.push({
-          name: ingredient.name,
+        missingIngredients.push({
+          name: ingredient.id,
           amount: ingredient.quantity.amount
         })
       } else if (ingredient.quantity.amount > this.pantryAmounts[currentIngredient]) {
-        difference = this.pantryAmounts[currentIngredient] - ingredient.quantity.amount;
-        return missingIngredients.push({
-          name: ingredient.name,
+        difference = ingredient.quantity.amount - this.pantryAmounts[currentIngredient];
+        missingIngredients.push({
+          name: ingredient.id,
           amount: difference
         })
       }
