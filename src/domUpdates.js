@@ -1,8 +1,7 @@
-import './scripts.js'
 
-let domUpdates = {
-  populateCards(recipes) {
-    const htmlString = recipes.map(recipe => {
+const domUpdates = {
+  populateCards(user, recipes, cardArea) {
+    let htmlString = recipes.map(recipe => {
       const { id, name, image } = recipe;
       const isFavorite = user.favoriteRecipes
         .some(favoriteRecipe => favoriteRecipe.id === id);
@@ -39,8 +38,7 @@ let domUpdates = {
                   alt='click to view recipe for ${name}'>
       </article>`
     })
-
-    cardArea.innerHTML = htmlString.join("");
+      cardArea.innerHTML = htmlString.join("");
   }
 
 }
