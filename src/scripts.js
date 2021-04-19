@@ -363,21 +363,19 @@ function showMissingIngredients(recipe, ingredients) {
   let ingredientNames = [];
   let ingredientValues = [];
   let response = ['To cook this recipe you need'];
-  if(missingIngredients === 'You have all of the ingredients that you need!') {
+  if (missingIngredients === 'You have all of the ingredients that you need!') {
     return missingIngredients;
   } else {
-  missingIngredients.forEach(ingredient => ingredientValues.push(ingredient.amount));
+    missingIngredients.forEach(ingredient => ingredientValues.push(ingredient.amount));
 
-  ingredients.forEach((ingredient, i) => {
-    if (missingIngredients.some((item, i) => item.name === ingredient.id)) {
-      ingredientNames.push(ingredient.name);
-    }
-  });
-  ingredientNames.forEach((item, i) => {
-  response.push(`${ingredientNames[i]}: ${ingredientValues[i]}`)
-  });
-
-  console.log(response.join(", "))
-  return response.join(", ")
- }
+    ingredients.forEach((ingredient, i) => {
+      if (missingIngredients.some((item, i) => item.name === ingredient.id)) {
+        ingredientNames.push(ingredient.name);
+      }
+    });
+    ingredientNames.forEach((item, i) => {
+      response.push(`${ingredientNames[i]}: ${ingredientValues[i]}`)
+    });
+    return response.join(", ")
+  }
 }
