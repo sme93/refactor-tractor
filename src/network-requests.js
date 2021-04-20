@@ -5,7 +5,6 @@ const fetchData = () => {
       return userData;
     })
 
-
   const ingredientData = fetch('http://localhost:3001/api/v1/ingredients')
     .then(response => response.json())
     .then(ingredientData => {
