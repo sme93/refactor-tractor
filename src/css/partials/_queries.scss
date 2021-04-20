@@ -21,20 +21,6 @@
   main > .all-cards {
     @include card-grid(4);
   }
-
-  .main-header {
-    @include center-flex();
-    flex-direction: column;
-  }
-
-  header > nav {
-    flex-direction: row;
-  }
-
-  .search-bar {
-    width: $width-max;
-  }
-
 }
 
 // Tablet 📱
@@ -61,6 +47,8 @@
 @media screen and (min-width: $mobile) and (max-width: $tablet - 1) {
   main > .all-cards {
     @include card-grid(1);
+    @include center-flex();
+    flex-direction: column;
   }
 
   .main-header {
@@ -69,7 +57,7 @@
   }
 
   header > nav {
-    flex-direction: row;
+    flex-direction: column;
   }
 
   .search-bar {

@@ -16,6 +16,7 @@ html {
   font-weight: $base-font-weight;
   font-size: $base-font-size;
   line-height: $base-line-height;
+  width: 100%;
 }
 
 body {
@@ -55,6 +56,10 @@ img {
   width: $width-max;
 }
 
+.header-nav {
+  @include space-flex();
+}
+
 .user-info {
   font-size: 180%;
   margin: auto;
@@ -83,7 +88,7 @@ img {
   display: flex;
   height: 100%;
   margin: 10px 0px 10px 0px;
-  width: $width-sml;
+  width: $width-max;
 }
 
 .search-button {
