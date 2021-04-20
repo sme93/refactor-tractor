@@ -4,15 +4,14 @@
 @import "typography";
 @import "variables";
 
-article > .card {
-  background-color: $card-background-gradient;
-}
-
 .card {
-  color: $light-text-color;
-  border: $sml-border;
-  width: $width-max;
+  // @include center-flex();
+  // flex-direction: column;
   @include rounded-corners(20px);
+  width: $width-max;
+  background-color: $card-background-color;
+  // border: $sml-border;
+  box-shadow: 7px 7px 7px #a85871;
 }
 
 .card-header {
@@ -28,9 +27,9 @@ article > .card {
 }
 
 .card-picture {
-  border: $sml-border;
-  height: 200px;
-  margin: 10px 3% 8px 2.6%;
+  @include rounded-corners(20px);
+  height: 211px;
+  margin: 10px;
   width: $width-big;
 }
 
@@ -48,7 +47,7 @@ article > .card {
 
 .add-button {
   background-color: $main-background-color;
-  display: flex;
+  // display: flex;
   width: $width-min;
 }
 
@@ -63,10 +62,6 @@ article > .card {
 .favorite-active {
   background-image: url(https://image.flaticon.com/icons/svg/148/148841.svg);
   background-repeat: no-repeat;
-}
-
-.all-cards {
-  @include card-grid(4);
 }
 
 .all-recipe-info,

@@ -12,11 +12,14 @@
 html {
   border: $med-border;
   height: 100vh;
+  font-family: $base-font-family;
+  font-weight: $base-font-weight;
+  font-size: $base-font-size;
+  line-height: $base-line-height;
 }
 
 body {
   box-sizing: border-box;
-  font-family: $base-font-family;
   margin: auto;
 }
 
@@ -27,7 +30,6 @@ main {
 }
 
 h1 {
-  border-right: $med-border;
   font-size: 255%;
   margin-top: 0;
   margin-bottom: 0;
