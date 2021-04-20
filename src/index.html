@@ -4,25 +4,28 @@
     <meta charset='UTF-8'>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>What's Cookin'?</title>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,800&display=swap' rel='stylesheet'>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap" rel="stylesheet">
   </head>
   <body>
     <header class='main-header'>
-      <h1>What's Cookin'</h1>
+      <h1>What's Cookin'?!</h1>
       <p class='user-info'>Welcome, <span class='user-name'>User</span>.</p>
+      <nav class="header-nav">
+        <label for='view-favorites-button' class='hidden'>View favorites</label>
+        <button id='viewFavoritesButton' class='view-favorites nav-button'>View Favorites</button>
+        <button id='viewPantryButton' class='view-favorites nav-button'>View Pantry</button>
+        <form class='search-bar' id='search-bar'>
+          <label for='search-button' class='hidden'>Click here to search here</label>
+          <button id='search-button' class='search-button'>
+            <img class='search-image' src='https://image.flaticon.com/icons/svg/660/660029.svg' alt='Search button'>
+          </button>
+          <label for='search-input' class='hidden'>Type search query here</label>
+          <input id='search-input' class='search-input' type='text' placeholder='Search recipes by name or ingredients' value=''>
+        </form>
+      </nav>
       <!-- <label for='home-button' class='hidden'>Homepage button</label> -->
       <!-- <button id='home-button' class='home nav-button'>Home</button> -->
-      <label for='view-favorites-button' class='hidden'>View favorites</label>
-      <button id='viewFavoritesButton' class='view-favorites nav-button'>View Favorites</button>
-      <button id='viewPantryButton' class='view-favorites nav-button'>View Pantry</button>
-      <form class='search-bar' id='search-bar'>
-        <label for='search-button' class='hidden'>Click here to search here</label>
-        <button id='search-button' class='search-button'>
-          <img class='search-image' src='https://image.flaticon.com/icons/svg/660/660029.svg' alt='Search button'>
-        </button>
-        <label for='search-input' class='hidden'>Type search query here</label>
-        <input id='search-input' class='search-input' type='text' placeholder='Search recipes by name or ingredients' value=''>
-      </form>
     </header>
     <main>
       <section class='all-tags'>

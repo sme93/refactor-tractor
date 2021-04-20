@@ -1,22 +1,30 @@
 // This file will set up our color rules
 
 /* 🎨 COLORS */
+// mint: #89dfc3, rgb(137,223,195);
+// lime: #ebf2af, rgb(235,242,175);
+// salmon: 	#a85871, rgb(168,88,113)
+// sugared violet: #a05caf,	rgb(160,92,175);
+// eggplant: #4b124b, rgb(75,18,75);
+// licorice: #020002, rgb(2,0,2);
+// marshmallow: #ffffff, rgb(255,255,255);
 
 /* BACKGROUND COLORS */
-$main-background-color: #ebf5ee;
-$secondary-background-color: #37515c;
-$active-background-color: #ac8dd8;
-$card-background-color: #d7f2fe;
+$main-background-color: #89dfc3;
+$secondary-background-color: #ebf2af;
+$tertiary-color: rgb(75,18,75);
+$border-color: rgba(75,18,75,.5);
+$active-background-color: #ebf2af;
+$card-background-color: rgba(137,223,195,.6);
+$card-background-gradient: linear-gradient(#89dfc3, #4b124b);
+$gradient-background-color: linear-gradient(217deg, rgba(137,223,195,.8), rgba(255,0,0,0) 70.71%),
+                            linear-gradient(127deg, rgba(0,255,0,.8), rgba(235,242,175,0) 70.71%),
+                            linear-gradient(336deg, rgba(75,18,75,.8), rgba(255,0,0,0) 70.71%);
 
 /* TEXT COLORS */
-$text-color: #ebf5ee;
+$dark-text-color: #020002;
+$light-text-color: #ffffff;
 
 /* STATE COLORS */
-$hover-color: #cff2da;
-$active-color: #c3c2c6;
-
-/* */
-
-/* */
-
-/* */
+$hover-color: #a05caf;
+$active-color: #4b124b;

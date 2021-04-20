@@ -2,9 +2,6 @@
 
 /* Mixin - Rounded corners on cards */
 @mixin rounded-corners($radius) {
-  -webkit-border-radius: 0 0 $radius $radius;
-  -moz-border-radius: 0 0 $radius $radius;
-  -ms-border-radius: 0 0 $radius $radius;
   border-radius: 0 0 $radius $radius;
 }
 
@@ -12,6 +9,15 @@
 @mixin space-flex() {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+/* Mixin - FlexBox Centered */
+@mixin center-flex() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 /* Mixin - Card Display Grid */
@@ -23,19 +29,7 @@
   width: 95.5vw;
 }
 
-/* Mixin Card Display Grid */
-// @mixin card-grid-four() {
-//   display: grid;
-//   grid-gap: 30px;
-//   grid-template-columns: repeat(4, 1fr);
-//   padding: 30px 0 30px 30px;
-//   width: 95.5vw;
-// }
-//
-// @mixin card-grid-three() {
-//   display: grid;
-//   grid-gap: 30px;
-//   grid-template-columns: repeat(3, 1fr);
-//   padding: 30px 0 30px 30px;
-//   width: 95.5vw;
+// /* Mixin - Adjust Width */
+// @mixin width-adj($pctg) {
+//   width: $pcgt;
 // }

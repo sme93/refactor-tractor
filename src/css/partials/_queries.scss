@@ -2,8 +2,15 @@
 @import "mixins";
 @import "variables";
 
+// Jumbo Desktop 📺
+@media screen and (min-width: $jumbo) {
+  main > .all-cards {
+    @include card-grid(6);
+  }
+}
+
 // Desktop 🖥
-@media screen and (min-width: $desktop) {
+@media screen and (min-width: $desktop) and (max-width: $jumbo - 1) {
   main > .all-cards {
     @include card-grid(5);
   }
@@ -19,7 +26,20 @@
 // Tablet 📱
 @media screen and (min-width: $tablet) and (max-width: $laptop - 1) {
   main > .all-cards {
-    @include card-grid(3);
+    @include card-grid(2);
+  }
+
+  .main-header {
+    @include center-flex();
+    flex-direction: column;
+  }
+
+  header > nav {
+    flex-direction: row;
+  }
+
+  .search-bar {
+    width: $width-max;
   }
 }
 
@@ -27,5 +47,20 @@
 @media screen and (min-width: $mobile) and (max-width: $tablet - 1) {
   main > .all-cards {
     @include card-grid(1);
+    @include center-flex();
+    flex-direction: column;
+  }
+
+  .main-header {
+    @include center-flex();
+    flex-direction: column;
+  }
+
+  header > nav {
+    flex-direction: column;
+  }
+
+  .search-bar {
+    width: $width-max;
   }
 }

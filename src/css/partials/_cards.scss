@@ -5,18 +5,19 @@
 @import "variables";
 
 .card {
-  background-color: $card-background-color;
-  border: $lrg-border;
-  width: $width-max;
+  // @include center-flex();
+  // flex-direction: column;
   @include rounded-corners(20px);
+  width: $width-max;
+  background-color: $card-background-color;
+  // border: $sml-border;
+  box-shadow: 7px 7px 7px #a85871;
 }
 
 .card-header {
   @include space-flex();
   background-color: $main-background-color;
   border-bottom: $sml-border;
-  // display: flex;
-  // justify-content: space-between;
 }
 
 .card-button {
@@ -26,9 +27,9 @@
 }
 
 .card-picture {
-  border: $sml-border;
-  height: 200px;
-  margin: 10px 3% 8px 2.6%;
+  @include rounded-corners(20px);
+  height: 211px;
+  margin: 10px;
   width: $width-big;
 }
 
@@ -42,11 +43,11 @@
 
 .add {
   width: $width-max;
+  height: 17px;
 }
 
 .add-button {
   background-color: $main-background-color;
-  display: flex;
   width: $width-min;
 }
 
@@ -62,3 +63,25 @@
   background-image: url(https://image.flaticon.com/icons/svg/148/148841.svg);
   background-repeat: no-repeat;
 }
+
+.all-recipe-info,
+ol {
+  color: $dark-text-color;
+  font-size: 220%;
+  width: $width-max;
+}
+
+.recipe-name {
+  @include center-flex();
+  color: $dark-text-color;
+  height: 7vw;
+  font-size: 150%;
+}
+
+.hidden {
+  display: none;
+}
+
+// .is-added-to-cookbook {
+//   background-color: $secondary-background-color;
+// }

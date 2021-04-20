@@ -1,10 +1,10 @@
 // This file will set up our variables
-/* BORDERS */
-$lrg-border: 3px solid #000;
-$med-border: 2px solid #000;
-$sml-border: 1px solid #000;
+/* Borders */
+$lrg-border: 3px solid $border-color;
+$med-border: 2px solid $border-color;
+$sml-border: 1px solid $border-color;
 
-/* WIDTH */
+/* Width */
 $width-max: 100%; // CHANGE THESE TO A MIXIN!
 $width-big: 90%;
 $width-avg: 40%;
@@ -12,35 +12,9 @@ $width-sml: 30%;
 $width-smol: 20%;
 $width-min: 13%;
 
-/* MEDIA QUERY SELECTORS */
-$mobile: 300px;
+/* Media Query Selectors */
+$mobile: 250px;
 $tablet: 540px;
 $laptop: 1024px;
-$desktop: 1300px;
-
-
-/* REUSED STYLES
--- REALLY THICK BORDER:   border: 3px solid #000; - card
--- THICK border: 2px solid #000; USED 3 TIMES- html, main-header, card-picture:active
--- THIN border: 1px solid #000; - search-button, search-input, card-button, card-picture
-
--- background-color: #ebf5ee; USED 6 TIMES - main-header, nav-button, search-button, add-button, favorite, card-header
--- background-color: #cff2da; - .search-image:hover, .card-button:hover, .nav-button:hover, .search-button:hover
--- background-color: #c3c2c6; - .search-image:active, .card-button:active,, .nav-button:active, .search-button:active
-
--- background-repeat: no-repeat; - favorite, favorite-active
-
-- DARK TEXT COLOR: color: #ebf5ee; - all-recipe-info, <OL>, <H3>
-
-
--- width: 100%; - main-header, add, card, all-recipe-info, <OL>, <main>
--- width: 30%; - <H1>, search-bar
-
--- text-align: center; - <H1>, user-info, recipe-name
-
--- display: flex; - main-header, search-bar, add-button, card-header
--- justify-content: space-between; main-header, card-header
-
--- display: grid; - all-cards
--- grid-gap: 0px; - all
-*/
+$desktop: 1200px;
+$jumbo: 1450px;
