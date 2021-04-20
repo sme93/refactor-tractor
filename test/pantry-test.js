@@ -43,19 +43,19 @@ describe('Pantry class', () => {
 
     it("should return an array of missing ingredients and amounts", () => {
       expect(pantry1.checkForIngr(recipe2)).to.deep.equal([{
-          name: 'Ahi tuna',
+          name: 2345,
           amount: 0.5
         },
         {
-          name: 'rice',
+          name: 23456,
           amount: 2
         },
         {
-          name: 'avocado',
+          name: 234567,
           amount: 1
         },
         {
-          name: 'seaweed salad',
+          name: 2345678,
           amount: 0.5
         }
       ]);

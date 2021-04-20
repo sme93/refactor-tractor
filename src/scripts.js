@@ -1,7 +1,7 @@
 import './css/main.scss';
 import domUpdates from './domUpdates.js';
 
-import { getData, postData } from './network-requests';
+import { fetchData, postData } from './network-requests';
 
 import Pantry from './pantry';
 import Recipe from './recipe';
@@ -35,7 +35,7 @@ cardArea.addEventListener('keydown', function(event) {
 })
 
 function onStartup() {
-  getData()
+  fetchData()
     .then(allData => {
       const randomIndexInArray = Math.floor(
         Math.random() * allData.userData.length);
@@ -352,20 +352,20 @@ function addIngredients(event) {
       postData({ userID: user.id, ingredientID: ingredient.name, ingredientModification: ingredient.amount })
     });
 
-getData()
-.then( allData => {
-  let currentUserIndex;
-  allData.userData.forEach((userObj, i) => {
-    if (userObj.id === user.id)
-    currentUserIndex = i;
-  })
-  let currentUser = allData.userData[currentUserIndex];
-  user = new User(currentUser.id, currentUser.name, currentUser.pantry)
-  pantry = new Pantry(user.pantry)
-  pantry.populatePantry();
-  populatePantryList(pantry, ingredients);
+  fetchData()
+    .then(allData => {
+      let currentUserIndex;
+      allData.userData.forEach((userObj, i) => {
+        if (userObj.id === user.id)
+          currentUserIndex = i;
+      })
+      let currentUser = allData.userData[currentUserIndex];
+      user = new User(currentUser.id, currentUser.name, currentUser.pantry)
+      pantry = new Pantry(user.pantry)
+      pantry.populatePantry();
+      populatePantryList(pantry, ingredients);
 
-})
-}
+    })
+  }
 }
 export {}

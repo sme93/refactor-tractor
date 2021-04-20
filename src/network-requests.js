@@ -1,24 +1,21 @@
-const getData = () => {
+const fetchData = () => {
   const userData = fetch('http://localhost:3001/api/v1/users')
     .then(response => response.json())
     .then(userData => {
       return userData;
     })
-    .catch(err => console.log('ERROR', err))
 
   const ingredientData = fetch('http://localhost:3001/api/v1/ingredients')
     .then(response => response.json())
     .then(ingredientData => {
       return ingredientData;
     })
-    .catch(err => console.log('ERROR', err))
 
   const recipeData = fetch('http://localhost:3001/api/v1/recipes')
     .then(response => response.json())
     .then(recipeData => {
       return recipeData;
     })
-    .catch(err => console.log('ERROR', err))
 
   return Promise.all([userData, ingredientData, recipeData])
     .then(data => {
@@ -28,6 +25,7 @@ const getData = () => {
       allData.recipeData = data[2];
       return allData;
     })
+    .catch(err => console.log('ERROR', err))
 }
 
 const postData = (object) => {
@@ -42,4 +40,4 @@ const postData = (object) => {
 
 }
 
-export {getData, postData};
+export { fetchData, postData };
