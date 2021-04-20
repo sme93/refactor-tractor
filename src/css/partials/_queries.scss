@@ -21,6 +21,20 @@
   main > .all-cards {
     @include card-grid(4);
   }
+
+  .main-header {
+    @include center-flex();
+    flex-direction: column;
+  }
+
+  header > nav {
+    flex-direction: row;
+  }
+
+  .search-bar {
+    width: $width-max;
+  }
+
 }
 
 // Tablet 📱
@@ -28,11 +42,37 @@
   main > .all-cards {
     @include card-grid(2);
   }
+
+  .main-header {
+    @include center-flex();
+    flex-direction: column;
+  }
+
+  header > nav {
+    flex-direction: row;
+  }
+
+  .search-bar {
+    width: $width-max;
+  }
 }
 
 // Mobile 📱
 @media screen and (min-width: $mobile) and (max-width: $tablet - 1) {
   main > .all-cards {
     @include card-grid(1);
+  }
+
+  .main-header {
+    @include center-flex();
+    flex-direction: column;
+  }
+
+  header > nav {
+    flex-direction: row;
+  }
+
+  .search-bar {
+    width: $width-max;
   }
 }
