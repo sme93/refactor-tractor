@@ -117,8 +117,7 @@ img {
   background-color: $active-color;
 }
 
-// .all {
-//   grid-gap: 0px;
-//   grid-template-columns: repeat(1, 1fr);
-//   border: 1px solid lime;
-// }
+.all-tags {
+  @include center-flex();
+  width: $width-max;
+}
