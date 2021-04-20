@@ -1,114 +1,83 @@
-# Webpack Starter Kit
+# Refactor Tractor - What's Cookin'
 
-## Clone This Repo
+## Table of Contents
 
-That's right, _clone_ not fork. You will use this repo multiple times, but you can only fork a repository once. So here is what you need to do to clone the repo and still be able to push changes to your repo:
+- [Description](#description)
+- [Installation](#installation)
+- [Walkthrough](#walkthrough)
+- [Authors](#authors)
+- [Technologies](#technologies)
+- [Systems Practices](#systemspractices)
 
-1. Clone down this repo. Since you don't want to name your project "webpack-starter-kit", you can use an optional argument when you run `git clone` (you replace the `[...]` with the terminal command arguments): `git clone [remote-address] [what you want to name the repo]`
-1. Remove the default remote: `git remote rm origin` (notice that `git remote -v` not gives you back nothing)
-1. Create a new repo on GitHub with the name of `[what you want to name the repo]` to be consistent with naming
-1. Copy the address that you would use to clone down this repo - something like `git@github.com:...`
-1. Add this remote to your cloned down repo: `git remote add origin [address you copied in the previous step]` - do not include the brackets
+## Description
 
-Now try to commit something and push it up to your new repo. If everything is setup correctly, you should see the changes on GitHub.
+In this project, our group was given the task of building on top someone else's pre-existing What's Cookin' codebase. We needed to get comfortable navigating the existing code so we could add features and start working with network requests to retrieve and manipulate data from an API. Other goals for this project included refactoring the pre-existing code to add a parent class, incorporating Sass to update the UI, making sure our site was accessible through Lighthouse and Wave audits, and thoroughly testing our Classes.
 
-## Setup
+### Notable features
 
-After one person has gone through the steps of cloning down this repo and editing the remote, everyone should clone down the repo.
+- Users can filter recipes by multiple tags, or search for recipes by their name or ingredients
+- Users can favorite or unfavorite reipes, or add a recipe to list of Recipes to Cook
+- Users can view what ingredients exist inside of their pantries, and check to see what ingredients are needed to cook a recipe
+- Items inside of a users pantry are removed if the user decides to cook a recipe, and their pantry is updated to reflect that change
+- Users can navigate through the site using tab to advance and the spacebar to select elements
 
-Then install the library dependencies. Run:
+## Installation
 
-```bash
-npm install
-```
+1. Fork this repo
+2. Clone down to your machine
+3. Access cloned directory
+4. Run npm install
+5. Run npm start
+6. View site http://localhost:8080/ with API also running on your machine
 
-To verify that it is setup correctly, run `npm start` in your terminal. Go to `http://localhost:8080/` and you should see a page with some `h1` text and a pink background. If that's the case, you're good to go. Enter `control + c` in your terminal to stop the server at any time.
+## Walkthrough
 
-## Where to Add Your Code
+1. View any recipe displayed on the main page by clicking the image for the recipe, or by tabbing to it and using the spacebar when the image is selected. Click the Show All Button to go back to the home page showing all your recipes.
 
-### JavaScript
+![Viewing a recipe](https://media.giphy.com/media/3zA1wuE0nckswvolNp/giphy.gif)
 
-📌 You have to be very intentional with where you add your feature code. This repo uses a tool called [webpack](https://webpack.js.org/) to combine many JavaScript files into one big file. Webpack enables you to have many, separate JavaScript files to keep your code organized and readable. Webpack expects all of your code files to be in a specific place, or else it doesn't know how to combine them all behind the scenes.
+2. Favorite a recipe by clicking the star on the recipe card, or selecting it with the spacebar. You can view all your favorite recipes by selecting the View Favorites button at the top of the page. Select Home to navigate back to the main page. Add recipes to your Recipes to Cook list by selecting the plus sign icon on the left side of the recipe card. You can also use the spacebar to select this button.
 
-**Create all of your feature code files in the `src` directory.**
+![Favoriting a recipe](https://media.giphy.com/media/U86IcUVbaUzgUTmctf/giphy.gif)
 
-📌 Since code is separated into multiple files, you need to use the `import` and `export` syntax to share code across file.
+3. Search through all your recipes by their names or by ingredients by using the search bar in the top right corner of the page. You can also use the search bar while you are on the favorites page and it will find only your favorite recipes that have that name or keyword.
 
-Here is a video that walks through some information about [import and export](https://www.youtube.com/watch?v=_3oSWwapPKQ). There are a lot of resources out there about `import` and `export`, and resources will sometimes call them `ES6 modules`. It's something you will see in React and beyond.
+![Search Recipes](https://media.giphy.com/media/3QGOXLQkXnGezqPLlt/giphy.gif)
 
-📌 asynchronous module definition (ES6)
-  * use code from another file by using `require([filename.js], function(filename) { do something with filename })` and `export default filename` to export the file
-  * `default` tells it there is only the one file
-📌 vanilla js (ES5) looks like `var filename = require([filename.js])` in combination with a `module.exports = filename`  
-📌 modules give us the ability to group a bunch of separate files together; they all depend on each other and work together
-📌 need to use a transpiler or bundling tool that knows how to use group your files using this syntax
-  * Babel is a tool that can perform this action
+4. See what items you have in your pantry by clicking on the View Pantry button on the top of page. Click Hide Pantry to navigate back to the home page.
 
+![View Pantry](https://media.giphy.com/media/PyYG3uXjVToQN549eA/giphy.gif)
 
-### HTML
+5. Use the filter buttons to filter through the recipes by their tags. You can click the Expand Filters button to see all of the available tags. Click the Show All Button to go back to the home page and see all the recipes again.
 
-Add the HTML you need in the `index.html` file in the `./src` directory. There is some boilerplate HTML that exists from the start that you can modify.
+![Filter by Tag](https://media.giphy.com/media/8fH2y0wZ5uFrwslzvl/giphy.gif)
 
-### CSS (SCSS/SASS)
+## Authors
 
-This project is setup to use SCSS/SASS files by default instead of your regular CSS files. Add your SCSS files in the `src/css` directory. There is a `base.scss` file already there, but you can change this file and add multiple SCSS files in this directory.
+<table>
+    <tr>
+        <td> Matt Craig <a href="https://github.com/mcraig2342">GH</td>
+        <td> Sarah Lane <a href="https://github.com/sarahlane8">GH</td>
+        <td> Nichele Dunn<a href="https://github.com/nichelicorn">GH</td>
+        <td> Sarah Fitzsimons <a href="https://github.com/sme93">GH</td>
+    </tr>
+    </tr>
+        <td><img src="https://avatars.githubusercontent.com/u/75296592?v=4" alt="M. Craig" width="125" height="auto" /></td>
+        <td><img src="https://avatars.githubusercontent.com/u/70901622?v=4" alt="S. Lane" width="125" height="auto" /></td>
+        <td><img src="https://avatars.githubusercontent.com/u/63027000?v=4" alt="N. Dunn" width="125" height="auto" /></td>
+        <td><img src="https://avatars.githubusercontent.com/u/74980483?s=400&u=666d5f139d0c221d8555a16e7f1b99069b6b9b0b&v=4" alt="S. Fitzsimons" width="125" height="auto" /></td>
+    </tr>
+</table>
 
-This might sound weird, but you need to `import` your SCSS files in the JavaScript entry file (`index.js`) for the styles to be applied to your HTML. The example `base.scss` file has already been imported in the JavaScript entry file as an example.
+## Technologies Used
 
-### Images
+- JavaScript, ES6
+- SCSS / SASS
+- Webpack
 
-Add your image files in the `src/images` directory. Similar to CSS files, you need to `import` image files in the JavaScript entry file (`index.js`). Then go into the HTML and add an `img` element with the `src` attribute pointing to the `images` directory. There is an example in the `index.html` file for you to see.
+## Systems/Practices
 
-## How to View Your Code in Action
-
-In the terminal, run:
-
-```bash
-npm start
-```
-
-You will see a bunch of lines output to your terminal. One of those lines will be something like:
-
-```bash
-Project is running at http://localhost:8080/
-```
-
-Go to `http://localhost:8080/` in your browser to view your code running in the browser.
-
----
-
-## Test Files Organization
-
-Similar to feature code, your test code needs to be put in a specific place for it to run successfully.
-
-**Put all of your test files in the `test` directory.** As a convention, all test filenames should end with `-test.js`. For instance: `box-test.js`.
-
-## Running Your Tests
-
-Run your test suite using the command:
-
-```bash
-npm test
-```
-
-The test results will output to the terminal.
-
----
-
-## Linting Your Code
-
-Run the command in your terminal `npm run lint` to run the linter on your JavaScript code. There will be errors and warnings right from the start in this starter kit - the linter is still running successfully.
-
-Your linter will look at the JavaScript files you have within the `src` directory and the `test` directory.
-
-## Webpack?
-
-If you look in the `package.json` file, you'll see one of the library dependencies called `webpack`. If you're interested in learning more about what Webpack is and how it works behind the scenes, take a look through the [Webpack configuration documentation](https://webpack.js.org/concepts/).
-
-## Deploying to GitHub Pages
-
-_If you are finished with the functionality and testing of your project_, then you can consider deploying your project to the web! This way anyone can play it without cloning down your repo.
-
-[GitHub Pages](https://pages.github.com/) is a great way to deploy your project to the web. Don't worry about this until your project is free of bugs and well tested!
-
-If you _are_ done, you can follow [this procedure](./gh-pages-procedure.md) to get your project live on GitHub Pages.
+- git/Version Control
+- PR Template
+- Project Board
+- TDD
