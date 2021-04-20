@@ -1,6 +1,6 @@
 import './css/main.scss';
 
-import { getData, postData } from './network-requests';
+import { fetchData, postData } from './network-requests';
 
 import Pantry from './pantry';
 import Recipe from './recipe';
@@ -34,7 +34,7 @@ cardArea.addEventListener('keydown', function(event) {
 })
 
 function onStartup() {
-  getData()
+  fetchData()
     .then(allData => {
       const randomIndexInArray = Math.floor(
         Math.random() * allData.userData.length);
@@ -396,7 +396,7 @@ function addIngredients() {
       postData({ userID: user.id, ingredientID: ingredient.name, ingredientModification: ingredient.amount })
     });
 
-getData()
+fetchData()
 .then( allData => {
   let currentUserIndex;
   allData.userData.forEach((userObj, i) => {
