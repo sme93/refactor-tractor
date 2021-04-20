@@ -50,7 +50,6 @@ img {
 .main-header {
   @include space-flex();
   background: $gradient-background-color;
-  // background-color: $main-background-color;
   border: $med-border;
   height: auto;
   width: $width-max;
@@ -70,7 +69,12 @@ img {
   margin: 1%;
 
   &.active {
-    background-color: $active-background-color;
+    background-color: $active-color;
+    border: none;
+  }
+
+  &.hover {
+    background-color: $hover-color;
     border: none;
   }
 }
@@ -113,8 +117,8 @@ img {
   background-color: $active-color;
 }
 
-.all {
-  grid-gap: 0px;
-  grid-template-columns: repeat(1, 1fr);
-  border: 1px solid lime;
-}
+// .all {
+//   grid-gap: 0px;
+//   grid-template-columns: repeat(1, 1fr);
+//   border: 1px solid lime;
+// }
