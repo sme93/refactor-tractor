@@ -47,6 +47,7 @@
 }
 
 .add-button {
+  // background-color: blue;
   background-color: $main-background-color;
   width: $width-min;
 }
@@ -82,6 +83,6 @@ ol {
   display: none;
 }
 
-// .is-added-to-cookbook {
-//   background-color: $secondary-background-color;
-// }
+.is-added-to-cookbook {
+  background-color: $secondary-background-color;
+}
