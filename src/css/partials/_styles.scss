@@ -75,6 +75,7 @@ img {
 
   &.active {
     background-color: $active-color;
+    color: $light-text-color;
     border: none;
   }
 
